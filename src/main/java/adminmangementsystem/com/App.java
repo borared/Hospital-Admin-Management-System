@@ -5,100 +5,69 @@ import java.util.Scanner;
 /**
  * Hello world!
  */
-public final class App {
+import java.util.Scanner;
+
+public class App {
     public static void main(String[] args) {
+
         Scanner sc = new Scanner(System.in);
-
-        Admin admin = new Admin("admin", "1234");
         DoctorService doctorService = new DoctorService();
-        PatientService patientService = new PatientService();
-        AppointmentService appointmentService = new AppointmentService();
 
-        System.out.println("Login as Admin");
-        System.out.print("Username: ");
-        String u = sc.next();
-        System.out.print("Password: ");
-        String p = sc.next();
+        while (true) {
+            System.out.println("\n--- Admin Management System ---");
+            System.out.println("1. Login as Admin");
+            System.out.println("2. Sign up admin account");
+            System.out.println("3. Exit");
 
-        if (!admin.login(u, p)) {
-            System.out.println("Invalid login.");
-            return;
-        }
+            int start = Validator.validChoice(sc, 1, 3);
+            if (start == 3) break;
 
-        int choice;
-        do {
-            System.out.println("\n--- Hospital Management System ---");
-            System.out.println("1. Add Doctor");
-            System.out.println("2. Add Patient");
-            System.out.println("3. Schedule Appointment");
-            System.out.println("4. View Appointments");
-            System.out.println("5. View Doctor List");
-            System.out.println("6. View Patient List");
-            System.out.println("7. Exit");
-            choice = sc.nextInt();
+            while (true) {
+                System.out.println("\n--- Admin Management System ---");
+                System.out.println("1. Doctor Management");
+                System.out.println("2. Patient Management");
+                System.out.println("3. Schedule Appointment");
+                System.out.println("4. View Appointment");
+                System.out.println("5. View Doctor List");
+                System.out.println("6. View Patient List");
+                System.out.println("7. Exit");
 
-            switch (choice) {
-                case 1:
-                    System.out.print("ID: ");
-                    String did = sc.next();
-                    System.out.print("Name: ");
-                    String dname = sc.next();
-                    System.out.print("DOB: ");
-                    String ddob = sc.next();
-                    System.out.print("Address: ");
-                    String dadd = sc.next();
-                    System.out.print("Position: ");
-                    String pos = sc.next();
-                    System.out.print("Salary: ");
-                    double sal = sc.nextDouble();
-                    doctorService.addDoctor(
-                            new Doctor(did, dname, ddob, dadd, pos, sal));
-                    break;
+                int mainChoice = Validator.validChoice(sc, 1, 7);
+                if (mainChoice == 7) break;
 
-                case 2:
-                    System.out.print("ID: ");
-                    String pid = sc.next();
-                    System.out.print("Name: ");
-                    String pname = sc.next();
-                    System.out.print("DOB: ");
-                    String pdob = sc.next();
-                    System.out.print("Address: ");
-                    String padd = sc.next();
-                    System.out.print("Disease: ");
-                    String dis = sc.next();
-                    System.out.print("Entry Date: ");
-                    String ed = sc.next();
-                    patientService.addPatient(
-                            new Patient(pid, pname, pdob, padd, dis, ed));
-                    break;
+                if (mainChoice == 1) {
+                    System.out.println("\n--- Doctor Management System ---");
+                    System.out.println("1. Add Doctor");
+                    System.out.println("2. Update Doctor");
+                    System.out.println("3. Delete Doctor");
+                    System.out.println("4. Search Doctor");
+                    System.out.println("5. Exit");
 
-                case 3:
-                    System.out.print("Patient ID: ");
-                    String apid = sc.next();
-                    System.out.print("Patient Name: ");
-                    String apname = sc.next();
-                    System.out.print("Disease: ");
-                    String adis = sc.next();
-                    System.out.print("Date: ");
-                    String adate = sc.next();
-                    appointmentService.addAppointment(
-                            new Appointment(apid, apname, adis, adate));
-                    break;
+                    int dChoice = Validator.validChoice(sc, 1, 5);
+                    sc.nextLine();
 
-                case 4:
-                    appointmentService.viewAppointments();
-                    break;
+                    if (dChoice == 1) {
+                        String id;
+                        while (true) {
+                            id = Validator.validString(sc, "Enter Doctor ID: ");
+                            if (!doctorService.idExists(id)) break;
+                            System.out.println("ID already exists.");
+                        }
 
-                case 5:
-                    doctorService.viewDoctors();
-                    break;
+                        String name = Validator.validName(sc, "Enter Doctor Name: ");
+                        String dob = Validator.validString(sc, "Enter DOB: ");
+                        String address = Validator.validString(sc, "Enter Address: ");
+                        String pos = Validator.validString(sc, "Enter Position: ");
+                        double sal = Validator.validSalary(sc);
 
-                case 6:
-                    patientService.viewPatients();
-                    break;
+                        doctorService.add(
+                                new Doctor(id, name, dob, address, pos, sal));
+                    }
+
+                    if (dChoice == 5) continue;
+                }
             }
-        } while (choice != 7);
-
+        }
         System.out.println("System exited.");
     }
 }
