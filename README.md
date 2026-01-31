@@ -2,9 +2,11 @@
 
 
 I. Introduction
+
 The Hospital Admin Management System is an object-oriented software application designed to help hospital administrators manage core hospital operations efficiently. The system focuses on managing doctors, patients, departments, and appointments through a centralized admin-controlled platform.
 
 II. Problem Statement
+
 Traditional hospital record keeping systems are often manual, time consuming that easily cause any error. Managing patient records, doctor details, and appointment schedules manually can lead to data inconsistency and inefficiency. This project aims to solve these problems by providing a structured, secure, and efficient digital management system.
 
 III. Objectives
@@ -38,5 +40,6 @@ VI. OOP Concepts Applied
 - Composition
 
 ⭐VIII. Conclusion
+
 The Hospital Admin Management System will provide a structured and efficient way to manage hospital operations. This project will enhance practical understanding of object oriented programming and real world software design.
 
