@@ -1,4 +1,6 @@
 🏥 Hospital Admin Management System
+
+
 I. Introduction
 The Hospital Admin Management System is an object-oriented software application designed to help hospital administrators manage core hospital operations efficiently. The system focuses on managing doctors, patients, departments, and appointments through a centralized admin-controlled platform.
 
