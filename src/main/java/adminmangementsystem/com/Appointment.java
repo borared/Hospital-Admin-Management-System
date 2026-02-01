@@ -97,4 +97,5 @@ public class Appointment {
                           patientId, patientName, patientDOB, phoneNumber, disease, DOA);
         System.out.println(line);
     }
+
 }
