@@ -1,8 +1,7 @@
 package adminmangementsystem.com;
 
-import java.util.Scanner;
-
 public class Appointment {
+
     private String patientId;
     private String patientName;
     private String patientDOB;
@@ -11,64 +10,91 @@ public class Appointment {
     private String DOA;
 
     // Constructor
-    public Appointment(String patientId, String patientName, String patientDOB, String disease, String phoneNumber, String DOA) {
-        setPatientId(patientId);
-        setPatientName(patientName);
-        setPatientDOB(patientDOB);
-        setPatientDisease(disease);
-        setPatientPhoneNum(phoneNumber);
-        setDOA(DOA);
+    public Appointment(String patientId, String patientName, String patientDOB,
+                       String disease, String phoneNumber, String DOA) {
+
+        if (!setPatientId(patientId) ||
+            !setPatientName(patientName) ||
+            !setPatientDOB(patientDOB) ||
+            !setPatientDisease(disease) ||
+            !setPatientPhoneNum(phoneNumber) ||
+            !setDOA(DOA)) {
+
+            throw new IllegalArgumentException("Invalid appointment data.");
+        }
     }
 
-    // SETTERS 
-    public Appointment setPatientId(String patientId) { this.patientId = patientId; return this; }
-    public Appointment setPatientName(String patientName) { this.patientName = patientName; return this; }
-    public Appointment setPatientDOB(String patientDOB) { this.patientDOB = patientDOB; return this; }
-    public Appointment setPatientDisease(String disease) { this.disease = disease; return this; }
-    public Appointment setPatientPhoneNum(String phoneNumber) { this.phoneNumber = phoneNumber; return this; }
-    public Appointment setDOA(String DOA) { this.DOA = DOA; return this; }
+    // SETTERS WITH VALIDATION
+    public boolean setPatientId(String patientId) {
+        if (patientId != null && !patientId.isEmpty()) {
+            this.patientId = patientId;
+            return true;
+        }
+        return false;
+    }
 
-    public static void main(String[] args) {
-        Scanner scanner = new Scanner(System.in);
+    public boolean setPatientName(String patientName) {
+        if (patientName.matches("[a-zA-Z ]{1,50}")) {
+            this.patientName = patientName;
+            return true;
+        }
+        return false;
+    }
 
-        System.out.println("\t\t------Appointment Management System------");
+    public boolean setPatientDOB(String patientDOB) {
+        if (!patientDOB.isEmpty()) {
+            this.patientDOB = patientDOB;
+            return true;
+        }
+        return false;
+    }
 
-        System.out.print("Enter patient ID: ");
-        String patientId = scanner.nextLine();
+    public boolean setPatientDisease(String disease) {
+        if (!disease.isEmpty()) {
+            this.disease = disease;
+            return true;
+        }
+        return false;
+    }
 
-        System.out.print("Enter patient Name: ");
-        String patientName = scanner.nextLine();
+    public boolean setPatientPhoneNum(String phoneNumber) {
+        if (phoneNumber.matches("\\d{8,15}")) {
+            this.phoneNumber = phoneNumber;
+            return true;
+        }
+        return false;
+    }
 
-        System.out.print("Enter patient Date of Birth (dd/mm/yyyy): ");
-        String patientDOB = scanner.nextLine();
+    public boolean setDOA(String DOA) {
+        if (!DOA.isEmpty()) {
+            this.DOA = DOA;
+            return true;
+        }
+        return false;
+    }
 
-        System.out.print("Enter patient Phone Number: ");
-        String phoneNumber = scanner.nextLine();
+    // GETTERS
+    public String getPatientId() { return patientId; }
+    public String getPatientName() { return patientName; }
+    public String getPatientDOB() { return patientDOB; }
+    public String getPatientDisease() { return disease; }
+    public String getPatientPhoneNum() { return phoneNumber; }
+    public String getDOA() { return DOA; }
 
-        System.out.print("Enter patient disease: ");
-        String disease = scanner.nextLine();
-
-        System.out.print("Enter date of appointment: ");
-        String DOA = scanner.nextLine();
-
-        // OUTPUT FORMATTING
+    // Display method
+    public void displayAppointment() {
         System.out.print("\n");
         System.out.println("\t\t\t\t------Appointment List------");
-        // Extended the line to accommodate the new column
         String line = "------------------------------------------------------------------------------------------------";
-        
-        // Header
+
         System.out.println(line);
-        // Column widths: ID(5), Name(18), DOB(12), Phone(15), Disease(15), DOA(12)
+        
         System.out.printf("| %-5s | %-18s | %-12s | %-15s | %-15s | %-12s |\n", 
                           "ID", "Patient Name", "DOB", "Phone Number", "Disease", "DOA");
         System.out.println(line);
         
-        // Data Row
         System.out.printf("| %-5s | %-18s | %-12s | %-15s | %-15s | %-12s |\n", 
                           patientId, patientName, patientDOB, phoneNumber, disease, DOA);
         System.out.println(line);
-
-        scanner.close();
     }
 }
