@@ -9,7 +9,7 @@ public class Doctor {
     private String position;
     private double salary;
 
-    // SETTERS (with validation)
+    // SETTERS
     public boolean setId(String id) {
         if (id != null && !id.isEmpty()) {
             this.id = id;

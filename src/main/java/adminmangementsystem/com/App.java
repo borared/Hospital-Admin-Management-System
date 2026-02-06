@@ -326,24 +326,21 @@ public class App {
                 case 3: //Make an Appointment
                     System.out.println("\t\t------Appointment Management System------");
 
-                    System.out.print("Enter patient ID: ");
-                    String patientId = sc.nextLine();
-
-                    System.out.print("Enter patient Name: ");
-                    String patientName = sc.nextLine();
+                    String patientId = Validator.getValidPatient(sc, "Enter Patient ID: ");
+                    
+                    String patientName = Validator.getValidPatient(sc, "Enter Patient Name: ");
 
                     System.out.print("Enter patient Date of Birth (dd/mm/yyyy): ");
-                    String patientDOB = sc.nextLine();
+                    String patientDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
 
-                    System.out.print("Enter patient Phone Number: ");
-                    String phoneNumber = sc.nextLine();
+                    String phoneNumber = Validator.getPhoneNumberLength(sc, "Enter patient Phone Number: ");
 
-                    System.out.print("Enter patient disease: ");
-                    String disease = sc.nextLine();
+                    String disease = Validator.getOnlyLetter(sc, "Enter patient disease: ");
 
-                    System.out.print("Enter date of appointment: ");
-                    String DOA = sc.nextLine();
+                    String DOA = Validator.getValidDateFomart(sc, "Enter date of appointment (dd/mm/yyyy): ");
                     Appointment appointment = new Appointment(patientId, patientName, patientDOB, disease, phoneNumber, DOA);
+                    
+                    //Display
                     appointment.displayAppointment();
                     System.out.println("Appointment data captured.\n");
                     break;
@@ -373,8 +370,6 @@ public class App {
                         }
                         System.out.println(line);
                     }
-
-
 
                   break;
 
