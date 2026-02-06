@@ -1,6 +1,5 @@
 package adminmangementsystem.com;
 
-import java.util.Scanner;
 public class Menu {
     
 private static final String LINE = "+--------------------------------------------------------+";
@@ -38,3 +37,5 @@ private static final String LINE = "+-------------------------------------------
         System.out.println(line);
     }
 }
+
+

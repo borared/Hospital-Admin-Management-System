@@ -58,7 +58,7 @@ public class Appointment {
     }
 
     public boolean setPatientPhoneNum(String phoneNumber) {
-        if (phoneNumber.matches("\\d{8,15}")) {
+        if (phoneNumber.matches("\\d{8,10}")) {
             this.phoneNumber = phoneNumber;
             return true;
         }
