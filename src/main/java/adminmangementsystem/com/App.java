@@ -56,8 +56,24 @@ public class App {
 
             switch (choiceIn) {
                 case 1: //Doctor System
+                    System.out.println("\t\t------Doctor Management System------");
                     
-                    break;
+                        String doctorId = Validator.getValidDoctor(sc, "Enter doctor ID: ");
+
+                        String doctorName = Validator.getValidDoctor(sc, "Enter doctor Name: ");
+    
+                        String doctorDOB = Validator.getValidDateFomart(sc, "Enter doctor Date of Birth (dd/mm/yyyy): ");
+    
+                        String doctorAddress = Validator.getValidAddress(sc, "Enter doctor address: ");
+    
+                        String doctorPosition = Validator.getDocPosition(sc, "Enter doctor position: ");
+    
+                        double doctorSalary = Validator.getValidSalary(sc, "Enter doctor salary: ");
+
+                        Doctor doctor = new Doctor(doctorId, doctorName, doctorDOB, doctorAddress, doctorPosition, doctorSalary);
+                        doctor.displayDoctorInfo();
+                        System.out.println("Doctor added successfully.");
+                break;
 
                 case 2: // Patient Management System
                     boolean patientMenu = true;
@@ -330,7 +346,6 @@ public class App {
                     
                     String patientName = Validator.getValidPatient(sc, "Enter Patient Name: ");
 
-                    System.out.print("Enter patient Date of Birth (dd/mm/yyyy): ");
                     String patientDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
 
                     String phoneNumber = Validator.getPhoneNumberLength(sc, "Enter patient Phone Number: ");
