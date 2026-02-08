@@ -6,11 +6,12 @@ import java.util.List;
 
 public class App {
     static List<Patient> patients = new ArrayList<>();
+    static List<Doctor> doctors = new ArrayList<>();
+
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         Admin admin = new Admin("admin", "admin$$$");
-       
 
         boolean loggedIn = false;
 
@@ -18,7 +19,7 @@ public class App {
             Menu.printAdminLoginMenu();
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
-            sc.nextLine(); 
+            sc.nextLine();
 
             switch (choice) {
                 case 1: // Login
@@ -52,28 +53,158 @@ public class App {
             Menu.printDashboardMenu();
             System.out.print("Enter your choice: ");
             int choiceIn = sc.nextInt();
-            sc.nextLine(); 
+            sc.nextLine();
 
             switch (choiceIn) {
-                case 1: //Doctor System
-                    System.out.println("\t\t------Doctor Management System------");
-                    
-                        String doctorId = Validator.getValidDoctor(sc, "Enter doctor ID: ");
+                case 1: // Doctor Management System
+                    boolean doctorMenu = true;
 
-                        String doctorName = Validator.getValidDoctor(sc, "Enter doctor Name: ");
-    
-                        String doctorDOB = Validator.getValidDateFomart(sc, "Enter doctor Date of Birth (dd/mm/yyyy): ");
-    
-                        String doctorAddress = Validator.getValidAddress(sc, "Enter doctor address: ");
-    
-                        String doctorPosition = Validator.getDocPosition(sc, "Enter doctor position: ");
-    
-                        double doctorSalary = Validator.getValidSalary(sc, "Enter doctor salary: ");
+                    while (doctorMenu) {
+                        System.out.println("\n\t\t------Doctor Management System------");
+                        System.out.println("\t1. Add Doctor");
+                        System.out.println("\t2. Update Doctor Info");
+                        System.out.println("\t3. Delete Doctor");
+                        System.out.println("\t4. Search Doctor by ID");
+                        System.out.println("\t5. Exit Doctor Management");
+                        System.out.print("Choose an option: ");
+                        int docChoice = Integer.parseInt(sc.nextLine());
 
-                        Doctor doctor = new Doctor(doctorId, doctorName, doctorDOB, doctorAddress, doctorPosition, doctorSalary);
-                        doctor.displayDoctorInfo();
-                        System.out.println("Doctor added successfully.");
-                break;
+                        switch (docChoice) {
+                            // --------- ADD DOCTOR ----------
+                            case 1:
+                                System.out.println("\t\t------Add Doctor------");
+
+                                // --- Validate ID ---
+                                final String doctorId;
+                                while (true) {
+                                    String tempDoctorId = Validator.getValidDoctor(sc, "Enter doctor ID: ");
+                                    boolean exists = doctors.stream()
+                                            .anyMatch(d -> d.getId().equalsIgnoreCase(tempDoctorId));
+                                    if (exists) {
+                                        System.out.println("Doctor ID already exists! Please enter a unique ID.");
+                                    } else {
+                                        doctorId = tempDoctorId;
+                                        break;
+                                    }
+                                }
+
+                                // --- Other validated fields ---
+                                String doctorName = Validator.getValidDoctor(sc, "Enter doctor Name: ");
+                                String doctorDOB = Validator.getValidDateFomart(sc,
+                                        "Enter doctor Date of Birth (dd/mm/yyyy): ");
+                                String doctorAddress = Validator.getValidAddress(sc, "Enter doctor address: ");
+                                String doctorPosition = Validator.getDocPosition(sc, "Enter doctor position: ");
+                                double doctorSalary = Validator.getValidSalary(sc, "Enter doctor salary: ");
+
+                                // --- Create and store doctor ---
+                                Doctor doctor = new Doctor(doctorId, doctorName, doctorDOB, doctorAddress,
+                                        doctorPosition, doctorSalary);
+                                doctors.add(doctor);
+                                doctor.displayDoctorInfo();
+                                System.out.println("Doctor added successfully.");
+                                break;
+
+                            // --------- UPDATE DOCTOR ----------
+                            case 2:
+                                if (doctors.isEmpty()) {
+                                    System.out.println("No doctors available to update.");
+                                    break;
+                                }
+
+                                System.out.print("Enter doctor ID to update: ");
+                                String updateId = sc.nextLine();
+                                Doctor doctorToUpdate = doctors.stream()
+                                        .filter(d -> d.getId().equalsIgnoreCase(updateId))
+                                        .findFirst()
+                                        .orElse(null);
+
+                                if (doctorToUpdate == null) {
+                                    System.out.println("Doctor not found!");
+                                    break;
+                                }
+
+                                System.out.println("Leave blank to keep current value.");
+
+                                // --- Update Name ---
+                                String newName = Validator.getValidUpdateDoc(sc, "Enter doctor Name",
+                                        doctorToUpdate.getName());
+                                doctorToUpdate.setName(newName);
+
+                                // --- Update DOB ---
+                                String newDOB = Validator.getValidUpdateDoc(sc, "Enter doctor DOB (dd/mm/yyyy)",
+                                        doctorToUpdate.getDob());
+                                doctorToUpdate.setDob(newDOB);
+
+                                // --- Update Address ---
+                                String newAddress = Validator.getValidUpdateDoc(sc, "Enter doctor Address",
+                                        doctorToUpdate.getAddress());
+                                doctorToUpdate.setAddress(newAddress);
+
+                                // --- Update Position ---
+                                String newPosition = Validator.getValidUpdateDoc(sc, "Enter doctor Position",
+                                        doctorToUpdate.getPosition());
+                                doctorToUpdate.setPosition(newPosition);
+
+                                // --- Update Salary ---
+                                double newSalary = Validator.getValidUpdateSalary(sc, "Enter doctor Salary",
+                                        doctorToUpdate.getSalary());
+                                doctorToUpdate.setSalary(newSalary);
+
+                                System.out.println("Doctor updated successfully.");
+                                break;
+
+                            // --------- DELETE DOCTOR ----------
+                            case 3:
+                                if (doctors.isEmpty()) {
+                                    System.out.println("No doctors available to delete.");
+                                    break;
+                                }
+
+                                String deleteId = Validator.getValidDeleteDoc(sc, doctors,
+                                        "Enter doctor ID to delete: ");
+                                Doctor doctorToDelete = doctors.stream()
+                                        .filter(d -> d.getId().equalsIgnoreCase(deleteId))
+                                        .findFirst()
+                                        .orElse(null);
+
+                                if (doctorToDelete != null) {
+                                    doctors.remove(doctorToDelete);
+                                    System.out.println("Doctor deleted successfully.");
+                                }
+                                break;
+
+                            // --------- SEARCH DOCTOR BY ID ----------
+                            case 4:
+                                if (doctors.isEmpty()) {
+                                    System.out.println("No doctors available to search.");
+                                    break;
+                                }
+
+                                System.out.print("Enter doctor ID to search: ");
+                                String searchId = sc.nextLine();
+                                Doctor foundDoctor = doctors.stream()
+                                        .filter(d -> d.getId().equalsIgnoreCase(searchId))
+                                        .findFirst()
+                                        .orElse(null);
+
+                                if (foundDoctor != null) {
+                                    foundDoctor.displayDoctorInfo();
+                                } else {
+                                    System.out.println("Doctor not found.");
+                                }
+                                break;
+
+                            // --------- EXIT DOCTOR MENU ----------
+                            case 5:
+                                doctorMenu = false;
+                                System.out.println("Exiting Doctor Management System...");
+                                break;
+
+                            default:
+                                System.out.println("Invalid choice! Please try again.");
+                        }
+                    }
+                    break;
 
                 case 2: // Patient Management System
                     boolean patientMenu = true;
@@ -101,7 +232,8 @@ public class App {
                                     if (patId == null || patId.isEmpty()) {
                                         System.out.println("ID cannot be empty. Please try again.");
                                     } else if (!isIdUnique(patId)) {
-                                        System.out.println("Error: This ID already exists! Please enter a different ID.");
+                                        System.out
+                                                .println("Error: This ID already exists! Please enter a different ID.");
                                     } else {
                                         break;
                                     }
@@ -113,7 +245,8 @@ public class App {
                                     System.out.print("Enter patient Name: ");
                                     patName = sc.nextLine();
                                     if (patName == null || patName.isEmpty() || !patName.matches("[a-zA-Z ]{1,50}")) {
-                                        System.out.println("Invalid Name! Only letters and spaces allowed (max 50 characters).");
+                                        System.out.println(
+                                                "Invalid Name! Only letters and spaces allowed (max 50 characters).");
                                     } else {
                                         break;
                                     }
@@ -175,7 +308,7 @@ public class App {
                                 break;
 
                             // --------- UPDATE PATIENT ----------
-                           case 2: // Update Patient
+                            case 2: // Update Patient
                                 System.out.print("Enter patient ID to update: ");
                                 String updateId = sc.nextLine();
                                 Patient pToUpdate = searchPatientById(updateId);
@@ -191,7 +324,8 @@ public class App {
                                         if (newName.isEmpty()) {
                                             break; // keep current
                                         } else if (!newName.matches("[a-zA-Z ]{1,50}")) {
-                                            System.out.println("Invalid Name! Only letters and spaces allowed (max 50 characters).");
+                                            System.out.println(
+                                                    "Invalid Name! Only letters and spaces allowed (max 50 characters).");
                                         } else {
                                             pToUpdate.setName(newName);
                                             break;
@@ -267,7 +401,6 @@ public class App {
                                 }
                                 break;
 
-
                             // --------- SEARCH PATIENT ----------
                             case 4:
                                 System.out.print("Search by (1) Name or (2) ID: ");
@@ -281,20 +414,22 @@ public class App {
 
                                     // Table header
                                     System.out.println(line);
-                                    System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s |\n", 
-                                                    "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
+                                    System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s |\n",
+                                            "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
                                     System.out.println(line);
 
                                     for (Patient p : patients) {
                                         if (p.getName().equalsIgnoreCase(searchName)) {
                                             System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s |\n",
-                                                            p.getId(), p.getName(), p.getDob(), p.getAddress(), p.getDisease(), p.getEntryDate());
+                                                    p.getId(), p.getName(), p.getDob(), p.getAddress(), p.getDisease(),
+                                                    p.getEntryDate());
                                             foundAny = true;
                                         }
                                     }
 
                                     if (!foundAny) {
-                                        System.out.println("|                        No patients found with that name                        |");
+                                        System.out.println(
+                                                "|                        No patients found with that name                        |");
                                     }
 
                                     System.out.println(line);
@@ -306,15 +441,17 @@ public class App {
 
                                     // Table header
                                     System.out.println(line);
-                                    System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s |\n", 
-                                                    "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
+                                    System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s |\n",
+                                            "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
                                     System.out.println(line);
 
                                     if (found != null) {
                                         System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s |\n",
-                                                        found.getId(), found.getName(), found.getDob(), found.getAddress(), found.getDisease(), found.getEntryDate());
+                                                found.getId(), found.getName(), found.getDob(), found.getAddress(),
+                                                found.getDisease(), found.getEntryDate());
                                     } else {
-                                        System.out.println("|                               Patient not found                               |");
+                                        System.out.println(
+                                                "|                               Patient not found                               |");
                                     }
 
                                     System.out.println(line);
@@ -336,14 +473,13 @@ public class App {
                                 break;
                         }
                     }
-                break;
+                    break;
 
-
-                case 3: //Make an Appointment
+                case 3: // Make an Appointment
                     System.out.println("\t\t------Appointment Management System------");
 
                     String patientId = Validator.getValidPatient(sc, "Enter Patient ID: ");
-                    
+
                     String patientName = Validator.getValidPatient(sc, "Enter Patient Name: ");
 
                     String patientDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
@@ -353,18 +489,37 @@ public class App {
                     String disease = Validator.getOnlyLetter(sc, "Enter patient disease: ");
 
                     String DOA = Validator.getValidDateFomart(sc, "Enter date of appointment (dd/mm/yyyy): ");
-                    Appointment appointment = new Appointment(patientId, patientName, patientDOB, disease, phoneNumber, DOA);
-                    
-                    //Display
+                    Appointment appointment = new Appointment(patientId, patientName, patientDOB, disease, phoneNumber,
+                            DOA);
+
+                    // Display
                     appointment.displayAppointment();
                     System.out.println("Appointment data captured.\n");
                     break;
 
                 case 4: // View Appointment List
-                  break;
+                    break;
 
                 case 5: // View Doctor List
-                  break;
+                        System.out.println("\t\t\t\t------Doctor List------");
+
+                    if (doctors.isEmpty()) {
+                        System.out.println("No doctors found.");
+                    } else {
+                        String line = "------------------------------------------------------------------------------------------------------------";   
+                        System.out.println(line);
+                        System.out.printf("| %-5s | %-20s | %-12s | %-15s | %-15s | %-12s |\n",
+                                "ID", "Name", "DOB", "Address", "Position", "Salary");
+                        System.out.println(line);
+
+                        for (Doctor d : doctors) {
+                            System.out.printf("| %-5s | %-20s | %-12s | %-15s | %-15s | %-12s |\n",
+                                    d.getId(), d.getName(), d.getDob(), d.getAddress(), d.getPosition(),
+                                    d.getSalary());
+                        }
+                        System.out.println(line);
+                    }
+                    break;
 
                 case 6: // View Patient List
                     System.out.println("\t\t\t\t------Patient List------");
@@ -375,18 +530,19 @@ public class App {
                         String line = "------------------------------------------------------------------------------------------------------------";
 
                         System.out.println(line);
-                        System.out.printf("| %-5s | %-20s | %-12s | %-15s | %-15s | %-12s |\n", 
-                                          "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
+                        System.out.printf("| %-5s | %-20s | %-12s | %-15s | %-15s | %-12s |\n",
+                                "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
                         System.out.println(line);
 
                         for (Patient p : patients) {
-                            System.out.printf("| %-5s | %-20s | %-12s | %-15s | %-15s | %-12s |\n", 
-                                              p.getId(), p.getName(), p.getDob(), p.getAddress(), p.getDisease(), p.getEntryDate());
+                            System.out.printf("| %-5s | %-20s | %-12s | %-15s | %-15s | %-12s |\n",
+                                    p.getId(), p.getName(), p.getDob(), p.getAddress(), p.getDisease(),
+                                    p.getEntryDate());
                         }
                         System.out.println(line);
                     }
 
-                  break;
+                    break;
 
                 case 7: // Exit dashboard
                     running = false;
@@ -400,24 +556,25 @@ public class App {
 
         sc.close();
     }
-    //Check ID
-    public static boolean isIdUnique(String id) {
-    for (Patient p : patients) {
-        if (p.getId().equalsIgnoreCase(id)) {
-            return false; // ID already exists
-        }
-    }
-    return true; // ID is unique
-    }
-    //Search Patient by ID
-    public static Patient searchPatientById(String id) {
-    for (Patient p : patients) {
-        if (p.getId().equalsIgnoreCase(id)) {
-            return p;
-        }
-    }
-    return null;
-}
 
+    // Check ID
+    public static boolean isIdUnique(String id) {
+        for (Patient p : patients) {
+            if (p.getId().equalsIgnoreCase(id)) {
+                return false; // ID already exists
+            }
+        }
+        return true; // ID is unique
+    }
+
+    // Search Patient by ID
+    public static Patient searchPatientById(String id) {
+        for (Patient p : patients) {
+            if (p.getId().equalsIgnoreCase(id)) {
+                return p;
+            }
+        }
+        return null;
+    }
 
 }

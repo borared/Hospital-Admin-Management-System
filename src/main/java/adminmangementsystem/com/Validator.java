@@ -1,5 +1,6 @@
 package adminmangementsystem.com;
 
+import java.util.List;
 import java.util.Scanner;
 
 public class Validator {
@@ -142,6 +143,64 @@ public class Validator {
 
             } catch (NumberFormatException e) {
                 System.out.println("Invalid salary! Please enter a numeric value.");
+            }
+        }
+    }
+
+    public static String getValidUpdateDoc(Scanner sc, String msg, String currentValue) {
+        while (true) {
+            System.out.print(msg + " [" + currentValue + "]: "); // show current value
+            String input = sc.nextLine().trim();
+
+            if (input.isEmpty()) {
+                // User pressed Enter, keep the current value
+                return currentValue;
+            } else if (input.length() < 2) {
+                System.out.println("Invalid input! Must be at least 2 characters.");
+            } else {
+                return input;
+            }
+        }
+    }
+
+    public static String getValidDeleteDoc(Scanner sc, List<Doctor> doctors, String msg) {
+        while (true) {
+            System.out.print(msg);
+            String id = sc.nextLine().trim();
+
+            if (id.isEmpty()) {
+                System.out.println("Doctor ID cannot be empty!");
+                continue;
+            }
+
+            boolean exists = doctors.stream()
+                    .anyMatch(d -> d.getId().equalsIgnoreCase(id));
+            if (exists) {
+                return id; // valid ID to delete
+            } else {
+                System.out.println("Doctor ID not found! Please enter a valid ID.");
+            }
+        }
+    }
+
+    public static double getValidUpdateSalary(Scanner sc, String msg, double currentSalary) {
+        while (true) {
+            System.out.print(msg + " [" + currentSalary + "]: ");
+            String input = sc.nextLine().trim();
+
+            if (input.isEmpty()) {
+                return currentSalary; // keep current value
+            }
+
+            try {
+                double salary = Double.parseDouble(input);
+                if (salary <= 0) {
+                    System.out.println("Invalid salary! Must be greater than 0.");
+                } else {
+                    return salary;
+                }
+            } catch (NumberFormatException e) {
+                System.out.println("Invalid salary! Enter a numeric value.");
             }
         }
     }
