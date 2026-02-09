@@ -1,6 +1,10 @@
 package adminmangementsystem.com;
 
 import java.util.Scanner;
+
+import adminmangementsystem.com.Model.Appointment;
+import adminmangementsystem.com.Model.Patient;
+
 import java.util.ArrayList;
 import java.util.List;
 
