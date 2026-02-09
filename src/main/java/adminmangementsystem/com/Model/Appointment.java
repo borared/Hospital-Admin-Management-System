@@ -1,4 +1,4 @@
-package adminmangementsystem.com;
+package adminmangementsystem.com.Model;
 
 public class Appointment {
 
