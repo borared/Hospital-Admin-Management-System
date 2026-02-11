@@ -36,6 +36,14 @@ private static final String LINE = "+-------------------------------------------
         System.out.printf("| %-57s |\n", " 2.Exit");
         System.out.println(line);
     }
+
+    public static void appointmentMenu(){
+        System.out.println("\n\t\t------Appointment Menu------");
+        System.out.println("\t1. Schedule Appointment");
+        System.out.println("\t2. View Appointments");
+        System.out.println("\t3. Exit");
+        System.out.print("Choose an option: ");
+    }
 }
 
 

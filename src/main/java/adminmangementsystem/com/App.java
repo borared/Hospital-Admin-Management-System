@@ -2,6 +2,7 @@ package adminmangementsystem.com;
 
 import java.util.Scanner;
 
+import adminmangementsystem.com.Management.AppointmentService;
 import adminmangementsystem.com.Model.Appointment;
 import adminmangementsystem.com.Model.Patient;
 
@@ -14,7 +15,7 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
         Admin admin = new Admin("admin", "admin$$$");
-       
+        AppointmentService appointmentService = new AppointmentService();
 
         boolean loggedIn = false;
 
@@ -328,25 +329,34 @@ public class App {
 
 
                 case 3: //Make an Appointment
-                    System.out.println("\t\t------Appointment Management System------");
-
-                    String patientId = Validator.getValidPatient(sc, "Enter Patient ID: ");
+                    boolean appointmentDisplayMenu = true;
                     
-                    String patientName = Validator.getValidPatient(sc, "Enter Patient Name: ");
+                    while(appointmentDisplayMenu){
 
-                    System.out.print("Enter patient Date of Birth (dd/mm/yyyy): ");
-                    String patientDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
+                        Menu.appointmentMenu();
 
-                    String phoneNumber = Validator.getPhoneNumberLength(sc, "Enter patient Phone Number: ");
-
-                    String disease = Validator.getOnlyLetter(sc, "Enter patient disease: ");
-
-                    String DOA = Validator.getValidDateFomart(sc, "Enter date of appointment (dd/mm/yyyy): ");
-                    Appointment appointment = new Appointment(patientId, patientName, patientDOB, disease, phoneNumber, DOA);
-                    
-                    //Display
-                    appointment.displayAppointment();
-                    System.out.println("Appointment data captured.\n");
+                        int appointmentChoice;
+                        try {
+                            appointmentChoice = Integer.parseInt(sc.nextLine());
+                        } catch (Exception e) {
+                        System.out.println("Invalid choice!");
+                        continue;
+                        }
+                        switch (appointmentChoice){
+                            
+                            case 1:
+                                appointmentService.addAppointment(sc);
+                                break;
+                            case 2:
+                                appointmentService.viewAppointments();
+                                break;
+                            case 3:
+                                appointmentDisplayMenu = false;
+                            break;
+                            default:
+                                System.out.println("Invalid choice!");
+                        }
+                    }
                     break;
 
                 case 4: // View Appointment List
