@@ -2,7 +2,8 @@ package adminmangementsystem.com;
 
 import java.util.Scanner;
 
-import adminmangementsystem.com.Management.AppointmentService;
+import adminmangementsystem.com.Management.AppointmentSystem;
+import adminmangementsystem.com.Management.PatientSystem;
 import adminmangementsystem.com.Model.Appointment;
 import adminmangementsystem.com.Model.Patient;
 
@@ -15,7 +16,8 @@ public class App {
 
         Scanner sc = new Scanner(System.in);
         Admin admin = new Admin("admin", "admin$$$");
-        AppointmentService appointmentService = new AppointmentService();
+        AppointmentSystem appointmentSystem = new AppointmentSystem();
+        PatientSystem patientSystem = new PatientSystem();
 
         boolean loggedIn = false;
 
@@ -67,44 +69,16 @@ public class App {
                 case 2: // Patient Management System
                     boolean patientMenu = true;
                     while (patientMenu) {
-                        System.out.println("\n\t\t------Patient Management System------");
-                        System.out.println("\t1. Add Patient");
-                        System.out.println("\t2. Update Patient Info");
-                        System.out.println("\t3. Delete Patient");
-                        System.out.println("\t4. Search Patient by Name or ID");
-                        System.out.println("\t5. Exit Patient Management");
+                        Menu.patientMenu();
+                        
                         System.out.print("Choose an option: ");
                         int patientChoice = Integer.parseInt(sc.nextLine());
 
                         switch (patientChoice) {
-
+                            
                             // --------- ADD PATIENT ----------
                             case 1:
-                                System.out.println("\t\t------Add Patient------");
-
-                                // --- Validate ID ---
-                                String patId = Validator.getValidPatient(sc, "Enter Patient ID: ");
-
-                                // --- Validate Name ---
-                                String patName = Validator.getOnlyLetter(sc, "Enter patient name: ");
-
-                                // --- Validate DOB ---
-                                String patDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
-
-                                // --- Validate Address ---
-                                String patAddress = Validator.getNonEmpty(sc, "Enter patient address: ");
-
-                                // --- Validate Disease ---
-                                String patDisease = Validator.getNonEmpty(sc, "Enter patient disease: ");
-
-                                // --- Validate Entry Date ---
-                                String patDOE = Validator.getValidDateFomart(sc, "Enter date of entry (dd/mm/yyyy): ");
-
-                                // --- Create and store patient ---
-                                Patient patient = new Patient(patId, patName, patDOB, patDisease, patAddress, patDOE);
-                                patients.add(patient);
-
-                                System.out.println("Patient data captured successfully.\n");
+                                patientSystem.addPatient(sc);
                                 break;
 
                             // --------- UPDATE PATIENT ----------
@@ -272,6 +246,7 @@ public class App {
 
                         Menu.appointmentMenu();
 
+                        System.out.print("Choose an option: ");
                         int appointmentChoice;
                         try {
                             appointmentChoice = Integer.parseInt(sc.nextLine());
@@ -282,10 +257,10 @@ public class App {
                         switch (appointmentChoice){
                             
                             case 1:
-                                appointmentService.addAppointment(sc);
+                                appointmentSystem.addAppointment(sc);
                                 break;
                             case 2:
-                                appointmentService.viewAppointments();
+                                appointmentSystem.viewAppointments();
                                 break;
                             case 3:
                                 appointmentDisplayMenu = false;
