@@ -83,78 +83,22 @@ public class App {
                                 System.out.println("\t\t------Add Patient------");
 
                                 // --- Validate ID ---
-                                String patId;
-                                while (true) {
-                                    System.out.print("Enter patient ID: ");
-                                    patId = sc.nextLine();
-                                    if (patId == null || patId.isEmpty()) {
-                                        System.out.println("ID cannot be empty. Please try again.");
-                                    } else if (!isIdUnique(patId)) {
-                                        System.out.println("Error: This ID already exists! Please enter a different ID.");
-                                    } else {
-                                        break;
-                                    }
-                                }
+                                String patId = Validator.getValidPatient(sc, "Enter Patient ID: ");
 
                                 // --- Validate Name ---
-                                String patName;
-                                while (true) {
-                                    System.out.print("Enter patient Name: ");
-                                    patName = sc.nextLine();
-                                    if (patName == null || patName.isEmpty() || !patName.matches("[a-zA-Z ]{1,50}")) {
-                                        System.out.println("Invalid Name! Only letters and spaces allowed (max 50 characters).");
-                                    } else {
-                                        break;
-                                    }
-                                }
+                                String patName = Validator.getOnlyLetter(sc, "Enter patient name: ");
 
                                 // --- Validate DOB ---
-                                String patDOB;
-                                while (true) {
-                                    System.out.print("Enter patient Date of Birth (dd/mm/yyyy): ");
-                                    patDOB = sc.nextLine();
-                                    if (patDOB == null || patDOB.isEmpty() || !patDOB.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                                        System.out.println("Invalid DOB! Format must be dd/mm/yyyy.");
-                                    } else {
-                                        break;
-                                    }
-                                }
+                                String patDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
 
                                 // --- Validate Address ---
-                                String patAddress;
-                                while (true) {
-                                    System.out.print("Enter patient address: ");
-                                    patAddress = sc.nextLine();
-                                    if (patAddress == null || patAddress.isEmpty()) {
-                                        System.out.println("Address cannot be empty!");
-                                    } else {
-                                        break;
-                                    }
-                                }
+                                String patAddress = Validator.getNonEmpty(sc, "Enter patient address: ");
 
                                 // --- Validate Disease ---
-                                String patDisease;
-                                while (true) {
-                                    System.out.print("Enter patient disease: ");
-                                    patDisease = sc.nextLine();
-                                    if (patDisease == null || patDisease.isEmpty()) {
-                                        System.out.println("Disease cannot be empty!");
-                                    } else {
-                                        break;
-                                    }
-                                }
+                                String patDisease = Validator.getNonEmpty(sc, "Enter patient disease: ");
 
                                 // --- Validate Entry Date ---
-                                String patDOE;
-                                while (true) {
-                                    System.out.print("Enter date of entry (dd/mm/yyyy): ");
-                                    patDOE = sc.nextLine();
-                                    if (patDOE == null || patDOE.isEmpty() || !patDOE.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                                        System.out.println("Invalid Entry Date! Format must be dd/mm/yyyy.");
-                                    } else {
-                                        break;
-                                    }
-                                }
+                                String patDOE = Validator.getValidDateFomart(sc, "Enter date of entry (dd/mm/yyyy): ");
 
                                 // --- Create and store patient ---
                                 Patient patient = new Patient(patId, patName, patDOB, patDisease, patAddress, patDOE);
@@ -164,9 +108,8 @@ public class App {
                                 break;
 
                             // --------- UPDATE PATIENT ----------
-                           case 2: // Update Patient
-                                System.out.print("Enter patient ID to update: ");
-                                String updateId = sc.nextLine();
+                           case 2: // Update Patient ID
+                                String updateId = Validator.getValidUpdatePatientId(sc, "Enter patient ID to update: ");
                                 Patient pToUpdate = searchPatientById(updateId);
                                 if (pToUpdate == null) {
                                     System.out.println("Patient not found!");
@@ -174,61 +117,55 @@ public class App {
                                     System.out.println("Leave blank to keep current value.");
 
                                     // --- Update Name ---
-                                    while (true) {
-                                        System.out.print("Enter new Name (" + pToUpdate.getName() + "): ");
-                                        String newName = sc.nextLine();
+                                        //Update Section not yet complate need to do it w4
+                                   
+                                        String newName = Validator.getOnlyLetter(sc, "Enter new Name (" + pToUpdate.getName() + "): ");
                                         if (newName.isEmpty()) {
                                             break; // keep current
-                                        } else if (!newName.matches("[a-zA-Z ]{1,50}")) {
-                                            System.out.println("Invalid Name! Only letters and spaces allowed (max 50 characters).");
+                                       
                                         } else {
                                             pToUpdate.setName(newName);
-                                            break;
                                         }
-                                    }
+                                    
 
                                     // --- Update DOB ---
-                                    while (true) {
-                                        System.out.print("Enter new DOB (" + pToUpdate.getDob() + "): ");
-                                        String newDob = sc.nextLine();
+                                   
+                                        String newDob = Validator.getValidDateFomart(sc, "Enter new DOB (" + pToUpdate.getDob() + "): ");
                                         if (newDob.isEmpty()) {
                                             break;
                                         } else if (!newDob.matches("\\d{2}/\\d{2}/\\d{4}")) {
                                             System.out.println("Invalid DOB! Format must be dd/mm/yyyy.");
                                         } else {
                                             pToUpdate.setDob(newDob);
-                                            break;
+                                            
                                         }
-                                    }
+                                    
 
                                     // --- Update Address ---
-                                    while (true) {
-                                        System.out.print("Enter new Address (" + pToUpdate.getAddress() + "): ");
-                                        String newAddress = sc.nextLine();
+                                    
+                                        String newAddress = Validator.getNonEmpty(sc, "Enter new Address (" + pToUpdate.getAddress() + "): ");
                                         if (newAddress.isEmpty()) {
                                             break;
                                         } else {
                                             pToUpdate.setAddress(newAddress);
-                                            break;
+                                            
                                         }
-                                    }
+                                    
 
                                     // --- Update Disease ---
-                                    while (true) {
-                                        System.out.print("Enter new Disease (" + pToUpdate.getDisease() + "): ");
-                                        String newDisease = sc.nextLine();
+                                   
+                                        String newDisease = Validator.getNonEmpty(sc, "Enter new Disease (" + pToUpdate.getDisease() + "): ");
                                         if (newDisease.isEmpty()) {
                                             break;
                                         } else {
                                             pToUpdate.setDisease(newDisease);
-                                            break;
+                                            
                                         }
-                                    }
+                                    
 
                                     // --- Update Entry Date ---
-                                    while (true) {
-                                        System.out.print("Enter new Entry Date (" + pToUpdate.getEntryDate() + "): ");
-                                        String newDOE = sc.nextLine();
+                                   
+                                        String newDOE = Validator.getValidDateFomart(sc, "Enter new Entry Date (" + pToUpdate.getEntryDate() + "): ");
                                         if (newDOE.isEmpty()) {
                                             break;
                                         } else if (!newDOE.matches("\\d{2}/\\d{2}/\\d{4}")) {
@@ -237,7 +174,7 @@ public class App {
                                             pToUpdate.setEntryDate(newDOE);
                                             break;
                                         }
-                                    }
+                                    
 
                                     System.out.println("Patient updated successfully.");
                                 }
