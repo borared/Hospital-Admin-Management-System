@@ -42,7 +42,17 @@ private static final String LINE = "+-------------------------------------------
         System.out.println("\t1. Schedule Appointment");
         System.out.println("\t2. View Appointments");
         System.out.println("\t3. Exit");
-        System.out.print("Choose an option: ");
+        
+    }
+
+    public static void patientMenu(){
+        System.out.println("\n\t\t------Patient Management System------");
+        System.out.println("\t1. Add Patient");
+        System.out.println("\t2. Update Patient Info");
+        System.out.println("\t3. Delete Patient");
+        System.out.println("\t4. Search Patient by Name or ID");
+        System.out.println("\t5. Exit Patient Management");
+        
     }
 }
 

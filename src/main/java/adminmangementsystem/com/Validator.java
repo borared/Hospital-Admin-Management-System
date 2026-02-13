@@ -75,4 +75,23 @@ public class Validator {
         }
     }
 
+    //Update patient ID
+        public static String getValidUpdatePatientId(Scanner sc, String msg) {
+            while (true) {
+                System.out.print(msg);
+                String input = sc.nextLine().trim();
+                if (input.isEmpty()) {
+                    return null; // Allow empty input to keep existing value
+                } else if (input.startsWith("-")) {
+                    System.out.println("Invalid input. Patient ID cannot start with a negative sign.");
+                } else if (!input.matches("^[a-zA-Z0-9 ]+$")) {
+                    System.out.println("Invalid input. Patient ID must contain only letters, numbers, and spaces.");
+                } else {
+                    return input;
+                }
+            }
+        }
+
+    
+
 }
