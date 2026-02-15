@@ -7,6 +7,7 @@ import java.util.Scanner;
 
 import adminmangementsystem.com.Validator;
 import adminmangementsystem.com.Model.Doctor;
+import adminmangementsystem.com.Model.Patient;
 
 
 public class DoctorSystem {
@@ -138,6 +139,18 @@ public class DoctorSystem {
         }
     }
     return true; // ID is unique
+    }
+
+    public void deleteDoctor(Scanner sc){
+        System.out.print("Enter doctor ID to delete: ");
+        String deleteId = sc.nextLine();
+        Doctor pToDelete = searchDoctorById(deleteId);
+        if (pToDelete == null) {
+            System.out.println("Doctor not found!");
+        } else {
+            doctors.remove(pToDelete);
+            System.out.println("Patient deleted successfully.");
+        }
     }
 
 }

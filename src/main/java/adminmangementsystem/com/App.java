@@ -75,7 +75,7 @@ public class App {
                                 doctorSystem.updateDoctor(sc);
                                 break;
                             case 3:
-                                doctorSystem.addDoctor(sc);
+                                doctorSystem.deleteDoctor(sc);
                                 break;
                             case 4:
                                 doctorSystem.addDoctor(sc);
