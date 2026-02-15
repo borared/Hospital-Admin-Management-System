@@ -37,6 +37,16 @@ private static final String LINE = "+-------------------------------------------
         System.out.println(line);
     }
 
+    public static void doctorMenu(){
+        System.out.println("\n\t\t------Doctor Management System------");
+        System.out.println("\t1. Add Doctor");
+        System.out.println("\t2. Update Doctor Info");
+        System.out.println("\t3. Delete Doctor");
+        System.out.println("\t4. Search Doctor by Name or ID");
+        System.out.println("\t5. Exit Doctor Management");
+        
+    }
+
     public static void appointmentMenu(){
         System.out.println("\n\t\t------Appointment Menu------");
         System.out.println("\t1. Schedule Appointment");
@@ -54,6 +64,8 @@ private static final String LINE = "+-------------------------------------------
         System.out.println("\t5. Exit Patient Management");
         
     }
+
+
 }
 
 

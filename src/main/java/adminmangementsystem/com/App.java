@@ -4,6 +4,7 @@ import java.util.Scanner;
 
 import adminmangementsystem.com.Management.AppointmentService;
 import adminmangementsystem.com.Management.PatientSystem;
+import adminmangementsystem.com.Management.DoctorSystem;
 
 public class App {
     
@@ -13,6 +14,7 @@ public class App {
         Admin admin = new Admin("admin", "admin$$$");
         AppointmentService appointmentSystem = new AppointmentService();
         PatientSystem patientSystem = new PatientSystem();
+        DoctorSystem doctorSystem = new DoctorSystem();
 
         boolean loggedIn = false;
 
@@ -58,7 +60,34 @@ public class App {
 
             switch (choiceIn) {
                 case 1: //Doctor System
-                    
+                    boolean doctorMenu = true;
+                    while(doctorMenu){
+                        Menu.patientMenu();
+
+                        System.out.print("Choose an option: ");
+                        int doctorChoice = Integer.parseInt(sc.nextLine());
+
+                        switch (doctorChoice) {
+                            case 1:
+                                doctorSystem.addDoctor(sc);
+                                break;
+                            case 2:
+                                doctorSystem.updateDoctor(sc);
+                                break;
+                            case 3:
+                                doctorSystem.addDoctor(sc);
+                                break;
+                            case 4:
+                                doctorSystem.addDoctor(sc);
+                                break;
+                            case 5:
+                                doctorSystem.addDoctor(sc);
+                                break;
+                        
+                            default:
+                                break;
+                        }
+                    }
                     break;
 
                 case 2: // Patient Management System
