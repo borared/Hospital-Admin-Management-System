@@ -224,8 +224,8 @@ public class DoctorSystem {
     System.out.println(line);
     }
 
+    //View List
     public void viewDoctorList() {
-
     System.out.println("\t\t\t\t------Doctor List------");
 
     if (doctors.isEmpty()) {
@@ -241,7 +241,7 @@ public class DoctorSystem {
     System.out.println(line);
 
     for (Doctor d : doctors) {
-        System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
+        System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | $%-9.2f | %-12s |\n",
                 d.getId(),
                 d.getName(),
                 d.getDob(),
@@ -253,7 +253,14 @@ public class DoctorSystem {
     }
 
     System.out.println(line);
-    }
+
+    // Full-width total row (matches table width exactly)
+    System.out.printf("| %-128s |\n", "Total Doctors: " + doctors.size());
+
+    System.out.println(line);
+}
+
+
 
 
 
