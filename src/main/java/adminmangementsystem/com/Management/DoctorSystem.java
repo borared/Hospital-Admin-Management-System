@@ -140,4 +140,122 @@ public class DoctorSystem {
     return true; // ID is unique
     }
 
+    public void deleteDoctor(Scanner sc){
+        System.out.print("Enter doctor ID to delete: ");
+        String deleteId = sc.nextLine();
+        Doctor pToDelete = searchDoctorById(deleteId);
+        if (pToDelete == null) {
+            System.out.println("Doctor not found!");
+        } else {
+            doctors.remove(pToDelete);
+            System.out.println("Patient deleted successfully.");
+        }
+    }
+
+    public void searchDoctor(Scanner sc) {
+
+    System.out.print("Search by (1) Name or (2) ID: ");
+    int searchChoice;
+
+    try {
+        searchChoice = Integer.parseInt(sc.nextLine());
+    } catch (Exception e) {
+        System.out.println("Invalid choice!");
+        return;
+    }
+
+    String line = "----------------------------------------------------------------------------------------------------------------------------";
+
+    // ---- TABLE HEADER ----
+    System.out.println(line);
+    System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10s | %-12s |\n",
+            "ID", "Name", "DOB", "Address", "Email", "Position", "Salary", "Entry Date");
+    System.out.println(line);
+
+    if (searchChoice == 1) { // Search by Name
+
+        System.out.print("Enter Doctor name: ");
+        String searchName = sc.nextLine().trim();
+        boolean foundAny = false;
+
+        for (Doctor d : doctors) {
+            if (d.getName().equalsIgnoreCase(searchName)) {
+                System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
+                        d.getId(),
+                        d.getName(),
+                        d.getDob(),
+                        d.getAddress(),
+                        d.getEmail(),
+                        d.getPosition(),
+                        d.getSalary(),
+                        d.getDoe());
+                foundAny = true;
+            }
+        }
+
+        if (!foundAny) {
+            System.out.println("|                                             No doctors found with that name                                              |");
+        }
+
+    } else if (searchChoice == 2) { // Search by ID
+
+        System.out.print("Enter Doctor ID: ");
+        String searchId = sc.nextLine().trim();
+        Doctor found = searchDoctorById(searchId);
+
+        if (found != null) {
+            System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
+                    found.getId(),
+                    found.getName(),
+                    found.getDob(),
+                    found.getAddress(),
+                    found.getEmail(),
+                    found.getPosition(),
+                    found.getSalary(),
+                    found.getDoe());
+        } else {
+            System.out.println("|                                                     Doctor not found                                                      |");
+        }
+
+    } else {
+        System.out.println("Invalid choice!");
+    }
+
+    System.out.println(line);
+    }
+
+    public void viewDoctorList() {
+
+    System.out.println("\t\t\t\t------Doctor List------");
+
+    if (doctors.isEmpty()) {
+        System.out.println("No doctors found.");
+        return;
+    }
+
+    String line = "-----------------------------------------------------------------------------------------------------------------------------------";
+
+    System.out.println(line);
+    System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10s | %-12s |\n",
+            "ID", "Name", "DOB", "Address", "Email", "Position", "Salary", "Entry Date");
+    System.out.println(line);
+
+    for (Doctor d : doctors) {
+        System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
+                d.getId(),
+                d.getName(),
+                d.getDob(),
+                d.getAddress(),
+                d.getEmail(),
+                d.getPosition(),
+                d.getSalary(),
+                d.getDoe());
+    }
+
+    System.out.println(line);
+    }
+
+
+
+
 }

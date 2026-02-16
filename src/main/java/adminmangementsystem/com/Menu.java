@@ -43,7 +43,8 @@ private static final String LINE = "+-------------------------------------------
         System.out.println("\t2. Update Doctor Info");
         System.out.println("\t3. Delete Doctor");
         System.out.println("\t4. Search Doctor by Name or ID");
-        System.out.println("\t5. Exit Doctor Management");
+        System.out.println("\t5. View Doctor List");
+        System.out.println("\t6. Exit Doctor Management");
         
     }
 

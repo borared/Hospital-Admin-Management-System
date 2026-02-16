@@ -62,29 +62,42 @@ public class App {
                 case 1: //Doctor System
                     boolean doctorMenu = true;
                     while(doctorMenu){
-                        Menu.patientMenu();
+                        Menu.doctorMenu();
 
                         System.out.print("Choose an option: ");
                         int doctorChoice = Integer.parseInt(sc.nextLine());
 
                         switch (doctorChoice) {
+                            //Add Doctor
                             case 1:
                                 doctorSystem.addDoctor(sc);
                                 break;
+                            //Update Doctor
                             case 2:
                                 doctorSystem.updateDoctor(sc);
                                 break;
+                            //Delete Doctor    
                             case 3:
-                                doctorSystem.addDoctor(sc);
+                                doctorSystem.deleteDoctor(sc);
                                 break;
+
+                            //Search Doctor
                             case 4:
-                                doctorSystem.addDoctor(sc);
+                                doctorSystem.searchDoctor(sc);
                                 break;
+                            
+                            //View Doctor List
                             case 5:
-                                doctorSystem.addDoctor(sc);
+                                doctorSystem.viewDoctorList();
+                                break;
+
+                            //Exit 
+                            case 6:
+                                doctorMenu = false;
                                 break;
                         
                             default:
+                                System.out.println("Invalid choice!");
                                 break;
                         }
                     }
