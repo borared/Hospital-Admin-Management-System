@@ -191,4 +191,14 @@ public class PatientSystem {
                         System.out.println(line);
                     }
     }
+
+    // Persistence helpers
+    public static List<Patient> getPatients() {
+        return patients;
+    }
+
+    public static void setPatients(List<Patient> patients) {
+        if (patients == null) return;
+        PatientSystem.patients = patients;
+    }
 }

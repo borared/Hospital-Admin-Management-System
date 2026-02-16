@@ -260,9 +260,14 @@ public class DoctorSystem {
     System.out.println(line);
 }
 
+    // Persistence helpers
+    public List<Doctor> getDoctors() {
+        return doctors;
+    }
 
-
-
-
+    public void setDoctors(List<Doctor> doctors) {
+        if (doctors == null) return;
+        this.doctors = doctors;
+    }
 
 }

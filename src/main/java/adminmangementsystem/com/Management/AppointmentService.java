@@ -62,4 +62,14 @@ public class AppointmentService {
 
         System.out.println(line);
     }
+
+    // Persistence helpers
+    public List<Appointment> getAppointments() {
+        return appointments;
+    }
+
+    public void setAppointments(List<Appointment> appointments) {
+        if (appointments == null) return;
+        this.appointments = appointments;
+    }
 }

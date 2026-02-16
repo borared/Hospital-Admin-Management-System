@@ -1,10 +1,19 @@
 package adminmangementsystem.com;
 
+import java.io.IOException;
+import java.lang.reflect.Type;
+import java.util.List;
 import java.util.Scanner;
+
+import com.google.gson.reflect.TypeToken;
 
 import adminmangementsystem.com.Management.AppointmentService;
 import adminmangementsystem.com.Management.PatientSystem;
 import adminmangementsystem.com.Management.DoctorSystem;
+import adminmangementsystem.com.Management.Persistence;
+import adminmangementsystem.com.Model.Appointment;
+import adminmangementsystem.com.Model.Doctor;
+import adminmangementsystem.com.Model.Patient;
 
 public class App {
     
@@ -15,6 +24,34 @@ public class App {
         AppointmentService appointmentSystem = new AppointmentService();
         PatientSystem patientSystem = new PatientSystem();
         DoctorSystem doctorSystem = new DoctorSystem();
+
+        // Load persisted data (if any)
+        try {
+            Type doctorListType = new TypeToken<List<Doctor>>(){}.getType();
+            List<Doctor> loadedDoctors = Persistence.loadList("data/doctors.json", doctorListType);
+            doctorSystem.setDoctors(loadedDoctors);
+
+            Type patientListType = new TypeToken<List<Patient>>(){}.getType();
+            List<Patient> loadedPatients = Persistence.loadList("data/patients.json", patientListType);
+            PatientSystem.setPatients(loadedPatients);
+
+            Type appointmentListType = new TypeToken<List<Appointment>>(){}.getType();
+            List<Appointment> loadedAppointments = Persistence.loadList("data/appointments.json", appointmentListType);
+            appointmentSystem.setAppointments(loadedAppointments);
+        } catch (Exception e) {
+            System.out.println("Warning: could not load persisted data: " + e.getMessage());
+        }
+
+        // Save on exit using shutdown hook
+        Runtime.getRuntime().addShutdownHook(new Thread(() -> {
+            try {
+                Persistence.saveList(doctorSystem.getDoctors(), "data/doctors.json");
+                Persistence.saveList(PatientSystem.getPatients(), "data/patients.json");
+                Persistence.saveList(appointmentSystem.getAppointments(), "data/appointments.json");
+            } catch (Exception e) {
+                e.printStackTrace();
+            }
+        }));
 
         boolean loggedIn = false;
 
@@ -185,6 +222,7 @@ public class App {
                   break;
 
                 case 5: // View Doctor List
+                    doctorSystem.viewDoctorList();
                   break;
 
                 case 6: // View Patient List

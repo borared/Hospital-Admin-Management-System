@@ -1,0 +1,22 @@
+[
+  {
+    "id": "01",
+    "name": "Jonh Doe",
+    "dob": "01/01/1985",
+    "address": "380str",
+    "email": "jonhdoe123@gmail.com",
+    "position": "Sugery",
+    "salary": 3000.0,
+    "doe": "01/01/2026"
+  },
+  {
+    "id": "02",
+    "name": "Belly Sum",
+    "dob": "02/05/1980",
+    "address": "400str",
+    "email": "bellysum12@gmail.com",
+    "position": "Nurse",
+    "salary": 2500.0,
+    "doe": "01/01/2025"
+  }
+]
