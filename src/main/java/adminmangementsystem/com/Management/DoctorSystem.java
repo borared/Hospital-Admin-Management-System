@@ -9,25 +9,34 @@ import adminmangementsystem.com.Validator;
 import adminmangementsystem.com.model.Doctor;
 
 
-public class DoctorSystem {
+public class DoctorSystem implements IDoctorSystem {
     private List<Doctor> doctors = new ArrayList<>();
 
     //---ADD Doctor---
     public void addDoctor(Scanner sc){
         System.out.println("\t\t------Add Doctor------");
 
-            String doctorId = Validator.getValidPatient(sc, "Enter Doctor ID: ");
-            String doctorName = Validator.getOnlyLetter(sc, "Enter Doctor name: ");
-            String doctorDOB = Validator.getValidDateFomart(sc, "Enter Doctor Date of Birth (dd/mm/yyyy): ");
-            String doctorAddress = Validator.getNonEmpty(sc, "Enter Doctor address: ");
-            String doctorEmail = Validator.getValidEmail(sc, "Enter Doctor email: ");
-            String doctorPosition = Validator.getOnlyLetter(sc, "Enter Doctor position: ");
-            Double doctorSalary = Validator.getPositiveDouble(sc, "Enter Doctor salary: ");
-            String doctorDOE = Validator.getValidDateFomart(sc, "Enter date of entry (dd/mm/yyyy): ");
-            Doctor doctor = new Doctor(doctorId, doctorName, doctorDOB, doctorAddress, doctorEmail, doctorPosition, doctorSalary, doctorDOE);
-            doctors.add(doctor);
+        String doctorId = Validator.getValidPatient(sc, "Enter Doctor ID: ");
+        if (!isIdUnique(doctorId)) {
+            System.out.println("Error: Doctor ID already exists. Please use a unique ID.");
+            return;
+        }
+        String doctorName = Validator.getOnlyLetter(sc, "Enter Doctor name: ");
+        String doctorDOB = Validator.getValidDateFomart(sc, "Enter Doctor Date of Birth (dd/mm/yyyy): ");
+        String doctorAddress = Validator.getNonEmpty(sc, "Enter Doctor address: ");
+        String doctorEmail = Validator.getValidEmail(sc, "Enter Doctor email: ");
+        String doctorPosition = Validator.getOnlyLetter(sc, "Enter Doctor position: ");
+        Double doctorSalary = Validator.getPositiveDouble(sc, "Enter Doctor salary: ");
+        String doctorDOE = Validator.getValidDateFomart(sc, "Enter date of entry (dd/mm/yyyy): ");
+        Doctor doctor = new Doctor(doctorId, doctorName, doctorDOB, doctorAddress, doctorEmail, doctorPosition, doctorSalary, doctorDOE);
+        doctors.add(doctor);
 
-            System.out.println("Doctor data captured successfully.\n");
+        System.out.println("Doctor data captured successfully.\n");
+    }
+
+    @Override
+    public void viewDoctors() {
+        viewDoctorList();
     }
 
     public void updateDoctor(Scanner sc) {
@@ -121,6 +130,7 @@ public class DoctorSystem {
 
 
       //Search Doctor by ID
+    @Override
     public Doctor searchDoctorById(String id) {
     for (Doctor p : doctors) {
         if (p.getId().equalsIgnoreCase(id)) {

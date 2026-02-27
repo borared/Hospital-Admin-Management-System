@@ -7,7 +7,7 @@ import java.util.Scanner;
 import adminmangementsystem.com.model.Appointment;
 import adminmangementsystem.com.Validator;
 
-public class AppointmentService {
+public class AppointmentService implements IAppointmentService {
 
     private List<Appointment> appointments = new ArrayList<>();
 
