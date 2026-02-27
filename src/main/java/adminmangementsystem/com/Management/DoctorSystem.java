@@ -1,4 +1,4 @@
-package adminmangementsystem.com.Management;
+package adminmangementsystem.com.management;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -6,7 +6,7 @@ import java.util.Scanner;
 
 
 import adminmangementsystem.com.Validator;
-import adminmangementsystem.com.Model.Doctor;
+import adminmangementsystem.com.model.Doctor;
 
 
 public class DoctorSystem {

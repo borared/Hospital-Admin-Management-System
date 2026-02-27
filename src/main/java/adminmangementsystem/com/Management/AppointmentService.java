@@ -1,10 +1,10 @@
-package adminmangementsystem.com.Management;
+package adminmangementsystem.com.management;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import adminmangementsystem.com.Model.Appointment;
+import adminmangementsystem.com.model.Appointment;
 import adminmangementsystem.com.Validator;
 
 public class AppointmentService {
