@@ -185,7 +185,8 @@ public class App {
                   break;
 
                 case 5: // View Doctor List
-                  break;
+                    doctorSystem.viewDoctorList1();
+                 break;
 
                 case 6: // View Patient List
                     patientSystem.viewPatientList(sc);
