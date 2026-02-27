@@ -10,6 +10,26 @@ import adminmangementsystem.com.model.Doctor;
 
 
 public class DoctorSystem implements IDoctorSystem {
+    public void viewDoctorList1() {
+        System.out.println("\t\t\t\t------Doctor List------");
+
+        if (doctors.isEmpty()) {
+            System.out.println("No doctors found.");
+            return;
+        }
+
+        String line = "------------------------------------------------------------------------------------------------------------";
+        System.out.println(line);
+        System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s | %-10s | %-12s |\n",
+            "ID", "Name", "DOB", "Address", "Email", "Position", "Salary", "Entry Date");
+        System.out.println(line);
+
+        for (Doctor d : doctors) {
+            System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s | %-10.2f | %-12s |\n",
+                d.getId(), d.getName(), d.getDob(), d.getAddress(), d.getEmail(), d.getPosition(), d.getSalary(), d.getDoe());
+        }
+        System.out.println(line);
+    }
     private List<Doctor> doctors = new ArrayList<>();
 
     //---ADD Doctor---
@@ -36,7 +56,7 @@ public class DoctorSystem implements IDoctorSystem {
 
     @Override
     public void viewDoctors() {
-        viewDoctorList();
+        viewDoctorList1();
     }
 
     public void updateDoctor(Scanner sc) {
