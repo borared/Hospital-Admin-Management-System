@@ -13,29 +13,11 @@ public class AppointmentService implements IAppointmentService {
 
     // --------- ADD APPOINTMENT ----------
     public void addAppointment(Scanner sc) {
+            Appointment appointment = adminmangementsystem.com.view.AppointmentView.getAppointmentInput(sc);
+            appointments.add(appointment);
+            System.out.println("Appointment scheduled successfully.\n");
+        }
 
-        System.out.println("\t\t------Appointment Management System------");
-
-        String patientId = Validator.getNonEmpty(sc, "Enter Patient ID: ");
-        String patientName = Validator.getOnlyLetter(sc, "Enter Patient Name: ");
-        String patientDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
-        String phoneNumber = Validator.getPhoneNumberLength(sc, "Enter patient Phone Number: ");
-        String disease = Validator.getOnlyLetter(sc, "Enter patient disease: ");
-        String DOA = Validator.getValidDateFomart(sc, "Enter date of appointment (dd/mm/yyyy): ");
-
-        Appointment appointment = new Appointment(
-                patientId,
-                patientName,
-                patientDOB,
-                disease,
-                phoneNumber,
-                DOA
-        );
-
-        appointments.add(appointment);
-
-        System.out.println("Appointment scheduled successfully.\n");
-    }
 
     // --------- VIEW APPOINTMENTS ----------
     public void viewAppointments() {

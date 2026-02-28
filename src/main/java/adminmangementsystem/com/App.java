@@ -6,6 +6,12 @@ import adminmangementsystem.com.management.AppointmentService;
 import adminmangementsystem.com.management.PatientSystem;
 import adminmangementsystem.com.management.DoctorSystem;
 
+// controllers handle menus and Scanner input
+import adminmangementsystem.com.controller.DoctorController;
+import adminmangementsystem.com.controller.PatientController;
+import adminmangementsystem.com.controller.AppointmentController;
+import adminmangementsystem.com.controller.MainController;
+
 public class App {
     
     public static void main(String[] args) {
