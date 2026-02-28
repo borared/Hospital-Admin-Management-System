@@ -5,15 +5,7 @@ import java.util.List;
 import java.util.Scanner;
 import adminmangementsystem.com.model.Doctor;
 
-/**
- * Implementation of IDoctorSystem interface.
- * Manages doctor records with CRUD operations and search functionality.
- */
-public class DoctorSystem implements IDoctorSystem {
-    
-    private List<Doctor> doctors = new ArrayList<>();
-
-    // Core interface methods (business logic)
+public class DoctorSystem extends AbstractManagementSystem<Doctor> implements IDoctorSystem {
     
     @Override
     public void addDoctor(Doctor doctor) {
@@ -25,7 +17,7 @@ public class DoctorSystem implements IDoctorSystem {
             throw new IllegalArgumentException("Doctor ID already exists.");
         }
         
-        doctors.add(doctor);
+        records.add(doctor);
     }
     
     @Override
@@ -55,7 +47,7 @@ public class DoctorSystem implements IDoctorSystem {
     public boolean deleteDoctor(String id) {
         Doctor doctor = searchDoctorById(id);
         if (doctor != null) {
-            doctors.remove(doctor);
+            records.remove(doctor);
             return true;
         }
         return false;
@@ -63,7 +55,7 @@ public class DoctorSystem implements IDoctorSystem {
     
     @Override
     public Doctor searchDoctorById(String id) {
-        for (Doctor doctor : doctors) {
+        for (Doctor doctor : records) {
             if (doctor.getId().equalsIgnoreCase(id)) {
                 return doctor;
             }
@@ -74,7 +66,7 @@ public class DoctorSystem implements IDoctorSystem {
     @Override
     public List<Doctor> searchDoctorsByName(String name) {
         List<Doctor> results = new ArrayList<>();
-        for (Doctor doctor : doctors) {
+        for (Doctor doctor : records) {
             if (doctor.getName().equalsIgnoreCase(name)) {
                 results.add(doctor);
             }
@@ -84,7 +76,7 @@ public class DoctorSystem implements IDoctorSystem {
     
     @Override
     public List<Doctor> getAllDoctors() {
-        return new ArrayList<>(doctors);
+        return getAll();
     }
     
     @Override
@@ -96,9 +88,12 @@ public class DoctorSystem implements IDoctorSystem {
     public void viewDoctors() {
         viewDoctorList();
     }
-
-    // UI interaction methods (Scanner-based for controller)
     
+    @Override
+    public void displayAll() {
+        viewDoctorList();
+    }
+
     public void addDoctor(Scanner sc) {
         Doctor doctor = adminmangementsystem.com.view.DoctorView.getDoctorInput(sc);
         
@@ -107,7 +102,7 @@ public class DoctorSystem implements IDoctorSystem {
             return;
         }
         
-        doctors.add(doctor);
+        records.add(doctor);
         System.out.println("Doctor data captured successfully.\n");
     }
     
@@ -130,7 +125,7 @@ public class DoctorSystem implements IDoctorSystem {
         if (pToDelete == null) {
             System.out.println("Doctor not found!");
         } else {
-            doctors.remove(pToDelete);
+            records.remove(pToDelete);
             System.out.println("Doctor deleted successfully.");
         }
     }
@@ -144,13 +139,12 @@ public class DoctorSystem implements IDoctorSystem {
         
         String line = "----------------------------------------------------------------------------------------------------------------------------";
         
-        // TABLE HEADER
         System.out.println(line);
         System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10s | %-12s |\n",
                 "ID", "Name", "DOB", "Address", "Email", "Position", "Salary", "Entry Date");
         System.out.println(line);
         
-        if (searchChoice == 1) { // Search by Name
+        if (searchChoice == 1) {
             String searchName = adminmangementsystem.com.view.DoctorView.getSearchName(sc);
             List<Doctor> results = searchDoctorsByName(searchName);
             
@@ -164,7 +158,7 @@ public class DoctorSystem implements IDoctorSystem {
                 }
             }
             
-        } else if (searchChoice == 2) { // Search by ID
+        } else if (searchChoice == 2) {
             String searchId = adminmangementsystem.com.view.DoctorView.getSearchId(sc);
             Doctor found = searchDoctorById(searchId);
             
@@ -186,7 +180,7 @@ public class DoctorSystem implements IDoctorSystem {
     public void viewDoctorList() {
         System.out.println("\t\t\t\t------Doctor List------");
         
-        if (doctors.isEmpty()) {
+        if (isEmpty()) {
             System.out.println("No doctors found.");
             return;
         }
@@ -198,7 +192,7 @@ public class DoctorSystem implements IDoctorSystem {
                 "ID", "Name", "DOB", "Address", "Email", "Position", "Salary", "Entry Date");
         System.out.println(line);
         
-        for (Doctor d : doctors) {
+        for (Doctor d : records) {
             System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
                     d.getId(), d.getName(), d.getDob(), d.getAddress(),
                     d.getEmail(), d.getPosition(), d.getSalary(), d.getDoe());

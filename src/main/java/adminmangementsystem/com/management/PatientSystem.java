@@ -4,11 +4,8 @@ import java.util.ArrayList;
 import java.util.List;
 import adminmangementsystem.com.model.Patient;
 
-public class PatientSystem implements IPatientSystem {
+public class PatientSystem extends AbstractManagementSystem<Patient> implements IPatientSystem {
 
-    private List<Patient> patients = new ArrayList<>();
-
-    // Add Patient
     @Override
     public void addPatient(Patient patient) {
         if (patient == null) {
@@ -19,21 +16,19 @@ public class PatientSystem implements IPatientSystem {
             throw new IllegalArgumentException("Patient ID already exists.");
         }
 
-        patients.add(patient);
+        records.add(patient);
     }
 
-    // Delete Patient
     @Override
     public boolean deletePatient(String id) {
         Patient patient = searchPatientById(id);
         if (patient != null) {
-            patients.remove(patient);
+            records.remove(patient);
             return true;
         }
         return false;
     }
 
-    // Update Patient
     @Override
     public boolean updatePatient(Patient updatedPatient) {
         if (updatedPatient == null) {
@@ -55,10 +50,9 @@ public class PatientSystem implements IPatientSystem {
         return true;
     }
 
-    // Search Patient by ID
     @Override
     public Patient searchPatientById(String id) {
-        for (Patient patient : patients) {
+        for (Patient patient : records) {
             if (patient.getId().equalsIgnoreCase(id)) {
                 return patient;
             }
@@ -66,19 +60,20 @@ public class PatientSystem implements IPatientSystem {
         return null;
     }
 
-    // Get All Patients
     @Override
     public List<Patient> getAllPatients() {
-        return new ArrayList<>(patients); // return copy for safety
+        return getAll();
     }
 
-    // Check ID uniqueness
     private boolean isIdUnique(String id) {
         return searchPatientById(id) == null;
     }
-
-    // Scanner-based methods for controller interaction
     
+    @Override
+    public void displayAll() {
+        viewPatientList(null);
+    }
+
     public void addPatient(java.util.Scanner sc) {
         Patient patient = adminmangementsystem.com.view.PatientView.getPatientInput(sc);
         
@@ -87,7 +82,7 @@ public class PatientSystem implements IPatientSystem {
             return;
         }
         
-        patients.add(patient);
+        records.add(patient);
         System.out.println("Patient data captured successfully.\n");
     }
     
@@ -111,7 +106,7 @@ public class PatientSystem implements IPatientSystem {
         if (pToDelete == null) {
             System.out.println("Patient not found!");
         } else {
-            patients.remove(pToDelete);
+            records.remove(pToDelete);
             System.out.println("Patient deleted successfully.");
         }
     }
@@ -125,30 +120,32 @@ public class PatientSystem implements IPatientSystem {
         
         String line = "----------------------------------------------------------------------------------------------------------------------------";
         
-        // TABLE HEADER
         System.out.println(line);
         System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
                 "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
         System.out.println(line);
         
-        if (searchChoice == 1) { // Search by Name
+        if (searchChoice == 1) {
             String searchName = adminmangementsystem.com.view.PatientView.getSearchName(sc);
-            boolean foundAny = false;
+            List<Patient> results = new ArrayList<>();
             
-            for (Patient p : patients) {
+            for (Patient p : records) {
                 if (p.getName().equalsIgnoreCase(searchName)) {
-                    System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
-                            p.getId(), p.getName(), p.getDob(), p.getAddress(),
-                            p.getDisease(), p.getEntryDate());
-                    foundAny = true;
+                    results.add(p);
                 }
             }
             
-            if (!foundAny) {
+            if (results.isEmpty()) {
                 System.out.println("|                                             No patients found with that name                                              |");
+            } else {
+                for (Patient p : results) {
+                    System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
+                            p.getId(), p.getName(), p.getDob(), p.getAddress(),
+                            p.getDisease(), p.getEntryDate());
+                }
             }
             
-        } else if (searchChoice == 2) { // Search by ID
+        } else if (searchChoice == 2) {
             String searchId = adminmangementsystem.com.view.PatientView.getSearchId(sc);
             Patient found = searchPatientById(searchId);
             
@@ -170,7 +167,7 @@ public class PatientSystem implements IPatientSystem {
     public void viewPatientList(java.util.Scanner sc) {
         System.out.println("\t\t\t\t------Patient List------");
 
-        if (patients.isEmpty()) {
+        if (isEmpty()) {
             System.out.println("No patients found.");
             return;
         }
@@ -181,7 +178,7 @@ public class PatientSystem implements IPatientSystem {
                 "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
         System.out.println(line);
 
-        for (Patient p : patients) {
+        for (Patient p : records) {
             System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
                     p.getId(), p.getName(), p.getDob(), p.getAddress(),
                     p.getDisease(), p.getEntryDate());
