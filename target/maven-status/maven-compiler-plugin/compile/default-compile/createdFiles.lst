@@ -1,0 +1,16 @@
+adminmangementsystem\com\Admin.class
+adminmangementsystem\com\ServiceRegistry.class
+adminmangementsystem\com\Model\Appointment.class
+adminmangementsystem\com\Controller\DoctorController.class
+adminmangementsystem\com\Controller\PatientController.class
+adminmangementsystem\com\Controller\LoginController.class
+adminmangementsystem\com\Controller\HomeController.class
+adminmangementsystem\com\Model\Doctor.class
+adminmangementsystem\com\App.class
+adminmangementsystem\com\Model\Patient.class
+adminmangementsystem\com\Controller\AppointmentController.class
+adminmangementsystem\com\Management\AppointmentService.class
+adminmangementsystem\com\Management\PatientSystem.class
+adminmangementsystem\com\Validator.class
+adminmangementsystem\com\Management\DoctorSystem.class
+adminmangementsystem\com\Menu.class

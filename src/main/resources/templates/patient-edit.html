@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Patient - Admin Management System</title>
+    <style>
+        body {
+            font-family: 'Segoe UI', Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f9f9f9;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: #fff;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0,0,0,0.05);
+        }
+        h1 {
+            color: #222;
+            margin-bottom: 25px;
+            font-size: 26px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 25px;
+            color: #007bff;
+            text-decoration: none;
+            font-size: 14px;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .form-group {
+            margin-bottom: 18px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 6px;
+            color: #333;
+            font-weight: 500;
+            font-size: 14px;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px 12px;
+            border: 1px solid #ccc;
+            border-radius: 5px;
+            font-size: 14px;
+            box-sizing: border-box;
+            transition: border-color 0.2s;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .form-group input:disabled {
+            background-color: #e9ecef;
+            cursor: not-allowed;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 20px;
+        }
+        .btn-submit {
+            padding: 12px 28px;
+            background-color: #ffc107;
+            color: #222;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            font-weight: 600;
+            transition: background-color 0.2s;
+            margin-right: 10px;
+        }
+        .btn-submit:hover {
+            background-color: #e0a800;
+        }
+        .btn-cancel {
+            padding: 12px 28px;
+            background-color: #6c757d;
+            color: #fff;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+            transition: background-color 0.2s;
+        }
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a th:href="@{/patients}" class="back-link">← Back to Patient List</a>
+        <h1>Edit Patient</h1>
+        
+        <form th:action="@{/patients/edit/{id}(id=${patient.id})}" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id">Patient ID</label>
+                    <input type="text" id="id" th:value="${patient.id}" disabled>
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" th:value="${patient.name}" required>
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dob">Date of Birth *</label>
+                    <input type="text" id="dob" name="dob" th:value="${patient.dob}" required placeholder="dd/mm/yyyy">
+                </div>
+                
+                <div class="form-group">
+                    <label for="entryDate">Entry Date *</label>
+                    <input type="text" id="entryDate" name="entryDate" th:value="${patient.entryDate}" required placeholder="dd/mm/yyyy">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address *</label>
+                <input type="text" id="address" name="address" th:value="${patient.address}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="disease">Disease *</label>
+                <input type="text" id="disease" name="disease" th:value="${patient.disease}" required>
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <button type="submit" class="btn-submit">Update Patient</button>
+                <a th:href="@{/patients}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

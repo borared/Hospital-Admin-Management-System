@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search Patient - Admin Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .search-form {
+            background-color: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 30px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        .form-group select,
+        .form-group input {
+            width: 100%;
+            max-width: 400px;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+        }
+        .btn-search {
+            padding: 10px 30px;
+            background-color: #17a2b8;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 14px;
+            margin-top: 10px;
+        }
+        .btn-search:hover {
+            background-color: #138496;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+        }
+        th, td {
+            padding: 12px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+        }
+        th {
+            background-color: #007bff;
+            color: white;
+            font-weight: bold;
+        }
+        tr:hover {
+            background-color: #f5f5f5;
+        }
+        .no-results {
+            text-align: center;
+            padding: 40px;
+            color: #666;
+            background-color: #fff3cd;
+            border: 1px solid #ffc107;
+            border-radius: 4px;
+            margin-top: 20px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a th:href="@{/patients}" class="back-link">← Back to Patient List</a>
+        <h1>Search Patient</h1>
+        
+        <div class="search-form">
+            <form th:action="@{/patients/search}" method="post">
+                <div class="form-group">
+                    <label for="searchType">Search By:</label>
+                    <select id="searchType" name="searchType" required>
+                        <option value="id">Patient ID</option>
+                        <option value="name">Patient Name</option>
+                    </select>
+                </div>
+                
+                <div class="form-group">
+                    <label for="searchValue">Search Value:</label>
+                    <input type="text" id="searchValue" name="searchValue" required placeholder="Enter ID or Name">
+                </div>
+                
+                <button type="submit" class="btn-search">🔍 Search</button>
+            </form>
+        </div>
+        
+        <div th:if="${searched != null}">
+            <h2>Search Results</h2>
+            
+            <div th:if="${patients.isEmpty()}" class="no-results">
+                <p><strong>No patients found matching your search criteria.</strong></p>
+            </div>
+            
+            <table th:if="${!patients.isEmpty()}">
+                <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Date of Birth</th>
+                        <th>Address</th>
+                        <th>Disease</th>
+                        <th>Entry Date</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="patient : ${patients}">
+                        <td th:text="${patient.id}">P001</td>
+                        <td th:text="${patient.name}">Jane Smith</td>
+                        <td th:text="${patient.dob}">15/05/1990</td>
+                        <td th:text="${patient.address}">456 Oak Ave</td>
+                        <td th:text="${patient.disease}">Flu</td>
+                        <td th:text="${patient.entryDate}">10/02/2024</td>
+                    </tr>
+                </tbody>
+            </table>
+            
+            <p th:if="${!patients.isEmpty()}" style="margin-top: 20px; color: #666;">
+                Found <span th:text="${patients.size()}">0</span> patient(s)
+            </p>
+        </div>
+    </div>
+</body>
+</html>

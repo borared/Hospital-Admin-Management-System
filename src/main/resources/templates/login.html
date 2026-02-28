@@ -1,0 +1,209 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login | Hospital Management System</title>
+
+    <!-- Modern Font -->
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: #f4f7fb;
+            height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .login-wrapper {
+            display: flex;
+            width: 900px;
+            max-width: 95%;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.08);
+            overflow: hidden;
+        }
+
+        /* Left Side (Brand Panel) */
+        .brand-panel {
+            flex: 1;
+            background: #e8f0fe;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            padding: 50px;
+        }
+
+        .brand-panel h2 {
+            font-size: 28px;
+            color: #1f2937;
+            margin-bottom: 15px;
+        }
+
+        .brand-panel p {
+            color: #4b5563;
+            font-size: 15px;
+            line-height: 1.6;
+        }
+
+        /* Right Side (Form Panel) */
+        .form-panel {
+            flex: 1;
+            padding: 60px 50px;
+        }
+
+        .form-panel h1 {
+            font-size: 24px;
+            color: #111827;
+            margin-bottom: 8px;
+        }
+
+        .form-panel .subtitle {
+            font-size: 14px;
+            color: #6b7280;
+            margin-bottom: 30px;
+        }
+
+        .form-group {
+            margin-bottom: 22px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 14px;
+            margin-bottom: 6px;
+            color: #374151;
+            font-weight: 500;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px 14px;
+            border-radius: 8px;
+            border: 1px solid #d1d5db;
+            font-size: 14px;
+            transition: all 0.25s ease;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #2563eb;
+            box-shadow: 0 0 0 3px rgba(37, 99, 235, 0.15);
+        }
+
+        .error-message {
+            background-color: #fef2f2;
+            color: #b91c1c;
+            border: 1px solid #fecaca;
+            padding: 12px;
+            border-radius: 8px;
+            margin-bottom: 20px;
+            font-size: 13px;
+        }
+
+        .btn-login {
+            width: 100%;
+            padding: 12px;
+            background-color: #2563eb;
+            border: none;
+            border-radius: 8px;
+            color: #ffffff;
+            font-size: 15px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.25s ease, transform 0.15s ease;
+        }
+
+        .btn-login:hover {
+            background-color: #1e40af;
+            transform: translateY(-1px);
+        }
+
+        .footer-text {
+            margin-top: 25px;
+            font-size: 12px;
+            color: #9ca3af;
+            text-align: center;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .login-wrapper {
+                flex-direction: column;
+            }
+
+            .brand-panel {
+                padding: 30px;
+                text-align: center;
+            }
+
+            .form-panel {
+                padding: 40px 30px;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="login-wrapper">
+
+    <div class="brand-panel">
+        <h2>Hospital Management System</h2>
+        <p>
+            Secure administrative portal for managing patients, staff,
+            appointments, and hospital operations efficiently.
+        </p>
+    </div>
+
+    <div class="form-panel">
+        <h1>Admin Login</h1>
+        <p class="subtitle">Please enter your credentials to continue</p>
+
+        <div th:if="${error}" class="error-message">
+            Invalid username or password. Please try again.
+        </div>
+
+        <form th:action="@{/login}" method="post">
+            <div class="form-group">
+                <label for="username">Username</label>
+                <input type="text"
+                       id="username"
+                       name="username"
+                       required
+                       autofocus
+                       placeholder="Enter your username">
+            </div>
+
+            <div class="form-group">
+                <label for="password">Password</label>
+                <input type="password"
+                       id="password"
+                       name="password"
+                       required
+                       placeholder="Enter your password">
+            </div>
+
+            <button type="submit" class="btn-login">
+                Sign In
+            </button>
+        </form>
+
+        <div class="footer-text">
+            © 2026 Hospital Management System
+        </div>
+    </div>
+
+</div>
+
+</body>
+</html>

@@ -256,6 +256,9 @@ public class DoctorSystem {
     }
 
 
-
-
+    // Get all doctors for web display
+    // Get all doctors for web display
+    public List<Doctor> getAllDoctors() {
+        return doctors;
+    }
 }

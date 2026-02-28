@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Patient - Admin Management System</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background-color: white;
+            padding: 30px;
+            border-radius: 8px;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 30px;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 20px;
+            color: #007bff;
+            text-decoration: none;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .form-group {
+            margin-bottom: 20px;
+        }
+        .form-group label {
+            display: block;
+            margin-bottom: 5px;
+            color: #333;
+            font-weight: 500;
+        }
+        .form-group input {
+            width: 100%;
+            padding: 10px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+            font-size: 14px;
+            box-sizing: border-box;
+        }
+        .form-group input:focus {
+            outline: none;
+            border-color: #007bff;
+        }
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .btn-submit {
+            padding: 12px 30px;
+            background-color: #28a745;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            margin-right: 10px;
+        }
+        .btn-submit:hover {
+            background-color: #218838;
+        }
+        .btn-cancel {
+            padding: 12px 30px;
+            background-color: #6c757d;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            font-size: 16px;
+            text-decoration: none;
+            display: inline-block;
+        }
+        .btn-cancel:hover {
+            background-color: #5a6268;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <a th:href="@{/patients}" class="back-link">← Back to Patient List</a>
+        <h1>Add New Patient</h1>
+        
+        <form th:action="@{/patients/add}" method="post">
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="id">Patient ID *</label>
+                    <input type="text" id="id" name="id" required placeholder="e.g., P001">
+                </div>
+                
+                <div class="form-group">
+                    <label for="name">Full Name *</label>
+                    <input type="text" id="name" name="name" required placeholder="e.g., Jane Smith">
+                </div>
+            </div>
+            
+            <div class="form-row">
+                <div class="form-group">
+                    <label for="dob">Date of Birth *</label>
+                    <input type="text" id="dob" name="dob" required placeholder="dd/mm/yyyy">
+                </div>
+                
+                <div class="form-group">
+                    <label for="entryDate">Entry Date *</label>
+                    <input type="text" id="entryDate" name="entryDate" required placeholder="dd/mm/yyyy">
+                </div>
+            </div>
+            
+            <div class="form-group">
+                <label for="address">Address *</label>
+                <input type="text" id="address" name="address" required placeholder="Full address">
+            </div>
+            
+            <div class="form-group">
+                <label for="disease">Disease *</label>
+                <input type="text" id="disease" name="disease" required placeholder="e.g., Flu">
+            </div>
+            
+            <div style="margin-top: 30px;">
+                <button type="submit" class="btn-submit">Add Patient</button>
+                <a th:href="@{/patients}" class="btn-cancel">Cancel</a>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

@@ -191,4 +191,9 @@ public class PatientSystem {
                         System.out.println(line);
                     }
     }
+    
+    // Get all patients for web display
+    public List<Patient> getAllPatients() {
+        return patients;
+    }
 }
