@@ -1,5 +1,9 @@
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\Admin.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\App.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\controller\AppointmentController.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\controller\DoctorController.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\controller\MainController.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\controller\PatientController.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\management\AppointmentService.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\management\DoctorSystem.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\management\IAppointmentService.java
@@ -11,3 +15,6 @@ C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\a
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\model\Doctor.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\model\Patient.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\Validator.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\view\AppointmentView.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\view\DoctorView.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\view\PatientView.java

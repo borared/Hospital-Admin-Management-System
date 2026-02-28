@@ -2,117 +2,112 @@ package adminmangementsystem.com.management;
 
 import java.util.ArrayList;
 import java.util.List;
-import java.util.Scanner;
-
 import adminmangementsystem.com.model.Patient;
-import adminmangementsystem.com.Validator;
 
 public class PatientSystem implements IPatientSystem {
 
     private List<Patient> patients = new ArrayList<>();
 
-    //---ADD Patient---
-    public void addPatient(Scanner sc){
-        System.out.println("\t\t------Add Patient------");
-
-        String patId = Validator.getValidPatient(sc, "Enter Patient ID: ");
-        if (!isIdUnique(patId)) {
-            System.out.println("Error: Patient ID already exists. Please use a unique ID.");
-            return;
+    // Add Patient
+    @Override
+    public void addPatient(Patient patient) {
+        if (patient == null) {
+            throw new IllegalArgumentException("Patient cannot be null.");
         }
-        String patName = Validator.getOnlyLetter(sc, "Enter patient name: ");
-        String patDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
-        String patAddress = Validator.getNonEmpty(sc, "Enter patient address: ");
-        String patDisease = Validator.getNonEmpty(sc, "Enter patient disease: ");
-        String patDOE = Validator.getValidDateFomart(sc, "Enter date of entry (dd/mm/yyyy): ");
-        Patient patient = new Patient(patId, patName, patDOB, patDisease, patAddress, patDOE);
-        patients.add(patient);
 
-        System.out.println("Patient data captured successfully.\n");
+        if (!isIdUnique(patient.getId())) {
+            throw new IllegalArgumentException("Patient ID already exists.");
+        }
+
+        patients.add(patient);
     }
 
-    //Search Patient by ID
+    // Delete Patient
+    @Override
+    public boolean deletePatient(String id) {
+        Patient patient = searchPatientById(id);
+        if (patient != null) {
+            patients.remove(patient);
+            return true;
+        }
+        return false;
+    }
+
+    // Update Patient
+    @Override
+    public boolean updatePatient(Patient updatedPatient) {
+        if (updatedPatient == null) {
+            return false;
+        }
+
+        Patient existingPatient = searchPatientById(updatedPatient.getId());
+
+        if (existingPatient == null) {
+            return false;
+        }
+
+        existingPatient.setName(updatedPatient.getName());
+        existingPatient.setDob(updatedPatient.getDob());
+        existingPatient.setAddress(updatedPatient.getAddress());
+        existingPatient.setDisease(updatedPatient.getDisease());
+        existingPatient.setEntryDate(updatedPatient.getEntryDate());
+
+        return true;
+    }
+
+    // Search Patient by ID
+    @Override
     public Patient searchPatientById(String id) {
-        for (Patient p : patients) {
-            if (p.getId().equalsIgnoreCase(id)) {
-                return p;
+        for (Patient patient : patients) {
+            if (patient.getId().equalsIgnoreCase(id)) {
+                return patient;
             }
         }
         return null;
     }
 
-    //Check ID
-    public boolean isIdUnique(String id) {
-        for (Patient p : patients) {
-            if (p.getId().equalsIgnoreCase(id)) {
-                return false; // ID already exists
-            }
-        }
-        return true; // ID is unique
+    // Get All Patients
+    @Override
+    public List<Patient> getAllPatients() {
+        return new ArrayList<>(patients); // return copy for safety
     }
 
-    public void updatePatient(Scanner sc){
-        String updateId = Validator.getValidUpdatePatientId(sc, "Enter patient ID to update: ");
-        Patient pToUpdate = searchPatientById(updateId);
+    // Check ID uniqueness
+    private boolean isIdUnique(String id) {
+        return searchPatientById(id) == null;
+    }
 
-        if (pToUpdate == null) {
-           System.out.println("Patient not found!");
-        } else {
-
-        System.out.println("Leave blank to keep current value.");
-
-        // --- Update Name ---
-        System.out.print("Enter new Name (" + pToUpdate.getName() + "): ");
-        String newName = sc.nextLine().trim();
-        if (!newName.isEmpty()) {
-            pToUpdate.setName(newName);
-        }
-
-        // --- Update DOB ---
-        System.out.print("Enter new DOB (" + pToUpdate.getDob() + ") [dd/MM/yyyy]: ");
-        String newDob = sc.nextLine().trim();
-        if (!newDob.isEmpty()) {
-            if (newDob.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                pToUpdate.setDob(newDob);
-            } else {
-                System.out.println("Invalid DOB format! Keeping old value.");
-            }
-        }
-
-        // --- Update Address ---
-        System.out.print("Enter new Address (" + pToUpdate.getAddress() + "): ");
-        String newAddress = sc.nextLine().trim();
-        if (!newAddress.isEmpty()) {
-            pToUpdate.setAddress(newAddress);
-        }
+    // Scanner-based methods for controller interaction
     
-        // --- Update Disease ---
-        System.out.print("Enter new Disease (" + pToUpdate.getDisease() + "): ");
-        String newDisease = sc.nextLine().trim();
-        if (!newDisease.isEmpty()) {
-            pToUpdate.setDisease(newDisease);
+    public void addPatient(java.util.Scanner sc) {
+        Patient patient = adminmangementsystem.com.view.PatientView.getPatientInput(sc);
+        
+        if (!isIdUnique(patient.getId())) {
+            System.out.println("Error: Patient ID already exists. Please use a unique ID.");
+            return;
         }
-
-        // --- Update Entry Date ---
-        System.out.print("Enter new Entry Date (" + pToUpdate.getEntryDate() + ") [dd/MM/yyyy]: ");
-        String newDOE = sc.nextLine().trim();
-        if (!newDOE.isEmpty()) {
-            if (newDOE.matches("\\d{2}/\\d{2}/\\d{4}")) {
-                pToUpdate.setEntryDate(newDOE);
-            } else {
-                System.out.println("Invalid Entry Date format! Keeping old value.");
-            }
+        
+        patients.add(patient);
+        System.out.println("Patient data captured successfully.\n");
+    }
+    
+    public void updatePatient(java.util.Scanner sc) {
+        String updateId = adminmangementsystem.com.view.PatientView.getSearchId(sc);
+        Patient pToUpdate = searchPatientById(updateId);
+        
+        if (pToUpdate == null) {
+            System.out.println("Patient not found!");
+            return;
         }
-
+        
+        adminmangementsystem.com.view.PatientView.getPatientUpdateInput(sc, pToUpdate);
         System.out.println("Patient updated successfully.");
     }
-
-    }
-
-    public void deletePatient(Scanner sc){
-        System.out.print("Enter patient ID to delete: ");
-        String deleteId = sc.nextLine();
+    
+    public void deletePatient(java.util.Scanner sc) {
+        String deleteId = adminmangementsystem.com.view.PatientView.getPatientIdForDelete(sc);
         Patient pToDelete = searchPatientById(deleteId);
+        
         if (pToDelete == null) {
             System.out.println("Patient not found!");
         } else {
@@ -120,86 +115,78 @@ public class PatientSystem implements IPatientSystem {
             System.out.println("Patient deleted successfully.");
         }
     }
-
-    public void searchPatient(Scanner sc){
-        System.out.print("Search by (1) Name or (2) ID: ");
-            int searchChoice = Integer.parseInt(sc.nextLine());
-            String line = "------------------------------------------------------------------------------------------------------------";
-
-            if (searchChoice == 1) { // Search by Name
-                System.out.print("Enter patient name: ");
-                String searchName = sc.nextLine();
-                boolean foundAny = false;
-
-                // Table header
-                System.out.println(line);
-                System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s |\n", 
-                                "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
-                System.out.println(line);
-
-                for (Patient p : patients) {
-                    if (p.getName().equalsIgnoreCase(searchName)) {
-                        System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s |\n",
-                                        p.getId(), p.getName(), p.getDob(), p.getAddress(), p.getDisease(), p.getEntryDate());
-                        foundAny = true;
-                    }
+    
+    public void searchPatient(java.util.Scanner sc) {
+        int searchChoice = adminmangementsystem.com.view.PatientView.getSearchChoice(sc);
+        
+        if (searchChoice == -1) {
+            return;
+        }
+        
+        String line = "----------------------------------------------------------------------------------------------------------------------------";
+        
+        // TABLE HEADER
+        System.out.println(line);
+        System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
+                "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
+        System.out.println(line);
+        
+        if (searchChoice == 1) { // Search by Name
+            String searchName = adminmangementsystem.com.view.PatientView.getSearchName(sc);
+            boolean foundAny = false;
+            
+            for (Patient p : patients) {
+                if (p.getName().equalsIgnoreCase(searchName)) {
+                    System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
+                            p.getId(), p.getName(), p.getDob(), p.getAddress(),
+                            p.getDisease(), p.getEntryDate());
+                    foundAny = true;
                 }
-
-                if (!foundAny) {
-                    System.out.println("|                        No patients found with that name                        |");
-                }
-
-                System.out.println(line);
-
-                } else if (searchChoice == 2) { // Search by ID
-                    System.out.print("Enter patient ID: ");
-                    String searchId = sc.nextLine();
-                    Patient found = searchPatientById(searchId);
-
-                    // Table header
-                    System.out.println(line);
-                    System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s |\n", 
-                                    "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
-                    System.out.println(line);
-
-                    if (found != null) {
-                        System.out.printf("| %-5s | %-20s | %-12s | %-20s | %-15s | %-12s |\n",
-                                        found.getId(), found.getName(), found.getDob(), found.getAddress(), found.getDisease(), found.getEntryDate());
-                    } else {
-                        System.out.println("|                               Patient not found                               |");
-                    }
-
-                    System.out.println(line);
-
-                    } else {
-                        System.out.println("Invalid choice!");
-                    }
+            }
+            
+            if (!foundAny) {
+                System.out.println("|                                             No patients found with that name                                              |");
+            }
+            
+        } else if (searchChoice == 2) { // Search by ID
+            String searchId = adminmangementsystem.com.view.PatientView.getSearchId(sc);
+            Patient found = searchPatientById(searchId);
+            
+            if (found != null) {
+                System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
+                        found.getId(), found.getName(), found.getDob(), found.getAddress(),
+                        found.getDisease(), found.getEntryDate());
+            } else {
+                System.out.println("|                                                     Patient not found                                                      |");
+            }
+            
+        } else {
+            System.out.println("Invalid choice!");
+        }
+        
+        System.out.println(line);
     }
 
-    public void viewPatientList(Scanner sc){
+    public void viewPatientList(java.util.Scanner sc) {
         System.out.println("\t\t\t\t------Patient List------");
 
-                    if (patients.isEmpty()) {
-                        System.out.println("No patients found.");
-                    } else {
-                        String line = "------------------------------------------------------------------------------------------------------------";
+        if (patients.isEmpty()) {
+            System.out.println("No patients found.");
+            return;
+        }
 
-                        System.out.println(line);
-                        System.out.printf("| %-5s | %-20s | %-12s | %-15s | %-15s | %-12s |\n", 
-                                          "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
-                        System.out.println(line);
+        String line = "----------------------------------------------------------------------------------------------------------------------------";
+        System.out.println(line);
+        System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
+                "ID", "Name", "DOB", "Address", "Disease", "Entry Date");
+        System.out.println(line);
 
-                        for (Patient p : patients) {
-                            System.out.printf("| %-5s | %-20s | %-12s | %-15s | %-15s | %-12s |\n", 
-                                              p.getId(), p.getName(), p.getDob(), p.getAddress(), p.getDisease(), p.getEntryDate());
-                        }
-                        System.out.println(line);
-                    }
-    }
+        for (Patient p : patients) {
+            System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
+                    p.getId(), p.getName(), p.getDob(), p.getAddress(),
+                    p.getDisease(), p.getEntryDate());
+        }
 
-    @Override
-    public void viewPatients() {
-        // TODO Auto-generated method stub
-        throw new UnsupportedOperationException("Unimplemented method 'viewPatients'");
+        System.out.println(line);
     }
 }
