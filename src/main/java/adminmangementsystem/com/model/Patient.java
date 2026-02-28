@@ -1,4 +1,4 @@
-package adminmangementsystem.com.Model;
+package adminmangementsystem.com.model;
 
 public class Patient {
 

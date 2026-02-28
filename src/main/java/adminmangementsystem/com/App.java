@@ -2,9 +2,9 @@ package adminmangementsystem.com;
 
 import java.util.Scanner;
 
-import adminmangementsystem.com.Management.AppointmentService;
-import adminmangementsystem.com.Management.PatientSystem;
-import adminmangementsystem.com.Management.DoctorSystem;
+import adminmangementsystem.com.management.AppointmentService;
+import adminmangementsystem.com.management.PatientSystem;
+import adminmangementsystem.com.management.DoctorSystem;
 
 public class App {
     
@@ -185,7 +185,8 @@ public class App {
                   break;
 
                 case 5: // View Doctor List
-                  break;
+                    doctorSystem.viewDoctorList1();
+                 break;
 
                 case 6: // View Patient List
                     patientSystem.viewPatientList(sc);

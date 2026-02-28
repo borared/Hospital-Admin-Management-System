@@ -1,49 +1,54 @@
-package adminmangementsystem.com.Management;
+package adminmangementsystem.com.management;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 
-import adminmangementsystem.com.Model.Patient;
+import adminmangementsystem.com.model.Patient;
 import adminmangementsystem.com.Validator;
 
-public class PatientSystem {
+public class PatientSystem implements IPatientSystem {
 
-    static List<Patient> patients = new ArrayList<>();
+    private List<Patient> patients = new ArrayList<>();
 
     //---ADD Patient---
     public void addPatient(Scanner sc){
         System.out.println("\t\t------Add Patient------");
 
-            String patId = Validator.getValidPatient(sc, "Enter Patient ID: ");
-            String patName = Validator.getOnlyLetter(sc, "Enter patient name: ");
-            String patDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
-            String patAddress = Validator.getNonEmpty(sc, "Enter patient address: ");
-            String patDisease = Validator.getNonEmpty(sc, "Enter patient disease: ");
-            String patDOE = Validator.getValidDateFomart(sc, "Enter date of entry (dd/mm/yyyy): ");
-            Patient patient = new Patient(patId, patName, patDOB, patDisease, patAddress, patDOE);
-            patients.add(patient);
-
-            System.out.println("Patient data captured successfully.\n");
-    }
-      //Search Patient by ID
-    public static Patient searchPatientById(String id) {
-    for (Patient p : patients) {
-        if (p.getId().equalsIgnoreCase(id)) {
-            return p;
+        String patId = Validator.getValidPatient(sc, "Enter Patient ID: ");
+        if (!isIdUnique(patId)) {
+            System.out.println("Error: Patient ID already exists. Please use a unique ID.");
+            return;
         }
+        String patName = Validator.getOnlyLetter(sc, "Enter patient name: ");
+        String patDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
+        String patAddress = Validator.getNonEmpty(sc, "Enter patient address: ");
+        String patDisease = Validator.getNonEmpty(sc, "Enter patient disease: ");
+        String patDOE = Validator.getValidDateFomart(sc, "Enter date of entry (dd/mm/yyyy): ");
+        Patient patient = new Patient(patId, patName, patDOB, patDisease, patAddress, patDOE);
+        patients.add(patient);
+
+        System.out.println("Patient data captured successfully.\n");
     }
-    return null;
+
+    //Search Patient by ID
+    public Patient searchPatientById(String id) {
+        for (Patient p : patients) {
+            if (p.getId().equalsIgnoreCase(id)) {
+                return p;
+            }
+        }
+        return null;
     }
 
     //Check ID
-    public static boolean isIdUnique(String id) {
-    for (Patient p : patients) {
-        if (p.getId().equalsIgnoreCase(id)) {
-            return false; // ID already exists
+    public boolean isIdUnique(String id) {
+        for (Patient p : patients) {
+            if (p.getId().equalsIgnoreCase(id)) {
+                return false; // ID already exists
+            }
         }
-    }
-    return true; // ID is unique
+        return true; // ID is unique
     }
 
     public void updatePatient(Scanner sc){
@@ -190,5 +195,11 @@ public class PatientSystem {
                         }
                         System.out.println(line);
                     }
+    }
+
+    @Override
+    public void viewPatients() {
+        // TODO Auto-generated method stub
+        throw new UnsupportedOperationException("Unimplemented method 'viewPatients'");
     }
 }
