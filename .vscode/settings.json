@@ -1,3 +1,10 @@
 {
+<<<<<<< HEAD
     "java.configuration.updateBuildConfiguration": "interactive"
 }
+=======
+  "html.autoClosingTags": false,
+  "java.debug.settings.onBuildFailureProceed": true,
+  "java.configuration.updateBuildConfiguration": "interactive"
+}
+>>>>>>> W2-Encapsulation
