@@ -1,12 +1,17 @@
 adminmangementsystem\com\Admin.class
 adminmangementsystem\com\ServiceRegistry.class
+adminmangementsystem\com\View\DoctorView.class
+adminmangementsystem\com\Management\AbstractManagementSystem.class
 adminmangementsystem\com\Model\Appointment.class
+adminmangementsystem\com\View\AppointmentView.class
 adminmangementsystem\com\Controller\DoctorController.class
 adminmangementsystem\com\Controller\PatientController.class
 adminmangementsystem\com\Controller\LoginController.class
 adminmangementsystem\com\Controller\HomeController.class
+adminmangementsystem\com\Management\IDoctorSystem.class
 adminmangementsystem\com\Model\Doctor.class
 adminmangementsystem\com\App.class
+adminmangementsystem\com\View\PatientView.class
 adminmangementsystem\com\Model\Patient.class
 adminmangementsystem\com\Controller\AppointmentController.class
 adminmangementsystem\com\Management\AppointmentService.class
