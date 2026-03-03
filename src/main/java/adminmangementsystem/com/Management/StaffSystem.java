@@ -6,79 +6,82 @@ import java.util.List;
 
 public class StaffSystem {
     
+    // Separate lists for each staff type
     private List<Doctor> doctors;
     private List<Nurse> nurses;
     private List<Surgeon> surgeons;
     private List<Cardiologist> cardiologists;
-
+    
     public StaffSystem() {
         this.doctors = new ArrayList<>();
         this.nurses = new ArrayList<>();
         this.surgeons = new ArrayList<>();
         this.cardiologists = new ArrayList<>();
     }
-
-    // Add staff based on position - POLYMORPHISM IN ACTION
+    
+    /**
+     * Factory method - Creates the correct staff type based on position
+     * and stores in the appropriate list
+     */
     public Staff addStaff(String id, String name, String dob, String address,
                          String email, String position, double salary, String doe) {
         
         Staff newStaff = null;
         String positionLower = position.toLowerCase();
         
-        // Create appropriate staff type based on position
+        // Determine staff type based on position
         if (positionLower.contains("surgeon")) {
-            Surgeon surgeon = new Surgeon(id, name, dob, address, email, position, salary, doe);
-            surgeon.setSurgerySpecialty(position);
-            surgeons.add(surgeon);
-            newStaff = surgeon;
+            newStaff = new Surgeon(id, name, dob, address, email, position, salary, doe);
+            surgeons.add((Surgeon) newStaff);
+            System.out.println("Added to Surgeon list");
             
         } else if (positionLower.contains("cardiologist") || positionLower.contains("cardiology")) {
-            Cardiologist cardiologist = new Cardiologist(id, name, dob, address, email, position, salary, doe);
-            cardiologists.add(cardiologist);
-            newStaff = cardiologist;
+            newStaff = new Cardiologist(id, name, dob, address, email, position, salary, doe);
+            cardiologists.add((Cardiologist) newStaff);
+            System.out.println("Added to Cardiologist list");
             
         } else if (positionLower.contains("nurse")) {
-            Nurse nurse = new Nurse(id, name, dob, address, email, position, salary, doe);
-            nurses.add(nurse);
-            newStaff = nurse;
+            newStaff = new Nurse(id, name, dob, address, email, position, salary, doe);
+            nurses.add((Nurse) newStaff);
+            System.out.println("Added to Nurse list");
             
         } else {
-            // Default to Doctor for other medical positions
-            Doctor doctor = new Doctor(id, name, dob, address, email, position, salary, doe);
-            doctors.add(doctor);
-            newStaff = doctor;
+            // Default to Doctor for other positions
+            newStaff = new Doctor(id, name, dob, address, email, position, salary, doe);
+            doctors.add((Doctor) newStaff);
+            System.out.println("Added to Doctor list");
         }
         
         return newStaff;
     }
-
+    
     // Get all staff combined
     public List<Staff> getAllStaff() {
         List<Staff> allStaff = new ArrayList<>();
         allStaff.addAll(doctors);
+        allStaff.addAll(nurses);
         allStaff.addAll(surgeons);
         allStaff.addAll(cardiologists);
-        allStaff.addAll(nurses);
         return allStaff;
     }
-
-    // Get staff by category
+    
+    // Get specific staff types
     public List<Doctor> getDoctors() {
         return doctors;
     }
-
+    
     public List<Nurse> getNurses() {
         return nurses;
     }
-
+    
     public List<Surgeon> getSurgeons() {
         return surgeons;
     }
-
+    
     public List<Cardiologist> getCardiologists() {
         return cardiologists;
     }
-
+    
     // Search staff by ID across all types
     public Staff searchStaffById(String id) {
         for (Staff staff : getAllStaff()) {
@@ -88,7 +91,7 @@ public class StaffSystem {
         }
         return null;
     }
-
+    
     // Delete staff by ID
     public boolean deleteStaff(String id) {
         Staff staff = searchStaffById(id);
@@ -105,33 +108,24 @@ public class StaffSystem {
         }
         return false;
     }
-
-    // Get staff type name
-    public String getStaffType(Staff staff) {
-        if (staff instanceof Surgeon) return "Surgeon";
-        if (staff instanceof Cardiologist) return "Cardiologist";
-        if (staff instanceof Nurse) return "Nurse";
-        if (staff instanceof Doctor) return "Doctor";
-        return "Unknown";
-    }
-
-    // Get count by type
+    
+    // Get staff count by type
     public int getDoctorCount() {
         return doctors.size();
     }
-
+    
     public int getNurseCount() {
         return nurses.size();
     }
-
+    
     public int getSurgeonCount() {
         return surgeons.size();
     }
-
+    
     public int getCardiologistCount() {
         return cardiologists.size();
     }
-
+    
     public int getTotalStaffCount() {
         return doctors.size() + nurses.size() + surgeons.size() + cardiologists.size();
     }

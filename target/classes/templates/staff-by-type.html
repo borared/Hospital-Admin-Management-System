@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${type}">Staff by Type</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #eef2f7, #e3e9f0);
+            padding: 40px 20px;
+        }
+
+        .header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            max-width: 1400px;
+            margin: 0 auto 25px;
+            padding: 20px 35px;
+            background: #ffffff;
+            border-radius: 16px;
+            box-shadow: 0 12px 30px rgba(0,0,0,0.08);
+        }
+
+        .header h2 {
+            margin: 0;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        .header-buttons a {
+            margin-left: 12px;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 10px;
+            font-weight: 600;
+            transition: 0.2s ease;
+            color: white;
+            background: #6b7280;
+        }
+
+        .container {
+            max-width: 1400px;
+            margin: 0 auto;
+            background: #ffffff;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 15px 40px rgba(0,0,0,0.08);
+        }
+
+        h1 {
+            margin-top: 0;
+            font-weight: 600;
+            color: #1f2937;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin-top: 20px;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        thead {
+            background: linear-gradient(135deg, #4f46e5, #4338ca);
+            color: white;
+        }
+
+        th {
+            padding: 14px;
+            text-align: left;
+            font-weight: 600;
+            font-size: 14px;
+        }
+
+        td {
+            padding: 14px;
+            border-bottom: 1px solid #e5e7eb;
+            font-size: 14px;
+            color: #374151;
+        }
+
+        tbody tr:hover {
+            background-color: #f9fafb;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 60px;
+            color: #6b7280;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="header">
+        <h2 th:text="${type}">Staff Type</h2>
+        <div class="header-buttons">
+            <a th:href="@{/staff}">← Back to All Staff</a>
+        </div>
+    </div>
+    
+    <div class="container">
+        <h1 th:text="${type + ' List'}">Staff List</h1>
+        
+        <table th:if="${!staff.isEmpty()}">
+            <thead>
+                <tr>
+                    <th>ID</th>
+                    <th>Name</th>
+                    <th>Position</th>
+                    <th>Department</th>
+                    <th>Responsibilities</th>
+                    <th>Email</th>
+                    <th>Salary</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr th:each="s : ${staff}">
+                    <td th:text="${s.id}">S001</td>
+                    <td th:text="${s.name}">John Doe</td>
+                    <td th:text="${s.position}">Position</td>
+                    <td th:text="${s.department}">Department</td>
+                    <td th:text="${s.responsibilities}">Responsibilities</td>
+                    <td th:text="${s.email}">email@hospital.com</td>
+                    <td th:text="${'$' + #numbers.formatDecimal(s.salary, 1, 2)}">$50000.00</td>
+                </tr>
+            </tbody>
+        </table>
+        
+        <div th:if="${staff.isEmpty()}" class="no-data">
+            <p th:text="'No ' + ${type} + ' found in the system.'">No staff found.</p>
+        </div>
+    </div>
+</body>
+</html>
