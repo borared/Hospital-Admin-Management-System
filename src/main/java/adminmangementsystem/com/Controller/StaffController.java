@@ -12,6 +12,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import adminmangementsystem.com.Management.StaffSystem;
 import adminmangementsystem.com.Model.Staff;
+import adminmangementsystem.com.Model.Nurse;
 
 @Controller
 @RequestMapping("/staff")
