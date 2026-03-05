@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Staff QR Code</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 500px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .staff-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+        }
+
+        .staff-info p {
+            margin: 8px 0;
+            color: #333;
+        }
+
+        .qr-container {
+            background: white;
+            padding: 20px;
+            border-radius: 8px;
+            display: inline-block;
+            margin: 20px 0;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        #qrcode {
+            margin: 0 auto;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            padding: 12px 25px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+
+        @media print {
+            body {
+                background: white;
+            }
+            .buttons {
+                display: none;
+            }
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Staff QR Code</h1>
+    
+    <div class="staff-info">
+        <p><strong>ID:</strong> <span th:text="${staff.id}">S001</span></p>
+        <p><strong>Name:</strong> <span th:text="${staff.name}">John Doe</span></p>
+        <p><strong>Position:</strong> <span th:text="${staff.position}">Doctor</span></p>
+        <p><strong>Department:</strong> <span th:text="${staff.department}">Medical</span></p>
+    </div>
+
+    <div class="qr-container">
+        <div id="qrcode"></div>
+    </div>
+
+    <p style="color: #666; font-size: 14px; margin: 10px 0;">
+        Scan this QR code for attendance check-in/check-out
+    </p>
+
+    <div class="buttons">
+        <button onclick="window.print()" class="btn btn-primary">🖨️ Print QR Code</button>
+        <button onclick="downloadQR()" class="btn btn-primary">💾 Download QR Code</button>
+        <a th:href="@{/staff}" class="btn btn-secondary">Back to Staff</a>
+    </div>
+</div>
+
+<!-- QR Code Generator Library -->
+<script src="https://cdnjs.cloudflare.com/ajax/libs/qrcodejs/1.0.0/qrcode.min.js"></script>
+
+<script th:inline="javascript">
+    /*<![CDATA[*/
+    let qrData = /*[[${staff.qrCode}]]*/ 'STAFF:S001:123456789';
+    let staffName = /*[[${staff.name}]]*/ 'Staff Name';
+    
+    // Generate QR Code
+    let qrcode = new QRCode(document.getElementById("qrcode"), {
+        text: qrData,
+        width: 256,
+        height: 256,
+        colorDark: "#000000",
+        colorLight: "#ffffff",
+        correctLevel: QRCode.CorrectLevel.H
+    });
+
+    function downloadQR() {
+        let canvas = document.querySelector('#qrcode canvas');
+        if (canvas) {
+            let url = canvas.toDataURL('image/png');
+            let link = document.createElement('a');
+            link.download = 'QR_' + staffName.replace(/\s+/g, '_') + '.png';
+            link.href = url;
+            link.click();
+        }
+    }
+    /*]]>*/
+</script>
+
+</body>
+</html>

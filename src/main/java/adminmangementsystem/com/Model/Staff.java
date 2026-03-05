@@ -1,5 +1,7 @@
 package adminmangementsystem.com.Model;
 
+import java.time.LocalDateTime;
+
 public abstract class Staff {
     
     protected String id;
@@ -10,6 +12,10 @@ public abstract class Staff {
     protected String position;
     protected double salary;
     protected String doe;
+    protected String qrCode;
+    protected boolean isActive;
+    protected LocalDateTime lastCheckIn;
+    protected LocalDateTime lastCheckOut;
 
     // CONSTRUCTOR
     public Staff(String id, String name, String dob, String address,
@@ -22,6 +28,15 @@ public abstract class Staff {
         setPosition(position);
         setSalary(salary);
         setDoe(doe);
+        this.qrCode = generateQRCode(id);
+        this.isActive = false;
+        this.lastCheckIn = null;
+        this.lastCheckOut = null;
+    }
+    
+    // Generate unique QR code data for staff
+    private String generateQRCode(String staffId) {
+        return "STAFF:" + staffId + ":" + System.currentTimeMillis();
     }
 
     // SETTERS
@@ -104,6 +119,46 @@ public abstract class Staff {
 
     public String getDoe() {
         return doe;
+    }
+    
+    public String getQrCode() {
+        return qrCode;
+    }
+    
+    public boolean isActive() {
+        return isActive;
+    }
+    
+    public void setActive(boolean active) {
+        this.isActive = active;
+    }
+    
+    public LocalDateTime getLastCheckIn() {
+        return lastCheckIn;
+    }
+    
+    public void setLastCheckIn(LocalDateTime lastCheckIn) {
+        this.lastCheckIn = lastCheckIn;
+    }
+    
+    public LocalDateTime getLastCheckOut() {
+        return lastCheckOut;
+    }
+    
+    public void setLastCheckOut(LocalDateTime lastCheckOut) {
+        this.lastCheckOut = lastCheckOut;
+    }
+    
+    // Check in staff
+    public void checkIn() {
+        this.isActive = true;
+        this.lastCheckIn = LocalDateTime.now();
+    }
+    
+    // Check out staff
+    public void checkOut() {
+        this.isActive = false;
+        this.lastCheckOut = LocalDateTime.now();
     }
 
     // ABSTRACT METHODS - Each staff type must implement these

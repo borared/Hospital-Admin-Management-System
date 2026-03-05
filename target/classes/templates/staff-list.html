@@ -207,6 +207,40 @@
         .btn-delete:hover {
             background: #dc2626;
         }
+
+        .btn-qr {
+            padding: 6px 12px;
+            border-radius: 8px;
+            font-size: 12px;
+            font-weight: 600;
+            text-decoration: none;
+            color: white;
+            background: #667eea;
+            transition: 0.2s ease;
+            margin-right: 5px;
+        }
+
+        .btn-qr:hover {
+            background: #5568d3;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 11px;
+            font-weight: 600;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
     </style>
 </head>
 
@@ -249,6 +283,8 @@
         <!-- Action Buttons -->
         <div class="action-buttons">
             <a th:href="@{/staff/add}" class="btn-add">+ Add Staff</a>
+            <a th:href="@{/staff/qr-scanner}" class="btn-filter" style="background: linear-gradient(135deg, #667eea, #764ba2);">📷 QR Scanner</a>
+            <a th:href="@{/staff/attendance}" class="btn-filter" style="background: linear-gradient(135deg, #f6c23e, #dda20a);">📊 Attendance</a>
             <a th:href="@{/staff/doctors}" class="btn-filter">View Doctors Only</a>
             <a th:href="@{/staff/nurses}" class="btn-filter">View Nurses Only</a>
             <a th:href="@{/staff/surgeons}" class="btn-filter">View Surgeons Only</a>
@@ -263,6 +299,7 @@
                     <th>Name</th>
                     <th>Position</th>
                     <th>Type</th>
+                    <th>Status</th>
                     <th>Department</th>
                     <th>Email</th>
                     <th>Salary</th>
@@ -280,10 +317,15 @@
                         <span th:if="${staff.class.simpleName == 'Surgeon'}" class="badge badge-surgeon">Surgeon</span>
                         <span th:if="${staff.class.simpleName == 'Cardiologist'}" class="badge badge-cardiologist">Cardiologist</span>
                     </td>
+                    <td>
+                        <span th:if="${staff.active}" class="status-badge status-active">🟢 Active</span>
+                        <span th:if="${!staff.active}" class="status-badge status-inactive">🔴 Inactive</span>
+                    </td>
                     <td th:text="${staff.department}">Medical</td>
                     <td th:text="${staff.email}">email@hospital.com</td>
                     <td th:text="${'$' + #numbers.formatDecimal(staff.salary, 1, 2)}">$50000.00</td>
                     <td>
+                        <a th:href="@{/staff/qr-code/{id}(id=${staff.id})}" class="btn-qr">QR</a>
                         <a th:href="@{/staff/delete/{id}(id=${staff.id})}" class="btn-delete"
                            onclick="return confirm('Are you sure?')">Delete</a>
                     </td>

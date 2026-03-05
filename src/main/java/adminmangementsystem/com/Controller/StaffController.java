@@ -70,6 +70,7 @@ public class StaffController {
                           @RequestParam String position,
                           @RequestParam Double salary,
                           @RequestParam String doe,
+                          @RequestParam(required = false) String ward,
                           HttpSession session,
                           Model model) {
         if (!isAuthenticated(session)) {
@@ -78,6 +79,11 @@ public class StaffController {
 
         // Factory pattern - creates correct staff type based on position
         Staff newStaff = staffSystem.addStaff(id, name, dob, address, email, position, salary, doe);
+        
+        // If it's a nurse and ward was provided, set the ward
+        if (newStaff instanceof Nurse && ward != null && !ward.isEmpty()) {
+            ((Nurse) newStaff).setWard(ward);
+        }
         
         model.addAttribute("success", true);
         model.addAttribute("staffType", newStaff.getClass().getSimpleName());
@@ -135,5 +141,74 @@ public class StaffController {
         model.addAttribute("staff", staffSystem.getCardiologists());
         model.addAttribute("type", "Cardiologists");
         return "staff-by-type";
+    }
+    
+    // QR Code Scanner Page
+    @GetMapping("/qr-scanner")
+    public String showQRScanner(HttpSession session) {
+        if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+        return "qr-scanner";
+    }
+    
+    // Process QR Code Scan
+    @PostMapping("/qr-scan")
+    public String processQRScan(@RequestParam String qrData, Model model, HttpSession session) {
+        if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+        
+        Staff staff = staffSystem.findStaffByQRCode(qrData);
+        
+        if (staff != null) {
+            // Toggle active status
+            if (staff.isActive()) {
+                staff.checkOut();
+                model.addAttribute("message", staff.getName() + " checked OUT successfully!");
+                model.addAttribute("status", "checkout");
+            } else {
+                staff.checkIn();
+                model.addAttribute("message", staff.getName() + " checked IN successfully!");
+                model.addAttribute("status", "checkin");
+            }
+            model.addAttribute("staff", staff);
+            model.addAttribute("success", true);
+        } else {
+            model.addAttribute("message", "Invalid QR Code!");
+            model.addAttribute("success", false);
+        }
+        
+        return "qr-result";
+    }
+    
+    // View staff QR code
+    @GetMapping("/qr-code/{id}")
+    public String viewQRCode(@PathVariable String id, Model model, HttpSession session) {
+        if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+        
+        Staff staff = staffSystem.searchStaffById(id);
+        if (staff != null) {
+            model.addAttribute("staff", staff);
+            return "staff-qr-code";
+        }
+        
+        return "redirect:/staff";
+    }
+    
+    // Attendance report
+    @GetMapping("/attendance")
+    public String viewAttendance(Model model, HttpSession session) {
+        if (!isAuthenticated(session)) {
+            return "redirect:/login";
+        }
+        
+        model.addAttribute("allStaff", staffSystem.getAllStaff());
+        model.addAttribute("activeCount", staffSystem.getActiveStaffCount());
+        model.addAttribute("inactiveCount", staffSystem.getInactiveStaffCount());
+        
+        return "staff-attendance";
     }
 }

@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Scan Result</title>
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
+    
+    <style>
+        * {
+            box-sizing: border-box;
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        body {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 20px;
+        }
+
+        .container {
+            max-width: 600px;
+            width: 100%;
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            text-align: center;
+        }
+
+        .icon {
+            font-size: 80px;
+            margin-bottom: 20px;
+        }
+
+        .success-icon {
+            color: #28a745;
+        }
+
+        .error-icon {
+            color: #dc3545;
+        }
+
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+
+        .message {
+            font-size: 18px;
+            color: #666;
+            margin-bottom: 30px;
+        }
+
+        .staff-info {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+
+        .staff-info p {
+            margin: 10px 0;
+            color: #333;
+        }
+
+        .staff-info strong {
+            color: #667eea;
+        }
+
+        .status-badge {
+            display: inline-block;
+            padding: 8px 16px;
+            border-radius: 20px;
+            font-weight: 600;
+            margin: 10px 0;
+        }
+
+        .status-active {
+            background: #d4edda;
+            color: #155724;
+        }
+
+        .status-inactive {
+            background: #f8d7da;
+            color: #721c24;
+        }
+
+        .buttons {
+            display: flex;
+            gap: 15px;
+            justify-content: center;
+            margin-top: 30px;
+        }
+
+        .btn {
+            padding: 12px 30px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: 0.2s ease;
+        }
+
+        .btn-primary {
+            background: #667eea;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #5568d3;
+            transform: translateY(-2px);
+        }
+
+        .btn-secondary {
+            background: #6c757d;
+            color: white;
+        }
+
+        .btn-secondary:hover {
+            background: #5a6268;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <div th:if="${success}">
+        <div class="icon success-icon">✅</div>
+        <h1>Scan Successful!</h1>
+        <p class="message" th:text="${message}">Staff checked in successfully!</p>
+        
+        <div class="staff-info" th:if="${staff}">
+            <p><strong>Staff ID:</strong> <span th:text="${staff.id}">S001</span></p>
+            <p><strong>Name:</strong> <span th:text="${staff.name}">John Doe</span></p>
+            <p><strong>Position:</strong> <span th:text="${staff.position}">Doctor</span></p>
+            <p><strong>Department:</strong> <span th:text="${staff.department}">Medical</span></p>
+            
+            <div style="text-align: center; margin-top: 15px;">
+                <span th:if="${staff.active}" class="status-badge status-active">🟢 ACTIVE</span>
+                <span th:if="${!staff.active}" class="status-badge status-inactive">🔴 INACTIVE</span>
+            </div>
+            
+            <p th:if="${staff.lastCheckIn}" style="margin-top: 15px; font-size: 14px; color: #666;">
+                <strong>Last Check-in:</strong> <span th:text="${#temporals.format(staff.lastCheckIn, 'yyyy-MM-dd HH:mm:ss')}"></span>
+            </p>
+            <p th:if="${staff.lastCheckOut}" style="font-size: 14px; color: #666;">
+                <strong>Last Check-out:</strong> <span th:text="${#temporals.format(staff.lastCheckOut, 'yyyy-MM-dd HH:mm:ss')}"></span>
+            </p>
+        </div>
+    </div>
+    
+    <div th:unless="${success}">
+        <div class="icon error-icon">❌</div>
+        <h1>Scan Failed</h1>
+        <p class="message" th:text="${message}">Invalid QR Code!</p>
+    </div>
+
+    <div class="buttons">
+        <a th:href="@{/staff/qr-scanner}" class="btn btn-primary">Scan Another</a>
+        <a th:href="@{/staff/attendance}" class="btn btn-secondary">View Attendance</a>
+        <a th:href="@{/staff}" class="btn btn-secondary">Back to Staff</a>
+    </div>
+</div>
+
+</body>
+</html>
