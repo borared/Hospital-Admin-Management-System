@@ -1,17 +1,40 @@
 package adminmangementsystem.com;
 
 import java.util.Scanner;
-import java.util.ArrayList;
-import java.util.List;
+
+import adminmangementsystem.com.management.AppointmentService;
+import adminmangementsystem.com.management.PatientSystem;
+import adminmangementsystem.com.management.DoctorSystem;
+
+// controllers handle menus and Scanner input
+import adminmangementsystem.com.controller.DoctorController;
+import adminmangementsystem.com.controller.PatientController;
+import adminmangementsystem.com.controller.AppointmentController;
+import adminmangementsystem.com.controller.MainController;
 
 public class App {
+<<<<<<< HEAD
     static List<Patient> patients = new ArrayList<>();
     static List<Doctor> doctors = new ArrayList<>();
 
+=======
+    
+>>>>>>> 29a8ce1d00dd2b4a2600bc29de3ac4909d72451a
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
         Admin admin = new Admin("admin", "admin$$$");
+<<<<<<< HEAD
+=======
+        AppointmentService appointmentSystem = new AppointmentService();
+        PatientSystem patientSystem = new PatientSystem();
+        DoctorSystem doctorSystem = new DoctorSystem();
+
+        DoctorController doctorController = new DoctorController(doctorSystem);
+        PatientController patientController = new PatientController(patientSystem);
+        AppointmentController appointmentController = new AppointmentController(appointmentSystem);
+        MainController mainController = new MainController(doctorController, patientController, appointmentController);
+>>>>>>> 29a8ce1d00dd2b4a2600bc29de3ac4909d72451a
 
         boolean loggedIn = false;
 
@@ -47,6 +70,7 @@ public class App {
             }
         }
 
+<<<<<<< HEAD
         boolean running = true;
 
         while (running) {
@@ -577,4 +601,11 @@ public class App {
         return null;
     }
 
+=======
+        // hand over control to main controller
+        mainController.start(sc);
+
+        sc.close();
+    }
+>>>>>>> 29a8ce1d00dd2b4a2600bc29de3ac4909d72451a
 }

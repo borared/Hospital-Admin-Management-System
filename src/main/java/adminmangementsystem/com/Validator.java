@@ -205,4 +205,67 @@ public class Validator {
         }
     }
 
+    //Update patient ID
+        public static String getValidUpdatePatientId(Scanner sc, String msg) {
+            while (true) {
+                System.out.print(msg);
+                String input = sc.nextLine().trim();
+                if (input.isEmpty()) {
+                    return null; // Allow empty input to keep existing value
+                } else if (input.startsWith("-")) {
+                    System.out.println("Invalid input. Patient ID cannot start with a negative sign.");
+                } else if (!input.matches("^[a-zA-Z0-9 ]+$")) {
+                    System.out.println("Invalid input. Patient ID must contain only letters, numbers, and spaces.");
+                } else {
+                    return input;
+                }
+            }
+        }
+
+        //Get Email Address format
+        public static String getValidEmail(Scanner sc, String msg) {
+           while (true) {
+              System.out.print(msg);
+              String input = sc.nextLine().trim();
+
+              // Simple professional email regex
+           if (input.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+              return input;
+            }
+
+           System.out.println("Invalid email format. Example: example@gmail.com");
+           }
+        }
+
+        //Get only number
+        public static String getNumberOnly(Scanner sc, String msg) {
+            while (true) {
+               System.out.print(msg);
+               String input = sc.nextLine().trim();
+
+               if (input.matches("\\d+")) {
+                  return input;
+               }
+
+            System.out.println("Invalid input. Numbers only.");
+            }
+        }
+
+        public static double getPositiveDouble(Scanner sc, String msg) {
+    while (true) {
+        System.out.print(msg);
+        String input = sc.nextLine().trim();
+
+        try {
+            double value = Double.parseDouble(input);
+            if (value > 0) {
+                return value;
+            }
+        } catch (Exception ignored) {}
+
+        System.out.println("Invalid input. Enter a positive number.");
+    }
+}
+
+
 }
