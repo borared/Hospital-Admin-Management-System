@@ -2,15 +2,13 @@ package adminmangementsystem.com;
 
 import java.util.Scanner;
 
-import adminmangementsystem.com.management.AppointmentService;
-import adminmangementsystem.com.management.PatientSystem;
-import adminmangementsystem.com.management.DoctorSystem;
-
-// controllers handle menus and Scanner input
-import adminmangementsystem.com.controller.DoctorController;
-import adminmangementsystem.com.controller.PatientController;
 import adminmangementsystem.com.controller.AppointmentController;
+import adminmangementsystem.com.controller.DoctorController;
 import adminmangementsystem.com.controller.MainController;
+import adminmangementsystem.com.controller.PatientController;
+import adminmangementsystem.com.management.AppointmentService;
+import adminmangementsystem.com.management.DoctorSystem;
+import adminmangementsystem.com.management.PatientSystem;
 
 public class App {
     
@@ -26,6 +24,8 @@ public class App {
         PatientController patientController = new PatientController(patientSystem);
         AppointmentController appointmentController = new AppointmentController(appointmentSystem);
         MainController mainController = new MainController(doctorController, patientController, appointmentController);
+        
+        
 
         boolean loggedIn = false;
 
