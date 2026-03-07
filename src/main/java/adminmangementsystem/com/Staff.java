@@ -1,20 +1,25 @@
-package adminmangementsystem.com.model;
+package adminmangementsystem.com;
 
-public class Doctor {
+import java.time.LocalDateTime;
 
-    private String id;
-    private String name;
-    private String dob;
-    private String address;
-    private String email;
-    private String position;
-    private double salary;
-    private String doe;   
+public abstract class Staff {
+
+      protected String id;
+    protected String name;
+    protected String dob;
+    protected String address;
+    protected String email;
+    protected String position;
+    protected double salary;
+    protected String doe;
+    protected String qrCode;
+    protected boolean isActive;
+    protected LocalDateTime lastCheckIn;
+    protected LocalDateTime lastCheckOut;
 
     // CONSTRUCTOR
-    public Doctor(String id, String name, String dob, String address,
-                  String email, String position, double salary, String doe) {
-
+    public Staff(String id, String name, String dob, String address,
+                 String email, String position, double salary, String doe) {
         setId(id);
         setName(name);
         setDob(dob);
@@ -23,10 +28,18 @@ public class Doctor {
         setPosition(position);
         setSalary(salary);
         setDoe(doe);
+        this.qrCode = generateQRCode(id);
+        this.isActive = false;
+        this.lastCheckIn = null;
+        this.lastCheckOut = null;
+    }
+    
+    // Generate unique QR code data for staff
+    private String generateQRCode(String staffId) {
+        return "STAFF:" + staffId + ":" + System.currentTimeMillis();
     }
 
     // SETTERS
-
     public boolean setId(String id) {
         if (id != null && !id.trim().isEmpty()) {
             this.id = id;
@@ -76,7 +89,6 @@ public class Doctor {
     }
 
     // GETTERS
-
     public String getId() {
         return id;
     }
@@ -108,9 +120,53 @@ public class Doctor {
     public String getDoe() {
         return doe;
     }
+    
+    public String getQrCode() {
+        return qrCode;
+    }
+    
+    public boolean isActive() {
+        return isActive;
+    }
+    
+    public void setActive(boolean active) {
+        this.isActive = active;
+    }
+    
+    public LocalDateTime getLastCheckIn() {
+        return lastCheckIn;
+    }
+    
+    public void setLastCheckIn(LocalDateTime lastCheckIn) {
+        this.lastCheckIn = lastCheckIn;
+    }
+    
+    public LocalDateTime getLastCheckOut() {
+        return lastCheckOut;
+    }
+    
+    public void setLastCheckOut(LocalDateTime lastCheckOut) {
+        this.lastCheckOut = lastCheckOut;
+    }
+    
+    // Check in staff
+    public void checkIn() {
+        this.isActive = true;
+        this.lastCheckIn = LocalDateTime.now();
+    }
+    
+    // Check out staff
+    public void checkOut() {
+        this.isActive = false;
+        this.lastCheckOut = LocalDateTime.now();
+    }
+
+    // ABSTRACT METHODS - Each staff type must implement these
+    public abstract String getResponsibilities();
+    public abstract String getDepartment();
+    public abstract void performDuty();
 
     // DISPLAY
-
     public void display() {
         System.out.println(id + " | " + name + " | " + dob + " | "
                 + address + " | " + email + " | "

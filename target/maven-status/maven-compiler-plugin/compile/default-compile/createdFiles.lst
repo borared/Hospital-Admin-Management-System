@@ -14,6 +14,8 @@ adminmangementsystem\com\controller\DoctorController.class
 adminmangementsystem\com\management\IAppointmentService.class
 adminmangementsystem\com\controller\AppointmentController.class
 adminmangementsystem\com\management\AppointmentService.class
+adminmangementsystem\com\management\AbstractManagementSystem.class
+adminmangementsystem\com\Doctor.class
 adminmangementsystem\com\Menu.class
 adminmangementsystem\com\model\Appointment.class
 adminmangementsystem\com\model\Patient.class
