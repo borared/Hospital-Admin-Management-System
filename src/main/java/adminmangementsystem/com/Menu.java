@@ -71,6 +71,19 @@ private static final String LINE = "+-------------------------------------------
         System.out.println("\t5. Exit Patient Management");
         
     }
+    public static void surgeonMenu() {
+    System.out.println("\n\t\t------ Surgeon Management System ------");
+    System.out.println("\t1. Add Surgeon");
+    System.out.println("\t2. Update Surgeon");
+    System.out.println("\t3. Delete Surgeon");
+    System.out.println("\t4. Search Surgeon");
+    System.out.println("\t5. View All Surgeons");
+    System.out.println("\t6. Check In Surgeon");
+    System.out.println("\t7. Check Out Surgeon");
+    System.out.println("\t8. View Attendance");
+    System.out.println("\t9. Exit");
+}
+
 
 
 }

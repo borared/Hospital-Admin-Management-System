@@ -1,6 +1,7 @@
 package adminmangementsystem.com.controller;
 
 import java.util.Scanner;
+import java.util.List;
 import adminmangementsystem.com.management.StaffSystem;
 import adminmangementsystem.com.Surgeon;
 import adminmangementsystem.com.view.SurgeonView;
@@ -32,7 +33,7 @@ public class SurgeonController {
             }
 
             switch (choice) {
-                case 1:
+                case 1: // Add Surgeon
                     Surgeon newSurgeon = SurgeonView.getSurgeonInput(sc);
                     try {
                         surgeonSystem.addStaff(newSurgeon);
@@ -42,7 +43,7 @@ public class SurgeonController {
                     }
                     break;
 
-                case 2:
+                case 2: // Update Surgeon
                     System.out.print("Enter Surgeon ID to update: ");
                     String updateId = sc.nextLine();
                     Surgeon existing = surgeonSystem.searchStaffById(updateId);
@@ -58,7 +59,7 @@ public class SurgeonController {
                     }
                     break;
 
-                case 3:
+                case 3: // Delete Surgeon
                     System.out.print("Enter Surgeon ID to delete: ");
                     String deleteId = sc.nextLine();
                     if (surgeonSystem.deleteStaff(deleteId)) {
@@ -68,58 +69,73 @@ public class SurgeonController {
                     }
                     break;
 
+                case 4: // Search Surgeon
+                    int searchChoice = SurgeonView.getSearchChoice(sc);
+                    if (searchChoice == -1) break;
 
-                case 4:
-                    System.out.print("Search by (1) Name or (2) ID: ");
-                    String searchOpt = sc.nextLine();
-                    if ("1".equals(searchOpt)) {
-                        System.out.print("Enter name: ");
-                        String name = sc.nextLine();
-                        var results = surgeonSystem.searchStaffByName(name);
-                        if (results.isEmpty()) {
-                            System.out.println("No surgeons found with that name.\n");
-                        } else {
-                            System.out.println("\n--- Search Results ---");
-                            for (Surgeon s : results) {
-                                s.display();
-                                System.out.println("-----");
+                    switch (searchChoice) {
+                        case 1: // by name
+                            String searchName = SurgeonView.getSearchName(sc);
+                            List<Surgeon> results = surgeonSystem.searchStaffByName(searchName);
+                            if (results.isEmpty()) {
+                                System.out.println("No surgeons found with that name.\n");
+                            } else {
+                                System.out.println("\n--- Search Results ---");
+                                for (Surgeon s : results) {
+                                    s.display();
+                                    System.out.println("-----");
+                                }
                             }
-                        }
-                    } else if ("2".equals(searchOpt)) {
-                        System.out.print("Enter ID: ");
-                        String id = sc.nextLine();
-                        Surgeon found = surgeonSystem.searchStaffById(id);
-                        if (found == null) {
-                            System.out.println("Surgeon not found.\n");
-                        } else {
-                            found.display();
-                        }
-                    } else {
-                        System.out.println("Invalid option.\n");
+                            break;
+
+                        case 2: // by ID
+                            String searchId = SurgeonView.getSearchId(sc);
+                            Surgeon found = surgeonSystem.searchStaffById(searchId);
+                            if (found == null) {
+                                System.out.println("Surgeon not found.\n");
+                            } else {
+                                found.display();
+                            }
+                            break;
+
+                        default:
+                            System.out.println("Invalid option.\n");
                     }
                     break;
 
-                case 5:
+                case 5: // View All Surgeons
                     surgeonSystem.displayAll();
                     break;
 
-                case 6:
+                case 6: // Check In
                     System.out.print("Enter Surgeon ID to check in: ");
                     String checkInId = sc.nextLine();
-                    surgeonSystem.checkInStaff(checkInId);
+                    Surgeon checkInSurgeon = surgeonSystem.searchStaffById(checkInId);
+                    if (checkInSurgeon == null) {
+                        System.out.println("Surgeon not found.\n");
+                    } else {
+                        surgeonSystem.checkInStaff(checkInId);
+                        System.out.println("Surgeon checked in successfully.\n");
+                    }
                     break;
 
-                case 7:
+                case 7: // Check Out
                     System.out.print("Enter Surgeon ID to check out: ");
                     String checkOutId = sc.nextLine();
-                    surgeonSystem.checkOutStaff(checkOutId);
+                    Surgeon checkOutSurgeon = surgeonSystem.searchStaffById(checkOutId);
+                    if (checkOutSurgeon == null) {
+                        System.out.println("Surgeon not found.\n");
+                    } else {
+                        surgeonSystem.checkOutStaff(checkOutId);
+                        System.out.println("Surgeon checked out successfully.\n");
+                    }
                     break;
 
-                case 8:
+                case 8: // View Attendance
                     surgeonSystem.displayAttendance();
                     break;
 
-                case 9:
+                case 9: // Exit
                     menuActive = false;
                     System.out.println("Exiting Surgeon Management.\n");
                     break;
