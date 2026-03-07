@@ -37,18 +37,27 @@ public class MainController {
                     patientController.run(sc);
                     break;
                 case 3:
-                    appointmentController.run(sc);
+                    doctorController.getDoctorSystem().viewDoctorsByPosition("Cardiologist", "Cardiologist List");
                     break;
                 case 4:
-                    appointmentController.getAppointmentService().viewAppointments();
+                    doctorController.getDoctorSystem().viewDoctorsByPosition("Surgeon", "Surgeon List");
                     break;
                 case 5:
-                    doctorController.getDoctorSystem().viewDoctorList1();
+                    doctorController.getDoctorSystem().viewDoctorsByPosition("Nurse", "Nurse List");
                     break;
                 case 6:
-                    patientController.getPatientSystem().viewPatientList(sc);
+                    appointmentController.getAppointmentService().addAppointment(sc);
                     break;
                 case 7:
+                    appointmentController.getAppointmentService().viewAppointments();
+                    break;
+                case 8:
+                    doctorController.getDoctorSystem().viewDoctorList1();
+                    break;
+                case 9:
+                    patientController.getPatientSystem().viewPatientList(sc);
+                    break;
+                case 10:
                     running = false;
                     System.out.println("Logged out.");
                     break;

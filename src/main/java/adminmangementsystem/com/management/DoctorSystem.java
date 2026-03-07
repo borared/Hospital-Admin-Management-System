@@ -204,4 +204,31 @@ public class DoctorSystem extends AbstractManagementSystem<Doctor> implements ID
     public void viewDoctorList1() {
         viewDoctorList();
     }
+
+    public void viewDoctorsByPosition(String position, String title) {
+        System.out.println("\t\t\t\t------" + title + "------");
+
+        String line = "-----------------------------------------------------------------------------------------------------------------------------------";
+        boolean found = false;
+
+        System.out.println(line);
+        System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10s | %-12s |\n",
+                "ID", "Name", "DOB", "Address", "Email", "Position", "Salary", "Entry Date");
+        System.out.println(line);
+
+        for (Doctor d : records) {
+            if (d.getPosition() != null && d.getPosition().equalsIgnoreCase(position)) {
+                found = true;
+                System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
+                        d.getId(), d.getName(), d.getDob(), d.getAddress(),
+                        d.getEmail(), d.getPosition(), d.getSalary(), d.getDoe());
+            }
+        }
+
+        if (!found) {
+            System.out.printf("| %-129s |\n", "No " + title.toLowerCase() + " found.");
+        }
+
+        System.out.println(line);
+    }
 }
