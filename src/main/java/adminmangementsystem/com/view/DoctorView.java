@@ -14,7 +14,9 @@ public class DoctorView {
         String doctorDOB = Validator.getValidDateFomart(sc, "Enter Doctor Date of Birth (dd/mm/yyyy): ");
         String doctorAddress = Validator.getNonEmpty(sc, "Enter Doctor address: ");
         String doctorEmail = Validator.getValidEmail(sc, "Enter Doctor email: ");
-        String doctorPosition = Validator.getOnlyLetter(sc, "Enter Doctor position: ");
+        String doctorPosition = Validator.getDoctorPositionWithShortcut(
+            sc,
+            "Enter Doctor position [S=Surgeon, C=Cardiologist, N=Nurse]: ");
         Double doctorSalary = Validator.getPositiveDouble(sc, "Enter Doctor salary: ");
         String doctorDOE = Validator.getValidDateFomart(sc, "Enter date of entry (dd/mm/yyyy): ");
         
@@ -59,10 +61,18 @@ public class DoctorView {
         }
 
         // Update Position
-        System.out.print("Enter new Position (" + existingDoctor.getPosition() + "): ");
+        System.out.print("Enter new Position (" + existingDoctor.getPosition() + ") [S/C/N]: ");
         String newPosition = sc.nextLine().trim();
         if (!newPosition.isEmpty()) {
-            existingDoctor.setPosition(newPosition);
+            if (newPosition.equalsIgnoreCase("S") || newPosition.equalsIgnoreCase("Surgeon")) {
+                existingDoctor.setPosition("Surgeon");
+            } else if (newPosition.equalsIgnoreCase("C") || newPosition.equalsIgnoreCase("Cardiologist")) {
+                existingDoctor.setPosition("Cardiologist");
+            } else if (newPosition.equalsIgnoreCase("N") || newPosition.equalsIgnoreCase("Nurse")) {
+                existingDoctor.setPosition("Nurse");
+            } else {
+                System.out.println("Invalid Position! Use S/C/N or Surgeon/Cardiologist/Nurse. Keeping old value.");
+            }
         }
 
         // Update Salary

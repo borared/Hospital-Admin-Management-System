@@ -267,5 +267,26 @@ public class Validator {
     }
 }
 
+    public static String getDoctorPositionWithShortcut(Scanner sc, String msg) {
+        while (true) {
+            System.out.print(msg);
+            String input = sc.nextLine().trim();
+
+            if (input.equalsIgnoreCase("S") || input.equalsIgnoreCase("Surgeon")) {
+                return "Surgeon";
+            }
+
+            if (input.equalsIgnoreCase("C") || input.equalsIgnoreCase("Cardiologist")) {
+                return "Cardiologist";
+            }
+
+            if (input.equalsIgnoreCase("N") || input.equalsIgnoreCase("Nurse")) {
+                return "Nurse";
+            }
+
+            System.out.println("Invalid position. Use S/C/N or Surgeon/Cardiologist/Nurse.");
+        }
+    }
+
 
 }
