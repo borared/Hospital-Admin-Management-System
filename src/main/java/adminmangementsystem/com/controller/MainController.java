@@ -7,13 +7,16 @@ public class MainController {
     private final DoctorController doctorController;
     private final PatientController patientController;
     private final AppointmentController appointmentController;
+    private final PharmacistController pharmacistController;
 
     public MainController(DoctorController doctorController,
                           PatientController patientController,
-                          AppointmentController appointmentController) {
+                          AppointmentController appointmentController,
+                          PharmacistController pharmacistController) {
         this.doctorController = doctorController;
         this.patientController = patientController;
         this.appointmentController = appointmentController;
+        this.pharmacistController = pharmacistController;
     }
 
     public void start(Scanner sc) {
@@ -46,18 +49,21 @@ public class MainController {
                     doctorController.getDoctorSystem().viewDoctorsByPosition("Nurse", "Nurse List");
                     break;
                 case 6:
-                    appointmentController.getAppointmentService().addAppointment(sc);
+                    pharmacistController.run(sc);
                     break;
                 case 7:
-                    appointmentController.getAppointmentService().viewAppointments();
+                    appointmentController.getAppointmentService().addAppointment(sc);
                     break;
                 case 8:
-                    doctorController.getDoctorSystem().viewDoctorList1();
+                    appointmentController.getAppointmentService().viewAppointments();
                     break;
                 case 9:
-                    patientController.getPatientSystem().viewPatientList(sc);
+                    doctorController.getDoctorSystem().viewDoctorList1();
                     break;
                 case 10:
+                    patientController.getPatientSystem().viewPatientList(sc);
+                    break;
+                case 11:
                     running = false;
                     System.out.println("Logged out.");
                     break;

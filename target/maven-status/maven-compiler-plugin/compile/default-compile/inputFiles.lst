@@ -4,6 +4,7 @@
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/controller/DoctorController.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/controller/MainController.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/controller/PatientController.java
+/Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/controller/PharmacistController.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/controller/SurgeonController.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/entity/Admin.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/entity/Appointment.java
@@ -11,6 +12,7 @@
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/entity/Doctor.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/entity/Nurse.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/entity/Patient.java
+/Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/entity/Pharmacist.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/entity/Staff.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/entity/Surgeon.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/service/AppointmentService.java
@@ -27,4 +29,5 @@
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/view/DoctorView.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/view/MenuView.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/view/PatientView.java
+/Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/view/PharmacistView.java
 /Users/sattya/Desktop/Hospital-Admin-Management-System/src/main/java/adminmangementsystem/com/view/SurgeonView.java

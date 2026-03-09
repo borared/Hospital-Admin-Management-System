@@ -6,10 +6,13 @@ import adminmangementsystem.com.controller.AppointmentController;
 import adminmangementsystem.com.controller.DoctorController;
 import adminmangementsystem.com.controller.MainController;
 import adminmangementsystem.com.controller.PatientController;
+import adminmangementsystem.com.controller.PharmacistController;
 import adminmangementsystem.com.entity.Admin;
+import adminmangementsystem.com.entity.Pharmacist;
 import adminmangementsystem.com.service.AppointmentService;
 import adminmangementsystem.com.service.DoctorService;
 import adminmangementsystem.com.service.PatientService;
+import adminmangementsystem.com.service.StaffService;
 import adminmangementsystem.com.view.MenuView;
 
 public class App {
@@ -21,11 +24,13 @@ public class App {
         AppointmentService appointmentSystem = new AppointmentService();
         PatientService PatientService = new PatientService();
         DoctorService DoctorService = new DoctorService();
+        StaffService<Pharmacist> pharmacistService = new StaffService<>(Pharmacist.class);
 
         DoctorController doctorController = new DoctorController(DoctorService);
         PatientController patientController = new PatientController(PatientService);
         AppointmentController appointmentController = new AppointmentController(appointmentSystem);
-        MainController mainController = new MainController(doctorController, patientController, appointmentController);
+        PharmacistController pharmacistController = new PharmacistController(pharmacistService);
+        MainController mainController = new MainController(doctorController, patientController, appointmentController, pharmacistController);
         
         
 

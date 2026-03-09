@@ -19,8 +19,10 @@ public class DoctorView {
             "Enter Doctor position [S=Surgeon, C=Cardiologist, N=Nurse]: ");
         Double doctorSalary = Validator.getPositiveDouble(sc, "Enter Doctor salary: ");
         String doctorDOE = Validator.getValidDateFomart(sc, "Enter date of entry (dd/mm/yyyy): ");
+        String specialization = Validator.getNonEmpty(sc, "Enter Doctor specialization: ");
+        String licenseNumber = Validator.getNonEmpty(sc, "Enter Doctor license number: ");
         
-        return new Doctor(doctorId, doctorName, doctorDOB, doctorAddress, doctorEmail, doctorPosition, doctorSalary, doctorDOE);
+        return new Doctor(doctorId, doctorName, doctorDOB, doctorAddress, doctorEmail, doctorPosition, doctorSalary, doctorDOE, specialization, licenseNumber);
     }
 
     public static Doctor getDoctorUpdateInput(Scanner sc, Doctor existingDoctor) {
@@ -98,6 +100,20 @@ public class DoctorView {
             existingDoctor.setDoe(newDoe);
         } else if (!newDoe.isEmpty()) {
             System.out.println("Invalid Entry Date format! Keeping old value.");
+        }
+
+        // Update Specialization
+        System.out.print("Enter new Specialization (" + existingDoctor.getSpecialization() + "): ");
+        String newSpecialization = sc.nextLine().trim();
+        if (!newSpecialization.isEmpty()) {
+            existingDoctor.setSpecialization(newSpecialization);
+        }
+
+        // Update License Number
+        System.out.print("Enter new License Number (" + existingDoctor.getLicenseNumber() + "): ");
+        String newLicenseNumber = sc.nextLine().trim();
+        if (!newLicenseNumber.isEmpty()) {
+            existingDoctor.setLicenseNumber(newLicenseNumber);
         }
 
         return existingDoctor;

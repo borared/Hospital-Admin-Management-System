@@ -1,119 +1,65 @@
 package adminmangementsystem.com.entity;
 
-public class Doctor {
+public class Doctor extends Staff {
 
-    private String id;
-    private String name;
-    private String dob;
-    private String address;
-    private String email;
-    private String position;
-    private double salary;
-    private String doe;   
+    private String specialization;  // e.g., "Cardiology", "Orthopedic Surgery", "Ophthalmology"
+    private String licenseNumber;
+    private String medicalSchool;
 
     // CONSTRUCTOR
     public Doctor(String id, String name, String dob, String address,
-                  String email, String position, double salary, String doe) {
-
-        setId(id);
-        setName(name);
-        setDob(dob);
-        setAddress(address);
-        setEmail(email);
-        setPosition(position);
-        setSalary(salary);
-        setDoe(doe);
+                  String email, String position, double salary, String doe,
+                  String specialization, String licenseNumber) {
+        super(id, name, dob, address, email, position, salary, doe);
+        this.specialization = specialization;
+        this.licenseNumber = licenseNumber;
     }
 
-    // SETTERS
-
-    public boolean setId(String id) {
-        if (id != null && !id.trim().isEmpty()) {
-            this.id = id;
-            return true;
-        }
-        return false;
+    // GETTERS AND SETTERS
+    public String getSpecialization() {
+        return specialization;
     }
 
-    public boolean setName(String name) {
-        if (name != null && name.matches("[a-zA-Z ]{1,50}")) {
-            this.name = name;
-            return true;
-        }
-        return false;
+    public void setSpecialization(String specialization) {
+        this.specialization = specialization;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public String getLicenseNumber() {
+        return licenseNumber;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setLicenseNumber(String licenseNumber) {
+        this.licenseNumber = licenseNumber;
     }
 
-    public boolean setEmail(String email) {
-        if (email != null && email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
-            this.email = email;
-            return true;
-        }
-        return false;
+    public String getMedicalSchool() {
+        return medicalSchool;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setMedicalSchool(String medicalSchool) {
+        this.medicalSchool = medicalSchool;
     }
 
-    public boolean setSalary(double salary) {
-        if (salary > 0) {
-            this.salary = salary;
-            return true;
-        }
-        return false;
+    // ABSTRACT METHOD IMPLEMENTATIONS
+    @Override
+    public String getResponsibilities() {
+        return "Diagnose and treat patients, prescribe medications, perform procedures related to " + specialization;
     }
 
-    public void setDoe(String doe) {
-        this.doe = doe;
+    @Override
+    public String getDepartment() {
+        return specialization != null ? specialization : "General Medicine";
     }
 
-    // GETTERS
-
-    public String getId() {
-        return id;
-    }
-
-    public String getName() {
-        return name;
-    }
-
-    public String getDob() {
-        return dob;
-    }
-
-    public String getAddress() {
-        return address;
-    }
-
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public String getDoe() {
-        return doe;
+    @Override
+    public void performDuty() {
+        System.out.println(name + " (Doctor - " + specialization + ") is consulting patients.");
     }
 
     // DISPLAY
-
+    @Override
     public void display() {
-        System.out.println(id + " | " + name + " | " + dob + " | "
-                + address + " | " + email + " | "
-                + position + " | $" + salary + " | " + doe);
+        super.display();
+        System.out.println("Specialization: " + specialization + " | License: " + licenseNumber);
     }
 }

@@ -6,67 +6,72 @@ import adminmangementsystem.com.controller.AppointmentController;
 import adminmangementsystem.com.controller.DoctorController;
 import adminmangementsystem.com.controller.MainController;
 import adminmangementsystem.com.controller.PatientController;
+import adminmangementsystem.com.controller.PharmacistController;
 import adminmangementsystem.com.entity.Admin;
+import adminmangementsystem.com.entity.Pharmacist;
 import adminmangementsystem.com.service.AppointmentService;
 import adminmangementsystem.com.service.DoctorService;
 import adminmangementsystem.com.service.PatientService;
+import adminmangementsystem.com.service.StaffService;
 import adminmangementsystem.com.view.MenuView;
 
-<span class="nc" id="L15">public class App {</span>
+<span class="nc" id="L18">public class App {</span>
     
     public static void main(String[] args) {
 
-<span class="nc" id="L19">        Scanner sc = new Scanner(System.in);</span>
-<span class="nc" id="L20">        Admin admin = new Admin(&quot;admin&quot;, &quot;admin$$$&quot;);</span>
-<span class="nc" id="L21">        AppointmentService appointmentSystem = new AppointmentService();</span>
-<span class="nc" id="L22">        PatientService PatientService = new PatientService();</span>
-<span class="nc" id="L23">        DoctorService DoctorService = new DoctorService();</span>
+<span class="nc" id="L22">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L23">        Admin admin = new Admin(&quot;admin&quot;, &quot;admin$$$&quot;);</span>
+<span class="nc" id="L24">        AppointmentService appointmentSystem = new AppointmentService();</span>
+<span class="nc" id="L25">        PatientService PatientService = new PatientService();</span>
+<span class="nc" id="L26">        DoctorService DoctorService = new DoctorService();</span>
+<span class="nc" id="L27">        StaffService&lt;Pharmacist&gt; pharmacistService = new StaffService&lt;&gt;(Pharmacist.class);</span>
 
-<span class="nc" id="L25">        DoctorController doctorController = new DoctorController(DoctorService);</span>
-<span class="nc" id="L26">        PatientController patientController = new PatientController(PatientService);</span>
-<span class="nc" id="L27">        AppointmentController appointmentController = new AppointmentController(appointmentSystem);</span>
-<span class="nc" id="L28">        MainController mainController = new MainController(doctorController, patientController, appointmentController);</span>
+<span class="nc" id="L29">        DoctorController doctorController = new DoctorController(DoctorService);</span>
+<span class="nc" id="L30">        PatientController patientController = new PatientController(PatientService);</span>
+<span class="nc" id="L31">        AppointmentController appointmentController = new AppointmentController(appointmentSystem);</span>
+<span class="nc" id="L32">        PharmacistController pharmacistController = new PharmacistController(pharmacistService);</span>
+<span class="nc" id="L33">        MainController mainController = new MainController(doctorController, patientController, appointmentController, pharmacistController);</span>
         
         
 
-<span class="nc" id="L32">        boolean loggedIn = false;</span>
+<span class="nc" id="L37">        boolean loggedIn = false;</span>
 
-<span class="nc bnc" id="L34" title="All 2 branches missed.">        while (!loggedIn) {</span>
-<span class="nc" id="L35">            MenuView.printAdminLoginMenu();</span>
-<span class="nc" id="L36">            System.out.print(&quot;Enter your choice: &quot;);</span>
-<span class="nc" id="L37">            int choice = sc.nextInt();</span>
-<span class="nc" id="L38">            sc.nextLine(); </span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        while (!loggedIn) {</span>
+<span class="nc" id="L40">            MenuView.printAdminLoginMenu();</span>
+<span class="nc" id="L41">            System.out.print(&quot;Enter your choice: &quot;);</span>
+<span class="nc" id="L42">            int choice = sc.nextInt();</span>
+<span class="nc" id="L43">            sc.nextLine(); </span>
 
-<span class="nc bnc" id="L40" title="All 3 branches missed.">            switch (choice) {</span>
+<span class="nc bnc" id="L45" title="All 3 branches missed.">            switch (choice) {</span>
                 case 1: // Login
-<span class="nc" id="L42">                    System.out.print(&quot;Enter admin username: &quot;);</span>
-<span class="nc" id="L43">                    String username = sc.nextLine();</span>
+<span class="nc" id="L47">                    System.out.print(&quot;Enter admin username: &quot;);</span>
+<span class="nc" id="L48">                    String username = sc.nextLine();</span>
 
-<span class="nc" id="L45">                    System.out.print(&quot;Enter admin password: &quot;);</span>
-<span class="nc" id="L46">                    String password = sc.nextLine();</span>
+<span class="nc" id="L50">                    System.out.print(&quot;Enter admin password: &quot;);</span>
+<span class="nc" id="L51">                    String password = sc.nextLine();</span>
 
-<span class="nc bnc" id="L48" title="All 2 branches missed.">                    if (admin.login(username, password)) {</span>
-<span class="nc" id="L49">                        loggedIn = true;</span>
-<span class="nc" id="L50">                        System.out.println(&quot;\nLogin successful.\n&quot;);</span>
-<span class="nc" id="L51">                    } else {</span>
-<span class="nc" id="L52">                        System.out.println(&quot;Invalid login. Try again.\n&quot;);</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">                    if (admin.login(username, password)) {</span>
+<span class="nc" id="L54">                        loggedIn = true;</span>
+<span class="nc" id="L55">                        System.out.println(&quot;\nLogin successful.\n&quot;);</span>
+                    } else {
+<span class="nc" id="L57">                        System.out.println(&quot;Invalid login. Try again.\n&quot;);</span>
                     }
-<span class="nc" id="L54">                    break;</span>
+<span class="nc" id="L59">                    break;</span>
 
                 case 2: // Exit
-<span class="nc" id="L57">                    System.out.println(&quot;System exited.&quot;);</span>
-<span class="nc" id="L58">                    sc.close();</span>
-<span class="nc" id="L59">                    return;</span>
+<span class="nc" id="L62">                    System.out.println(&quot;System exited.&quot;);</span>
+<span class="nc" id="L63">                    sc.close();</span>
+<span class="nc" id="L64">                    return;</span>
 
                 default:
-<span class="nc" id="L62">                    System.out.println(&quot;Invalid choice.\n&quot;);</span>
+<span class="nc" id="L67">                    System.out.println(&quot;Invalid choice.\n&quot;);</span>
             }
-        }
+<span class="nc" id="L69">        }</span>
 
         // hand over control to main controller
-<span class="nc" id="L67">        mainController.start(sc);</span>
+<span class="nc" id="L72">        mainController.start(sc);</span>
 
-<span class="nc" id="L69">        sc.close();</span>
-<span class="nc" id="L70">    }</span>
+<span class="nc" id="L74">        sc.close();</span>
+<span class="nc" id="L75">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

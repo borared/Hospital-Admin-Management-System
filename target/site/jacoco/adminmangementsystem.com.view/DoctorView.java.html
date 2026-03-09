@@ -7,18 +7,18 @@ import adminmangementsystem.com.entity.Doctor;
 <span class="nc" id="L7">public class DoctorView {</span>
 
     public static Doctor getDoctorInput(Scanner sc) {
-<span class="nc" id="L10">        System.out.println(&quot;\t\t------Add Doctor------&quot;);</span>
+        System.out.println(&quot;\t\t------Add Doctor------&quot;);
         
-<span class="nc" id="L12">        String doctorId = Validator.getValidPatient(sc, &quot;Enter Doctor ID: &quot;);</span>
-<span class="nc" id="L13">        String doctorName = Validator.getOnlyLetter(sc, &quot;Enter Doctor name: &quot;);</span>
-<span class="nc" id="L14">        String doctorDOB = Validator.getValidDateFomart(sc, &quot;Enter Doctor Date of Birth (dd/mm/yyyy): &quot;);</span>
-<span class="nc" id="L15">        String doctorAddress = Validator.getNonEmpty(sc, &quot;Enter Doctor address: &quot;);</span>
-<span class="nc" id="L16">        String doctorEmail = Validator.getValidEmail(sc, &quot;Enter Doctor email: &quot;);</span>
-<span class="nc" id="L17">        String doctorPosition = Validator.getDoctorPositionWithShortcut(</span>
-<span class="nc" id="L18">            sc,</span>
-<span class="nc" id="L19">            &quot;Enter Doctor position [S=Surgeon, C=Cardiologist, N=Nurse]: &quot;);</span>
-<span class="nc" id="L20">        Double doctorSalary = Validator.getPositiveDouble(sc, &quot;Enter Doctor salary: &quot;);</span>
-<span class="nc" id="L21">        String doctorDOE = Validator.getValidDateFomart(sc, &quot;Enter date of entry (dd/mm/yyyy): &quot;);</span>
+        String doctorId = Validator.getValidPatient(sc, &quot;Enter Doctor ID: &quot;);
+        String doctorName = Validator.getOnlyLetter(sc, &quot;Enter Doctor name: &quot;);
+        String doctorDOB = Validator.getValidDateFomart(sc, &quot;Enter Doctor Date of Birth (dd/mm/yyyy): &quot;);
+        String doctorAddress = Validator.getNonEmpty(sc, &quot;Enter Doctor address: &quot;);
+        String doctorEmail = Validator.getValidEmail(sc, &quot;Enter Doctor email: &quot;);
+        String doctorPosition = Validator.getDoctorPositionWithShortcut(
+            sc,
+            &quot;Enter Doctor position [S=Surgeon, C=Cardiologist, N=Nurse]: &quot;);
+        Double doctorSalary = Validator.getPositiveDouble(sc, &quot;Enter Doctor salary: &quot;);
+        String doctorDOE = Validator.getValidDateFomart(sc, &quot;Enter date of entry (dd/mm/yyyy): &quot;);
         
 <span class="nc" id="L23">        return new Doctor(doctorId, doctorName, doctorDOB, doctorAddress, doctorEmail, doctorPosition, doctorSalary, doctorDOE);</span>
     }

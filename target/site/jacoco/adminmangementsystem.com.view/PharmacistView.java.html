@@ -1,0 +1,84 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PharmacistView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.view</a> &gt; <span class="el_source">PharmacistView.java</span></div><h1>PharmacistView.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.view;
+
+import java.util.Scanner;
+import adminmangementsystem.com.entity.Pharmacist;
+import adminmangementsystem.com.util.Validator;
+
+<span class="nc" id="L7">public class PharmacistView {</span>
+
+    public static Pharmacist getPharmacistInput(Scanner sc) {
+<span class="nc" id="L10">        System.out.println(&quot;\n--- Add New Pharmacist ---&quot;);</span>
+
+<span class="nc" id="L12">        String id = Validator.getNonEmpty(sc, &quot;Enter Pharmacist ID: &quot;);</span>
+<span class="nc" id="L13">        String name = Validator.getOnlyLetter(sc, &quot;Enter Name: &quot;);</span>
+<span class="nc" id="L14">        String dob = Validator.getValidDateFomart(sc, &quot;Enter DOB (dd/mm/yyyy): &quot;);</span>
+<span class="nc" id="L15">        String address = Validator.getValidAddress(sc, &quot;Enter Address: &quot;);</span>
+<span class="nc" id="L16">        String email = Validator.getValidEmail(sc, &quot;Enter Email: &quot;);</span>
+<span class="nc" id="L17">        String position = &quot;Pharmacist&quot;;</span>
+<span class="nc" id="L18">        double salary = Validator.getValidSalary(sc, &quot;Enter Salary: &quot;);</span>
+<span class="nc" id="L19">        String doe = Validator.getValidDateFomart(sc, &quot;Enter Date of Entry (dd/mm/yyyy): &quot;);</span>
+<span class="nc" id="L20">        String licenseNumber = Validator.getNonEmpty(sc, &quot;Enter License Number: &quot;);</span>
+
+<span class="nc" id="L22">        return new Pharmacist(id, name, dob, address, email, position, salary, doe, licenseNumber);</span>
+    }
+
+    public static String getUpdatePharmacistId(Scanner sc) {
+<span class="nc" id="L26">        return Validator.getNonEmpty(sc, &quot;Enter Pharmacist ID to update: &quot;);</span>
+    }
+
+    public static void getPharmacistUpdateInput(Scanner sc, Pharmacist pharmacist) {
+<span class="nc" id="L30">        System.out.println(&quot;\n--- Update Pharmacist (Press Enter to keep current value) ---&quot;);</span>
+
+<span class="nc" id="L32">        String name = Validator.getValidUpdateDoc(sc, &quot;Enter Name&quot;, pharmacist.getName());</span>
+<span class="nc" id="L33">        pharmacist.setName(name);</span>
+
+<span class="nc" id="L35">        String dob = Validator.getValidUpdateDoc(sc, &quot;Enter DOB&quot;, pharmacist.getDob());</span>
+<span class="nc" id="L36">        pharmacist.setDob(dob);</span>
+
+<span class="nc" id="L38">        String address = Validator.getValidUpdateDoc(sc, &quot;Enter Address&quot;, pharmacist.getAddress());</span>
+<span class="nc" id="L39">        pharmacist.setAddress(address);</span>
+
+<span class="nc" id="L41">        String email = Validator.getValidUpdateDoc(sc, &quot;Enter Email&quot;, pharmacist.getEmail());</span>
+<span class="nc" id="L42">        pharmacist.setEmail(email);</span>
+
+<span class="nc" id="L44">        double salary = Validator.getValidUpdateSalary(sc, &quot;Enter Salary&quot;, pharmacist.getSalary());</span>
+<span class="nc" id="L45">        pharmacist.setSalary(salary);</span>
+
+<span class="nc" id="L47">        String doe = Validator.getValidUpdateDoc(sc, &quot;Enter Date of Entry&quot;, pharmacist.getDoe());</span>
+<span class="nc" id="L48">        pharmacist.setDoe(doe);</span>
+
+<span class="nc" id="L50">        String licenseNumber = Validator.getValidUpdateDoc(sc, &quot;Enter License Number&quot;, pharmacist.getLicenseNumber());</span>
+<span class="nc" id="L51">        pharmacist.setLicenseNumber(licenseNumber);</span>
+<span class="nc" id="L52">    }</span>
+
+    public static String getPharmacistIdForDelete(Scanner sc) {
+<span class="nc" id="L55">        return Validator.getNonEmpty(sc, &quot;Enter Pharmacist ID to delete: &quot;);</span>
+    }
+
+    public static int getSearchChoice(Scanner sc) {
+<span class="nc" id="L59">        System.out.println(&quot;\n--- Search Pharmacist ---&quot;);</span>
+<span class="nc" id="L60">        System.out.println(&quot;1. Search by Name&quot;);</span>
+<span class="nc" id="L61">        System.out.println(&quot;2. Search by ID&quot;);</span>
+<span class="nc" id="L62">        System.out.println(&quot;0. Back&quot;);</span>
+<span class="nc" id="L63">        System.out.print(&quot;Enter choice: &quot;);</span>
+
+        try {
+<span class="nc" id="L66">            int choice = Integer.parseInt(sc.nextLine());</span>
+<span class="nc bnc" id="L67" title="All 4 branches missed.">            if (choice &gt;= 0 &amp;&amp; choice &lt;= 2) {</span>
+<span class="nc" id="L68">                return choice;</span>
+            }
+<span class="nc" id="L70">        } catch (NumberFormatException e) {</span>
+<span class="nc" id="L71">            System.out.println(&quot;Invalid input!&quot;);</span>
+        }
+<span class="nc" id="L73">        return -1;</span>
+    }
+
+    public static String getSearchName(Scanner sc) {
+<span class="nc" id="L77">        return Validator.getOnlyLetter(sc, &quot;Enter Pharmacist Name to search: &quot;);</span>
+    }
+
+    public static String getSearchId(Scanner sc) {
+<span class="nc" id="L81">        return Validator.getNonEmpty(sc, &quot;Enter Pharmacist ID to search: &quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

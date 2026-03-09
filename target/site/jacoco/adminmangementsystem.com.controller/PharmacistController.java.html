@@ -1,0 +1,171 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PharmacistController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.controller</a> &gt; <span class="el_source">PharmacistController.java</span></div><h1>PharmacistController.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.controller;
+
+import java.util.List;
+import java.util.Scanner;
+import adminmangementsystem.com.entity.Pharmacist;
+import adminmangementsystem.com.service.StaffService;
+import adminmangementsystem.com.view.PharmacistView;
+
+public class PharmacistController {
+
+    private StaffService&lt;Pharmacist&gt; pharmacistService;
+
+<span class="nc" id="L13">    public PharmacistController(StaffService&lt;Pharmacist&gt; pharmacistService) {</span>
+<span class="nc" id="L14">        this.pharmacistService = pharmacistService;</span>
+<span class="nc" id="L15">    }</span>
+
+    public void run(Scanner sc) {
+<span class="nc" id="L18">        boolean running = true;</span>
+
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        while (running) {</span>
+<span class="nc" id="L21">            System.out.println(&quot;\n=== Pharmacist Management ===&quot;);</span>
+<span class="nc" id="L22">            System.out.println(&quot;1. Add Pharmacist&quot;);</span>
+<span class="nc" id="L23">            System.out.println(&quot;2. Update Pharmacist&quot;);</span>
+<span class="nc" id="L24">            System.out.println(&quot;3. Delete Pharmacist&quot;);</span>
+<span class="nc" id="L25">            System.out.println(&quot;4. Search Pharmacist&quot;);</span>
+<span class="nc" id="L26">            System.out.println(&quot;5. View All Pharmacists&quot;);</span>
+<span class="nc" id="L27">            System.out.println(&quot;6. Check In Pharmacist&quot;);</span>
+<span class="nc" id="L28">            System.out.println(&quot;7. Check Out Pharmacist&quot;);</span>
+<span class="nc" id="L29">            System.out.println(&quot;8. View Attendance&quot;);</span>
+<span class="nc" id="L30">            System.out.println(&quot;0. Back to Main Menu&quot;);</span>
+<span class="nc" id="L31">            System.out.print(&quot;Enter your choice: &quot;);</span>
+
+            try {
+<span class="nc" id="L34">                int choice = Integer.parseInt(sc.nextLine());</span>
+
+<span class="nc bnc" id="L36" title="All 10 branches missed.">                switch (choice) {</span>
+                    case 1:
+<span class="nc" id="L38">                        addPharmacist(sc);</span>
+<span class="nc" id="L39">                        break;</span>
+                    case 2:
+<span class="nc" id="L41">                        updatePharmacist(sc);</span>
+<span class="nc" id="L42">                        break;</span>
+                    case 3:
+<span class="nc" id="L44">                        deletePharmacist(sc);</span>
+<span class="nc" id="L45">                        break;</span>
+                    case 4:
+<span class="nc" id="L47">                        searchPharmacist(sc);</span>
+<span class="nc" id="L48">                        break;</span>
+                    case 5:
+<span class="nc" id="L50">                        viewAllPharmacists();</span>
+<span class="nc" id="L51">                        break;</span>
+                    case 6:
+<span class="nc" id="L53">                        checkInPharmacist(sc);</span>
+<span class="nc" id="L54">                        break;</span>
+                    case 7:
+<span class="nc" id="L56">                        checkOutPharmacist(sc);</span>
+<span class="nc" id="L57">                        break;</span>
+                    case 8:
+<span class="nc" id="L59">                        pharmacistService.displayAttendance();</span>
+<span class="nc" id="L60">                        break;</span>
+                    case 0:
+<span class="nc" id="L62">                        running = false;</span>
+<span class="nc" id="L63">                        break;</span>
+                    default:
+<span class="nc" id="L65">                        System.out.println(&quot;Invalid choice!&quot;);</span>
+                }
+<span class="nc" id="L67">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L68">                System.out.println(&quot;Invalid input! Please enter a number.&quot;);</span>
+<span class="nc" id="L69">            }</span>
+        }
+<span class="nc" id="L71">    }</span>
+
+    private void addPharmacist(Scanner sc) {
+        try {
+<span class="nc" id="L75">            Pharmacist pharmacist = PharmacistView.getPharmacistInput(sc);</span>
+<span class="nc" id="L76">            pharmacistService.addStaff(pharmacist);</span>
+<span class="nc" id="L77">            System.out.println(&quot;Pharmacist added successfully!&quot;);</span>
+<span class="nc" id="L78">        } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L79">            System.out.println(&quot;Error: &quot; + e.getMessage());</span>
+<span class="nc" id="L80">        }</span>
+<span class="nc" id="L81">    }</span>
+
+    private void updatePharmacist(Scanner sc) {
+<span class="nc" id="L84">        String id = PharmacistView.getUpdatePharmacistId(sc);</span>
+<span class="nc" id="L85">        Pharmacist pharmacist = pharmacistService.searchStaffById(id);</span>
+
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        if (pharmacist == null) {</span>
+<span class="nc" id="L88">            System.out.println(&quot;Pharmacist not found!&quot;);</span>
+<span class="nc" id="L89">            return;</span>
+        }
+
+<span class="nc" id="L92">        PharmacistView.getPharmacistUpdateInput(sc, pharmacist);</span>
+<span class="nc bnc" id="L93" title="All 2 branches missed.">        if (pharmacistService.updateStaff(pharmacist)) {</span>
+<span class="nc" id="L94">            System.out.println(&quot;Pharmacist updated successfully!&quot;);</span>
+        } else {
+<span class="nc" id="L96">            System.out.println(&quot;Failed to update pharmacist.&quot;);</span>
+        }
+<span class="nc" id="L98">    }</span>
+
+    private void deletePharmacist(Scanner sc) {
+<span class="nc" id="L101">        String id = PharmacistView.getPharmacistIdForDelete(sc);</span>
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (pharmacistService.deleteStaff(id)) {</span>
+<span class="nc" id="L103">            System.out.println(&quot;Pharmacist deleted successfully!&quot;);</span>
+        } else {
+<span class="nc" id="L105">            System.out.println(&quot;Pharmacist not found!&quot;);</span>
+        }
+<span class="nc" id="L107">    }</span>
+
+    private void searchPharmacist(Scanner sc) {
+<span class="nc" id="L110">        int searchChoice = PharmacistView.getSearchChoice(sc);</span>
+
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        if (searchChoice == 0) {</span>
+<span class="nc" id="L113">            return;</span>
+        }
+
+<span class="nc" id="L116">        String line = &quot;-----------------------------------------------------------------------------------------------------------------------------------&quot;;</span>
+
+<span class="nc" id="L118">        System.out.println(line);</span>
+<span class="nc" id="L119">        System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10s | %-12s | %-15s |\n&quot;,</span>
+                &quot;ID&quot;, &quot;Name&quot;, &quot;DOB&quot;, &quot;Address&quot;, &quot;Email&quot;, &quot;Position&quot;, &quot;Salary&quot;, &quot;Entry Date&quot;, &quot;License Number&quot;);
+<span class="nc" id="L121">        System.out.println(line);</span>
+
+<span class="nc bnc" id="L123" title="All 2 branches missed.">        if (searchChoice == 1) {</span>
+<span class="nc" id="L124">            String searchName = PharmacistView.getSearchName(sc);</span>
+<span class="nc" id="L125">            List&lt;Pharmacist&gt; results = pharmacistService.searchStaffByName(searchName);</span>
+
+<span class="nc bnc" id="L127" title="All 2 branches missed.">            if (results.isEmpty()) {</span>
+<span class="nc" id="L128">                System.out.println(&quot;|                                             No pharmacists found with that name                                              |&quot;);</span>
+            } else {
+<span class="nc bnc" id="L130" title="All 2 branches missed.">                for (Pharmacist p : results) {</span>
+<span class="nc" id="L131">                    System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s | %-15s |\n&quot;,</span>
+<span class="nc" id="L132">                            p.getId(), p.getName(), p.getDob(), p.getAddress(), p.getEmail(),</span>
+<span class="nc" id="L133">                            p.getPosition(), p.getSalary(), p.getDoe(), p.getLicenseNumber());</span>
+<span class="nc" id="L134">                }</span>
+            }
+
+<span class="nc bnc" id="L137" title="All 2 branches missed.">        } else if (searchChoice == 2) {</span>
+<span class="nc" id="L138">            String searchId = PharmacistView.getSearchId(sc);</span>
+<span class="nc" id="L139">            Pharmacist found = pharmacistService.searchStaffById(searchId);</span>
+
+<span class="nc bnc" id="L141" title="All 2 branches missed.">            if (found != null) {</span>
+<span class="nc" id="L142">                System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s | %-15s |\n&quot;,</span>
+<span class="nc" id="L143">                        found.getId(), found.getName(), found.getDob(), found.getAddress(),</span>
+<span class="nc" id="L144">                        found.getEmail(), found.getPosition(), found.getSalary(), found.getDoe(), found.getLicenseNumber());</span>
+            } else {
+<span class="nc" id="L146">                System.out.println(&quot;|                                                     Pharmacist not found                                                      |&quot;);</span>
+            }
+
+<span class="nc" id="L149">        } else {</span>
+<span class="nc" id="L150">            System.out.println(&quot;Invalid choice!&quot;);</span>
+        }
+
+<span class="nc" id="L153">        System.out.println(line);</span>
+<span class="nc" id="L154">    }</span>
+
+    private void viewAllPharmacists() {
+<span class="nc" id="L157">        System.out.println(&quot;\n\t\t\t\t------Pharmacist List------&quot;);</span>
+<span class="nc" id="L158">        pharmacistService.displayAll();</span>
+<span class="nc" id="L159">    }</span>
+
+    private void checkInPharmacist(Scanner sc) {
+<span class="nc" id="L162">        String id = PharmacistView.getSearchId(sc);</span>
+<span class="nc" id="L163">        pharmacistService.checkInStaff(id);</span>
+<span class="nc" id="L164">    }</span>
+
+    private void checkOutPharmacist(Scanner sc) {
+<span class="nc" id="L167">        String id = PharmacistView.getSearchId(sc);</span>
+<span class="nc" id="L168">        pharmacistService.checkOutStaff(id);</span>
+<span class="nc" id="L169">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

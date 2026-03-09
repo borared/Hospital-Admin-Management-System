@@ -20,8 +20,8 @@ public abstract class Staff {
     protected LocalDateTime lastCheckOut;
 
     // CONSTRUCTOR
-<span class="nc" id="L23">    public Staff(String id, String name, String dob, String address,</span>
-                 String email, String position, double salary, String doe) {
+    public Staff(String id, String name, String dob, String address,
+<span class="nc" id="L24">                 String email, String position, double salary, String doe) {</span>
 <span class="nc" id="L25">        setId(id);</span>
 <span class="nc" id="L26">        setName(name);</span>
 <span class="nc" id="L27">        setDob(dob);</span>
@@ -171,8 +171,8 @@ public abstract class Staff {
     // DISPLAY
     public void display() {
 <span class="nc" id="L173">        System.out.println(id + &quot; | &quot; + name + &quot; | &quot; + dob + &quot; | &quot;</span>
-<span class="nc" id="L174">                + address + &quot; | &quot; + email + &quot; | &quot;</span>
-<span class="nc" id="L175">                + position + &quot; | $&quot; + salary + &quot; | &quot; + doe);</span>
+                + address + &quot; | &quot; + email + &quot; | &quot;
+                + position + &quot; | $&quot; + salary + &quot; | &quot; + doe);
 <span class="nc" id="L176">    }</span>
 }
 </pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

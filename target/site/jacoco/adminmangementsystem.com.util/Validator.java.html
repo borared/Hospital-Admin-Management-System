@@ -7,17 +7,17 @@ import adminmangementsystem.com.entity.Doctor;
 <span class="nc" id="L7">public class Validator {</span>
 
     public static String getNonEmpty(Scanner sc, String msg) {
-<span class="nc" id="L10">        while (true) {</span>
+        while (true) {
 <span class="nc" id="L11">            System.out.print(msg);</span>
 <span class="nc" id="L12">            String input = sc.nextLine();</span>
 <span class="nc bnc" id="L13" title="All 4 branches missed.">            if (input != null &amp;&amp; !input.trim().isEmpty())</span>
 <span class="nc" id="L14">                return input;</span>
 <span class="nc" id="L15">            System.out.println(&quot;Invalid input. Please enter a non-empty value.&quot;);</span>
-        }
+<span class="nc" id="L16">        }</span>
     }
 
     public static String getPhoneNumberLength(Scanner sc, String msg) {
-<span class="nc" id="L20">        while (true) {</span>
+        while (true) {
 <span class="nc" id="L21">            System.out.print(msg);</span>
 <span class="nc" id="L22">            String input = sc.nextLine();</span>
 
@@ -26,11 +26,11 @@ import adminmangementsystem.com.entity.Doctor;
             }
 
 <span class="nc" id="L28">            System.out.println(&quot;Invalid input. Phone number must be 8–10 digits.&quot;);</span>
-        }
+<span class="nc" id="L29">        }</span>
     }
 
     public static int getPositiveInteger(Scanner sc, String msg) {
-<span class="nc" id="L33">        while (true) {</span>
+        while (true) {
             try {
 <span class="nc" id="L35">                System.out.print(msg);</span>
 <span class="nc" id="L36">                int num = Integer.parseInt(sc.nextLine());</span>
@@ -39,7 +39,7 @@ import adminmangementsystem.com.entity.Doctor;
 <span class="nc" id="L39">                System.out.println(&quot;Invalid input. Please enter a positive number.&quot;);</span>
 <span class="nc" id="L40">            } catch (NumberFormatException e) {</span>
 <span class="nc" id="L41">                System.out.println(&quot;Invalid input. Please enter a valid integer.&quot;);</span>
-            }
+<span class="nc" id="L42">            }</span>
         }
     }
 
@@ -53,36 +53,36 @@ import adminmangementsystem.com.entity.Doctor;
 <span class="nc" id="L53">                System.out.println(&quot;Invalid input. Patient ID cannot start with a negative sign.&quot;);</span>
 <span class="nc bnc" id="L54" title="All 2 branches missed.">            } else if (!input.matches(&quot;^[a-zA-Z0-9 ]+$&quot;)) {</span>
 <span class="nc" id="L55">                System.out.println(&quot;Invalid input. Patient ID must contain only letters, numbers, and spaces.&quot;);</span>
-<span class="nc" id="L56">            } else {</span>
+            } else {
 <span class="nc" id="L57">                return input;</span>
             }
-        }
+<span class="nc" id="L59">        }</span>
     }
 
     public static String getOnlyLetter(Scanner sc, String msg) {
-<span class="nc" id="L63">        while (true) {</span>
+        while (true) {
 <span class="nc" id="L64">            System.out.print(msg);</span>
 <span class="nc" id="L65">            String input = sc.nextLine().trim();</span>
 <span class="nc bnc" id="L66" title="All 2 branches missed.">            if (input.matches(&quot;^[a-zA-Z ]+$&quot;)) {</span>
 <span class="nc" id="L67">                return input;</span>
             } else
 <span class="nc" id="L69">                System.out.println(&quot;Invalid only letter are accepted&quot;);</span>
-        }
+<span class="nc" id="L70">        }</span>
     }
 
     public static String getValidDateFomart(Scanner sc, String msg) {
-<span class="nc" id="L74">        while (true) {</span>
+        while (true) {
 <span class="nc" id="L75">            System.out.print(msg);</span>
 <span class="nc" id="L76">            String input = sc.nextLine().trim();</span>
 <span class="nc bnc" id="L77" title="All 2 branches missed.">            if (input.matches(&quot;\\d{2}/\\d{2}/\\d{4}&quot;)) {</span>
 <span class="nc" id="L78">                return input;</span>
             } else
 <span class="nc" id="L80">                System.out.println(&quot;Invalid DOB! Format must be dd/mm/yyyy.&quot;);</span>
-        }
+<span class="nc" id="L81">        }</span>
     }
 
     public static String getValidAddress(Scanner sc, String msg) {
-<span class="nc" id="L85">        while (true) {</span>
+        while (true) {
 <span class="nc" id="L86">            System.out.print(msg);</span>
 <span class="nc" id="L87">            String input = sc.nextLine().trim();</span>
 
@@ -93,7 +93,7 @@ import adminmangementsystem.com.entity.Doctor;
             } else {
 <span class="nc" id="L94">                System.out.println(&quot;Invalid address! Format must be letters, numbers, spaces, and , . / - only.&quot;);</span>
             }
-        }
+<span class="nc" id="L96">        }</span>
     }
 
     public static String getValidDoctor(Scanner sc, String msg) {
@@ -107,10 +107,10 @@ import adminmangementsystem.com.entity.Doctor;
 <span class="nc" id="L107">                System.out.println(&quot;Invalid input. Doctor ID cannot start with a negative sign.&quot;);</span>
 <span class="nc bnc" id="L108" title="All 2 branches missed.">            } else if (!input.matches(&quot;^[a-zA-Z0-9 ]+$&quot;)) {</span>
 <span class="nc" id="L109">                System.out.println(&quot;Invalid input. Doctor ID must contain only letters, numbers, and spaces.&quot;);</span>
-<span class="nc" id="L110">            } else {</span>
+            } else {
 <span class="nc" id="L111">                return input;</span>
             }
-        }
+<span class="nc" id="L113">        }</span>
     }
 
     public static String getDocPosition(Scanner sc, String msg) {
@@ -122,14 +122,14 @@ import adminmangementsystem.com.entity.Doctor;
 <span class="nc" id="L122">                System.out.println(&quot;Doctor position cannot be empty.&quot;);</span>
 <span class="nc bnc" id="L123" title="All 2 branches missed.">            } else if (!input.matches(&quot;[a-zA-Z ]{1,50}&quot;)) {</span>
 <span class="nc" id="L124">                System.out.println(&quot;Invalid position. Use letters and spaces only (max 50 characters).&quot;);</span>
-<span class="nc" id="L125">            } else {</span>
+            } else {
 <span class="nc" id="L126">                return input;</span>
             }
-        }
+<span class="nc" id="L128">        }</span>
     }
 
     public static double getValidSalary(Scanner sc, String msg) {
-<span class="nc" id="L132">        while (true) {</span>
+        while (true) {
 <span class="nc" id="L133">            System.out.print(msg);</span>
 <span class="nc" id="L134">            String input = sc.nextLine().trim();</span>
 
@@ -138,14 +138,14 @@ import adminmangementsystem.com.entity.Doctor;
 
 <span class="nc bnc" id="L139" title="All 2 branches missed.">                if (salary &lt;= 0) {</span>
 <span class="nc" id="L140">                    System.out.println(&quot;Invalid salary! Salary must be greater than 0.&quot;);</span>
-<span class="nc" id="L141">                } else {</span>
+                } else {
 <span class="nc" id="L142">                    return salary;</span>
                 }
 
 <span class="nc" id="L145">            } catch (NumberFormatException e) {</span>
 <span class="nc" id="L146">                System.out.println(&quot;Invalid salary! Please enter a numeric value.&quot;);</span>
-            }
-        }
+<span class="nc" id="L147">            }</span>
+<span class="nc" id="L148">        }</span>
     }
 
     public static String getValidUpdateDoc(Scanner sc, String msg, String currentValue) {
@@ -158,14 +158,14 @@ import adminmangementsystem.com.entity.Doctor;
 <span class="nc" id="L158">                return currentValue;</span>
 <span class="nc bnc" id="L159" title="All 2 branches missed.">            } else if (input.length() &lt; 2) {</span>
 <span class="nc" id="L160">                System.out.println(&quot;Invalid input! Must be at least 2 characters.&quot;);</span>
-<span class="nc" id="L161">            } else {</span>
+            } else {
 <span class="nc" id="L162">                return input;</span>
             }
-        }
+<span class="nc" id="L164">        }</span>
     }
 
     public static String getValidDeleteDoc(Scanner sc, List&lt;Doctor&gt; doctors, String msg) {
-<span class="nc" id="L168">        while (true) {</span>
+        while (true) {
 <span class="nc" id="L169">            System.out.print(msg);</span>
 <span class="nc" id="L170">            String id = sc.nextLine().trim();</span>
 
@@ -181,11 +181,11 @@ import adminmangementsystem.com.entity.Doctor;
             } else {
 <span class="nc" id="L182">                System.out.println(&quot;Doctor ID not found! Please enter a valid ID.&quot;);</span>
             }
-        }
+<span class="nc" id="L184">        }</span>
     }
 
     public static double getValidUpdateSalary(Scanner sc, String msg, double currentSalary) {
-<span class="nc" id="L188">        while (true) {</span>
+        while (true) {
 <span class="nc" id="L189">            System.out.print(msg + &quot; [&quot; + currentSalary + &quot;]: &quot;);</span>
 <span class="nc" id="L190">            String input = sc.nextLine().trim();</span>
 
@@ -197,13 +197,13 @@ import adminmangementsystem.com.entity.Doctor;
 <span class="nc" id="L197">                double salary = Double.parseDouble(input);</span>
 <span class="nc bnc" id="L198" title="All 2 branches missed.">                if (salary &lt;= 0) {</span>
 <span class="nc" id="L199">                    System.out.println(&quot;Invalid salary! Must be greater than 0.&quot;);</span>
-<span class="nc" id="L200">                } else {</span>
+                } else {
 <span class="nc" id="L201">                    return salary;</span>
                 }
 <span class="nc" id="L203">            } catch (NumberFormatException e) {</span>
 <span class="nc" id="L204">                System.out.println(&quot;Invalid salary! Enter a numeric value.&quot;);</span>
-            }
-        }
+<span class="nc" id="L205">            }</span>
+<span class="nc" id="L206">        }</span>
     }
 
     //Update patient ID
@@ -217,15 +217,15 @@ import adminmangementsystem.com.entity.Doctor;
 <span class="nc" id="L217">                    System.out.println(&quot;Invalid input. Patient ID cannot start with a negative sign.&quot;);</span>
 <span class="nc bnc" id="L218" title="All 2 branches missed.">                } else if (!input.matches(&quot;^[a-zA-Z0-9 ]+$&quot;)) {</span>
 <span class="nc" id="L219">                    System.out.println(&quot;Invalid input. Patient ID must contain only letters, numbers, and spaces.&quot;);</span>
-<span class="nc" id="L220">                } else {</span>
+                } else {
 <span class="nc" id="L221">                    return input;</span>
                 }
-            }
+<span class="nc" id="L223">            }</span>
         }
 
         //Get Email Address format
         public static String getValidEmail(Scanner sc, String msg) {
-<span class="nc" id="L228">           while (true) {</span>
+           while (true) {
 <span class="nc" id="L229">              System.out.print(msg);</span>
 <span class="nc" id="L230">              String input = sc.nextLine().trim();</span>
 
@@ -235,12 +235,12 @@ import adminmangementsystem.com.entity.Doctor;
             }
 
 <span class="nc" id="L237">           System.out.println(&quot;Invalid email format. Example: example@gmail.com&quot;);</span>
-           }
+<span class="nc" id="L238">           }</span>
         }
 
         //Get only number
         public static String getNumberOnly(Scanner sc, String msg) {
-<span class="nc" id="L243">            while (true) {</span>
+            while (true) {
 <span class="nc" id="L244">               System.out.print(msg);</span>
 <span class="nc" id="L245">               String input = sc.nextLine().trim();</span>
 
@@ -249,11 +249,11 @@ import adminmangementsystem.com.entity.Doctor;
                }
 
 <span class="nc" id="L251">            System.out.println(&quot;Invalid input. Numbers only.&quot;);</span>
-            }
+<span class="nc" id="L252">            }</span>
         }
 
         public static double getPositiveDouble(Scanner sc, String msg) {
-<span class="nc" id="L256">    while (true) {</span>
+    while (true) {
 <span class="nc" id="L257">        System.out.print(msg);</span>
 <span class="nc" id="L258">        String input = sc.nextLine().trim();</span>
 
@@ -265,11 +265,11 @@ import adminmangementsystem.com.entity.Doctor;
 <span class="nc" id="L265">        } catch (Exception ignored) {}</span>
 
 <span class="nc" id="L267">        System.out.println(&quot;Invalid input. Enter a positive number.&quot;);</span>
-    }
+<span class="nc" id="L268">    }</span>
 }
 
     public static String getDoctorPositionWithShortcut(Scanner sc, String msg) {
-<span class="nc" id="L272">        while (true) {</span>
+        while (true) {
 <span class="nc" id="L273">            System.out.print(msg);</span>
 <span class="nc" id="L274">            String input = sc.nextLine().trim();</span>
 
@@ -286,7 +286,7 @@ import adminmangementsystem.com.entity.Doctor;
             }
 
 <span class="nc" id="L288">            System.out.println(&quot;Invalid position. Use S/C/N or Surgeon/Cardiologist/Nurse.&quot;);</span>
-        }
+<span class="nc" id="L289">        }</span>
     }
 
 

@@ -19,15 +19,17 @@ private static final String LINE = "+-------------------------------------------
         System.out.println(SEP);
         System.out.printf("| %-54s |\n", " 5.Nurse Management");
         System.out.println(SEP);
-        System.out.printf("| %-54s |\n", " 6.Schedule Appointment");
+        System.out.printf("| %-54s |\n", " 6.Pharmacist Management");
         System.out.println(SEP);
-        System.out.printf("| %-54s |\n", " 7.View Appointment");
+        System.out.printf("| %-54s |\n", " 7.Schedule Appointment");
         System.out.println(SEP);
-        System.out.printf("| %-54s |\n", " 8.View Doctor List");
+        System.out.printf("| %-54s |\n", " 8.View Appointment");
         System.out.println(SEP);
-        System.out.printf("| %-54s |\n", " 9.View Patient List");
+        System.out.printf("| %-54s |\n", " 9.View Doctor List");
         System.out.println(SEP);
-        System.out.printf("| %-54s |\n", " 10.Exit");
+        System.out.printf("| %-54s |\n", " 10.View Patient List");
+        System.out.println(SEP);
+        System.out.printf("| %-54s |\n", " 11.Exit");
         System.out.println(LINE);
     }
 

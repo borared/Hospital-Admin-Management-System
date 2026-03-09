@@ -60,7 +60,7 @@ import adminmangementsystem.com.service.interfaces.IAppointmentService;
 <span class="nc bnc" id="L60" title="All 2 branches missed.">            if (appointment.getPatientId().equalsIgnoreCase(patientId)) {</span>
 <span class="nc" id="L61">                return appointment;</span>
             }
-        }
+<span class="nc" id="L63">        }</span>
 <span class="nc" id="L64">        return null;</span>
     }
     
@@ -71,7 +71,7 @@ import adminmangementsystem.com.service.interfaces.IAppointmentService;
 <span class="nc bnc" id="L71" title="All 2 branches missed.">            if (appointment.getPatientName().equalsIgnoreCase(patientName)) {</span>
 <span class="nc" id="L72">                results.add(appointment);</span>
             }
-        }
+<span class="nc" id="L74">        }</span>
 <span class="nc" id="L75">        return results;</span>
     }
     
@@ -82,7 +82,7 @@ import adminmangementsystem.com.service.interfaces.IAppointmentService;
 <span class="nc bnc" id="L82" title="All 2 branches missed.">            if (appointment.getDOA().equals(date)) {</span>
 <span class="nc" id="L83">                results.add(appointment);</span>
             }
-        }
+<span class="nc" id="L85">        }</span>
 <span class="nc" id="L86">        return results;</span>
     }
     
@@ -106,7 +106,7 @@ import adminmangementsystem.com.service.interfaces.IAppointmentService;
 <span class="nc" id="L106">        String line = &quot;------------------------------------------------------------------------------------------------&quot;;</span>
 <span class="nc" id="L107">        System.out.println(line);</span>
 <span class="nc" id="L108">        System.out.printf(&quot;| %-5s | %-18s | %-12s | %-15s | %-15s | %-12s |\n&quot;,</span>
-<span class="nc" id="L109">                &quot;ID&quot;, &quot;Patient Name&quot;, &quot;DOB&quot;, &quot;Phone&quot;, &quot;Disease&quot;, &quot;DOA&quot;);</span>
+                &quot;ID&quot;, &quot;Patient Name&quot;, &quot;DOB&quot;, &quot;Phone&quot;, &quot;Disease&quot;, &quot;DOA&quot;);
 <span class="nc" id="L110">        System.out.println(line);</span>
 
 <span class="nc bnc" id="L112" title="All 2 branches missed.">        for (Appointment a : appointments) {</span>
@@ -117,7 +117,7 @@ import adminmangementsystem.com.service.interfaces.IAppointmentService;
 <span class="nc" id="L117">                    a.getPatientPhoneNum(),</span>
 <span class="nc" id="L118">                    a.getPatientDisease(),</span>
 <span class="nc" id="L119">                    a.getDOA());</span>
-        }
+<span class="nc" id="L120">        }</span>
 
 <span class="nc" id="L122">        System.out.println(line);</span>
 <span class="nc" id="L123">    }</span>

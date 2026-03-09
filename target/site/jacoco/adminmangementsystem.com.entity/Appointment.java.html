@@ -10,8 +10,8 @@ public class Appointment {
     private String DOA;
 
     // Constructor
-<span class="nc" id="L13">    public Appointment(String patientId, String patientName, String patientDOB,</span>
-                       String disease, String phoneNumber, String DOA) {
+    public Appointment(String patientId, String patientName, String patientDOB,
+<span class="nc" id="L14">                       String disease, String phoneNumber, String DOA) {</span>
 
 <span class="nc bnc" id="L16" title="All 2 branches missed.">        if (!setPatientId(patientId) ||</span>
 <span class="nc bnc" id="L17" title="All 2 branches missed.">            !setPatientName(patientName) ||</span>
@@ -90,11 +90,11 @@ public class Appointment {
 <span class="nc" id="L90">        System.out.println(line);</span>
         
 <span class="nc" id="L92">        System.out.printf(&quot;| %-5s | %-18s | %-12s | %-15s | %-15s | %-12s |\n&quot;, </span>
-<span class="nc" id="L93">                          &quot;ID&quot;, &quot;Patient Name&quot;, &quot;DOB&quot;, &quot;Phone Number&quot;, &quot;Disease&quot;, &quot;DOA&quot;);</span>
+                          &quot;ID&quot;, &quot;Patient Name&quot;, &quot;DOB&quot;, &quot;Phone Number&quot;, &quot;Disease&quot;, &quot;DOA&quot;);
 <span class="nc" id="L94">        System.out.println(line);</span>
         
 <span class="nc" id="L96">        System.out.printf(&quot;| %-5s | %-18s | %-12s | %-15s | %-15s | %-12s |\n&quot;, </span>
-<span class="nc" id="L97">                          patientId, patientName, patientDOB, phoneNumber, disease, DOA);</span>
+                          patientId, patientName, patientDOB, phoneNumber, disease, DOA);
 <span class="nc" id="L98">        System.out.println(line);</span>
 <span class="nc" id="L99">    }</span>
 
