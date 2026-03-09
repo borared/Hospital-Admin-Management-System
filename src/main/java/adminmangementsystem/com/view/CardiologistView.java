@@ -1,8 +1,8 @@
 package adminmangementsystem.com.view;
 
 import java.util.Scanner;
-import adminmangementsystem.com.Validator;
-import adminmangementsystem.com.Cardiologist;
+import adminmangementsystem.com.util.Validator;
+import adminmangementsystem.com.entity.Cardiologist;
 
 public class CardiologistView {
 

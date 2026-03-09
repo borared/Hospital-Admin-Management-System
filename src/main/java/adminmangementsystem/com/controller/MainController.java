@@ -1,7 +1,7 @@
 package adminmangementsystem.com.controller;
 
 import java.util.Scanner;
-import adminmangementsystem.com.Menu;
+import adminmangementsystem.com.view.MenuView;
 
 public class MainController {
     private final DoctorController doctorController;
@@ -19,7 +19,7 @@ public class MainController {
     public void start(Scanner sc) {
         boolean running = true;
         while (running) {
-            Menu.printDashboardMenu();
+            MenuView.printDashboardMenu();
             System.out.print("Enter your choice: ");
             int choiceIn;
             try {
