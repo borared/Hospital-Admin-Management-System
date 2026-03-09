@@ -1,24 +1,24 @@
 package adminmangementsystem.com.controller;
 
 import java.util.Scanner;
-import adminmangementsystem.com.management.PatientSystem;
-import adminmangementsystem.com.Menu;
+import adminmangementsystem.com.service.PatientService;
+import adminmangementsystem.com.view.MenuView;
 
 public class PatientController {
-    private final PatientSystem patientSystem;
+    private final PatientService PatientService;
 
-    public PatientController(PatientSystem patientSystem) {
-        this.patientSystem = patientSystem;
+    public PatientController(PatientService PatientService) {
+        this.PatientService = PatientService;
     }
 
-    public PatientSystem getPatientSystem() {
-        return patientSystem;
+    public PatientService getPatientSystem() {
+        return PatientService;
     }
 
     public void run(Scanner sc) {
         boolean patientMenu = true;
         while (patientMenu) {
-            Menu.patientMenu();
+            MenuView.patientMenu();
             System.out.print("Choose an option: ");
             int patientChoice;
             try {
@@ -29,16 +29,16 @@ public class PatientController {
             }
             switch (patientChoice) {
                 case 1:
-                    patientSystem.addPatient(sc);
+                    PatientService.addPatient(sc);
                     break;
                 case 2:
-                    patientSystem.updatePatient(sc);
+                    PatientService.updatePatient(sc);
                     break;
                 case 3:
-                    patientSystem.deletePatient(sc);
+                    PatientService.deletePatient(sc);
                     break;
                 case 4:
-                    patientSystem.searchPatient(sc);
+                    PatientService.searchPatient(sc);
                     break;
                 case 5:
                     patientMenu = false;

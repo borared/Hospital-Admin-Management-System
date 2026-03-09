@@ -1,8 +1,8 @@
 package adminmangementsystem.com.controller;
 
 import java.util.Scanner;
-import adminmangementsystem.com.management.AppointmentService;
-import adminmangementsystem.com.Menu;
+import adminmangementsystem.com.service.AppointmentService;
+import adminmangementsystem.com.view.MenuView;
 
 public class AppointmentController {
     private final AppointmentService appointmentService;
@@ -18,7 +18,7 @@ public class AppointmentController {
     public void run(Scanner sc) {
         boolean appointmentDisplayMenu = true;
         while (appointmentDisplayMenu) {
-            Menu.appointmentMenu();
+            MenuView.appointmentMenu();
             System.out.print("Choose an option: ");
             int appointmentChoice;
             try {

@@ -3,15 +3,15 @@ package adminmangementsystem.com.controller;
 import java.util.List;
 import java.util.Scanner;
 
-import adminmangementsystem.com.Cardiologist;
-import adminmangementsystem.com.management.StaffSystem;
+import adminmangementsystem.com.entity.Cardiologist;
+import adminmangementsystem.com.service.StaffService;
 import adminmangementsystem.com.view.CardiologistView;
 
 public class CardiologistController {
 
-    private final StaffSystem<Cardiologist> cardiologistSystem;
+    private final StaffService<Cardiologist> cardiologistSystem;
 
-    public CardiologistController(StaffSystem<Cardiologist> cardiologistSystem) {
+    public CardiologistController(StaffService<Cardiologist> cardiologistSystem) {
         this.cardiologistSystem = cardiologistSystem;
     }
 
@@ -45,7 +45,7 @@ public class CardiologistController {
                     System.out.println("Cardiologist added.");
                     break;
                 case 2:
-                    // Implement update (similar to previous DoctorSystem update)
+                    // Implement update (similar to previous DoctorService update)
                     System.out.print("Enter ID to update: ");
                     String updateId = sc.nextLine();
                     Cardiologist existing = cardiologistSystem.searchStaffById(updateId);

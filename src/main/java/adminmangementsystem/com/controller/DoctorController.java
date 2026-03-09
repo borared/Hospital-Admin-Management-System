@@ -1,25 +1,25 @@
 package adminmangementsystem.com.controller;
 
 import java.util.Scanner;
-import adminmangementsystem.com.management.DoctorSystem;
-import adminmangementsystem.com.Menu;
+import adminmangementsystem.com.service.DoctorService;
+import adminmangementsystem.com.view.MenuView;
 
 public class DoctorController {
-    private final DoctorSystem doctorSystem;
+    private final DoctorService DoctorService;
 
-    public DoctorController(DoctorSystem doctorSystem) {
-        this.doctorSystem = doctorSystem;
+    public DoctorController(DoctorService DoctorService) {
+        this.DoctorService = DoctorService;
     }
 
     // expose for cases where caller needs more than menu actions
-    public DoctorSystem getDoctorSystem() {
-        return doctorSystem;
+    public DoctorService getDoctorSystem() {
+        return DoctorService;
     }
 
     public void run(Scanner sc) {
         boolean doctorMenu = true;
         while (doctorMenu) {
-            Menu.doctorMenu();
+            MenuView.doctorMenu();
             System.out.print("Choose an option: ");
             int doctorChoice;
             try {
@@ -31,19 +31,19 @@ public class DoctorController {
 
             switch (doctorChoice) {
                 case 1:
-                    doctorSystem.addDoctor(sc);
+                    DoctorService.addDoctor(sc);
                     break;
                 case 2:
-                    doctorSystem.updateDoctor(sc);
+                    DoctorService.updateDoctor(sc);
                     break;
                 case 3:
-                    doctorSystem.deleteDoctor(sc);
+                    DoctorService.deleteDoctor(sc);
                     break;
                 case 4:
-                    doctorSystem.searchDoctor(sc);
+                    DoctorService.searchDoctor(sc);
                     break;
                 case 5:
-                    doctorSystem.viewDoctorList();
+                    DoctorService.viewDoctorList();
                     break;
                 case 6:
                     doctorMenu = false;

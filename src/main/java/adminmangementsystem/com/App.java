@@ -6,9 +6,9 @@ import adminmangementsystem.com.controller.AppointmentController;
 import adminmangementsystem.com.controller.DoctorController;
 import adminmangementsystem.com.controller.MainController;
 import adminmangementsystem.com.controller.PatientController;
-import adminmangementsystem.com.management.AppointmentService;
-import adminmangementsystem.com.management.DoctorSystem;
-import adminmangementsystem.com.management.PatientSystem;
+import adminmangementsystem.com.service.AppointmentService;
+import adminmangementsystem.com.service.DoctorService;
+import adminmangementsystem.com.service.PatientService;
 
 public class App {
     
@@ -17,11 +17,11 @@ public class App {
         Scanner sc = new Scanner(System.in);
         Admin admin = new Admin("admin", "admin$$$");
         AppointmentService appointmentSystem = new AppointmentService();
-        PatientSystem patientSystem = new PatientSystem();
-        DoctorSystem doctorSystem = new DoctorSystem();
+        PatientService PatientService = new PatientService();
+        DoctorService DoctorService = new DoctorService();
 
-        DoctorController doctorController = new DoctorController(doctorSystem);
-        PatientController patientController = new PatientController(patientSystem);
+        DoctorController doctorController = new DoctorController(DoctorService);
+        PatientController patientController = new PatientController(PatientService);
         AppointmentController appointmentController = new AppointmentController(appointmentSystem);
         MainController mainController = new MainController(doctorController, patientController, appointmentController);
         
@@ -30,7 +30,7 @@ public class App {
         boolean loggedIn = false;
 
         while (!loggedIn) {
-            Menu.printAdminLoginMenu();
+            MenuView.printAdminLoginMenu();
             System.out.print("Enter your choice: ");
             int choice = sc.nextInt();
             sc.nextLine(); 

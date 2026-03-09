@@ -2,27 +2,27 @@ package adminmangementsystem.com.controller;
 
 import java.util.Scanner;
 import java.util.List;
-import adminmangementsystem.com.management.StaffSystem;
-import adminmangementsystem.com.Surgeon;
+import adminmangementsystem.com.service.StaffService;
+import adminmangementsystem.com.entity.Surgeon;
 import adminmangementsystem.com.view.SurgeonView;
-import adminmangementsystem.com.Menu;
+import adminmangementsystem.com.view.MenuView;
 
 public class SurgeonController {
 
-    private final StaffSystem<Surgeon> surgeonSystem;
+    private final StaffService<Surgeon> surgeonSystem;
 
-    public SurgeonController(StaffSystem<Surgeon> surgeonSystem) {
+    public SurgeonController(StaffService<Surgeon> surgeonSystem) {
         this.surgeonSystem = surgeonSystem;
     }
 
-    public StaffSystem<Surgeon> getSurgeonSystem() {
+    public StaffService<Surgeon> getSurgeonSystem() {
         return surgeonSystem;
     }
 
     public void run(Scanner sc) {
         boolean menuActive = true;
         while (menuActive) {
-            Menu.surgeonMenu();
+            MenuView.surgeonMenu();
             System.out.print("Choose an option: ");
             int choice;
             try {

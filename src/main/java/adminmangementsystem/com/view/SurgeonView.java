@@ -2,8 +2,8 @@ package adminmangementsystem.com.view;
 
 import java.util.Scanner;
 
-import adminmangementsystem.com.Surgeon;
-import adminmangementsystem.com.Validator;
+import adminmangementsystem.com.entity.Surgeon;
+import adminmangementsystem.com.util.Validator;
 
 public class SurgeonView {
 
