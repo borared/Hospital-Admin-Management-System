@@ -1,0 +1,94 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.view</a> &gt; <span class="el_source">PatientView.java</span></div><h1>PatientView.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.view;
+
+import java.util.Scanner;
+import adminmangementsystem.com.util.Validator;
+import adminmangementsystem.com.entity.Patient;
+
+<span class="nc" id="L7">public class PatientView {</span>
+
+    public static Patient getPatientInput(Scanner sc) {
+<span class="nc" id="L10">        System.out.println(&quot;\t\t------Add Patient------&quot;);</span>
+        
+<span class="nc" id="L12">        String patId = Validator.getValidPatient(sc, &quot;Enter Patient ID: &quot;);</span>
+<span class="nc" id="L13">        String patName = Validator.getOnlyLetter(sc, &quot;Enter patient name: &quot;);</span>
+<span class="nc" id="L14">        String patDOB = Validator.getValidDateFomart(sc, &quot;Enter patient Date of Birth (dd/mm/yyyy): &quot;);</span>
+<span class="nc" id="L15">        String patAddress = Validator.getNonEmpty(sc, &quot;Enter patient address: &quot;);</span>
+<span class="nc" id="L16">        String patDisease = Validator.getNonEmpty(sc, &quot;Enter patient disease: &quot;);</span>
+<span class="nc" id="L17">        String patDOE = Validator.getValidDateFomart(sc, &quot;Enter date of entry (dd/mm/yyyy): &quot;);</span>
+        
+<span class="nc" id="L19">        return new Patient(patId, patName, patDOB, patDisease, patAddress, patDOE);</span>
+    }
+
+    public static Patient getPatientUpdateInput(Scanner sc, Patient existingPatient) {
+<span class="nc" id="L23">        System.out.println(&quot;Leave blank to keep current value.&quot;);</span>
+
+        // Update Name
+<span class="nc" id="L26">        System.out.print(&quot;Enter new Name (&quot; + existingPatient.getName() + &quot;): &quot;);</span>
+<span class="nc" id="L27">        String newName = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L28" title="All 4 branches missed.">        if (!newName.isEmpty() &amp;&amp; newName.matches(&quot;[a-zA-Z ]{1,50}&quot;)) {</span>
+<span class="nc" id="L29">            existingPatient.setName(newName);</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        } else if (!newName.isEmpty()) {</span>
+<span class="nc" id="L31">            System.out.println(&quot;Invalid Name! Keeping old value.&quot;);</span>
+        }
+
+        // Update DOB
+<span class="nc" id="L35">        System.out.print(&quot;Enter new DOB (&quot; + existingPatient.getDob() + &quot;) [dd/MM/yyyy]: &quot;);</span>
+<span class="nc" id="L36">        String newDob = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L37" title="All 4 branches missed.">        if (!newDob.isEmpty() &amp;&amp; newDob.matches(&quot;\\d{2}/\\d{2}/\\d{4}&quot;)) {</span>
+<span class="nc" id="L38">            existingPatient.setDob(newDob);</span>
+<span class="nc bnc" id="L39" title="All 2 branches missed.">        } else if (!newDob.isEmpty()) {</span>
+<span class="nc" id="L40">            System.out.println(&quot;Invalid DOB format! Keeping old value.&quot;);</span>
+        }
+
+        // Update Address
+<span class="nc" id="L44">        System.out.print(&quot;Enter new Address (&quot; + existingPatient.getAddress() + &quot;): &quot;);</span>
+<span class="nc" id="L45">        String newAddress = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L46" title="All 2 branches missed.">        if (!newAddress.isEmpty()) {</span>
+<span class="nc" id="L47">            existingPatient.setAddress(newAddress);</span>
+        }
+
+        // Update Disease
+<span class="nc" id="L51">        System.out.print(&quot;Enter new Disease (&quot; + existingPatient.getDisease() + &quot;): &quot;);</span>
+<span class="nc" id="L52">        String newDisease = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L53" title="All 2 branches missed.">        if (!newDisease.isEmpty()) {</span>
+<span class="nc" id="L54">            existingPatient.setDisease(newDisease);</span>
+        }
+
+        // Update Entry Date
+<span class="nc" id="L58">        System.out.print(&quot;Enter new Entry Date (&quot; + existingPatient.getEntryDate() + &quot;) [dd/MM/yyyy]: &quot;);</span>
+<span class="nc" id="L59">        String newDoe = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L60" title="All 4 branches missed.">        if (!newDoe.isEmpty() &amp;&amp; newDoe.matches(&quot;\\d{2}/\\d{2}/\\d{4}&quot;)) {</span>
+<span class="nc" id="L61">            existingPatient.setEntryDate(newDoe);</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">        } else if (!newDoe.isEmpty()) {</span>
+<span class="nc" id="L63">            System.out.println(&quot;Invalid Entry Date format! Keeping old value.&quot;);</span>
+        }
+
+<span class="nc" id="L66">        return existingPatient;</span>
+    }
+
+    public static String getPatientIdForDelete(Scanner sc) {
+<span class="nc" id="L70">        System.out.print(&quot;Enter patient ID to delete: &quot;);</span>
+<span class="nc" id="L71">        return sc.nextLine().trim();</span>
+    }
+
+    public static int getSearchChoice(Scanner sc) {
+<span class="nc" id="L75">        System.out.print(&quot;Search by (1) Name or (2) ID: &quot;);</span>
+        try {
+<span class="nc" id="L77">            return Integer.parseInt(sc.nextLine());</span>
+<span class="nc" id="L78">        } catch (Exception e) {</span>
+<span class="nc" id="L79">            System.out.println(&quot;Invalid choice!&quot;);</span>
+<span class="nc" id="L80">            return -1;</span>
+        }
+    }
+
+    public static String getSearchName(Scanner sc) {
+<span class="nc" id="L85">        System.out.print(&quot;Enter Patient name: &quot;);</span>
+<span class="nc" id="L86">        return sc.nextLine().trim();</span>
+    }
+
+    public static String getSearchId(Scanner sc) {
+<span class="nc" id="L90">        System.out.print(&quot;Enter Patient ID: &quot;);</span>
+<span class="nc" id="L91">        return sc.nextLine().trim();</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

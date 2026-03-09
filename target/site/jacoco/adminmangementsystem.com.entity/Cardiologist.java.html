@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Cardiologist.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.entity</a> &gt; <span class="el_source">Cardiologist.java</span></div><h1>Cardiologist.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.entity;
+
+public class Cardiologist extends Staff {
+
+    private String fellowship;  // e.g., &quot;Interventional Cardiology&quot;
+
+    public Cardiologist(String id, String name, String dob, String address,
+                        String email, String position, double salary, String doe,
+                        String fellowship) {
+<span class="nc" id="L10">        super(id, name, dob, address, email, position, salary, doe);</span>
+<span class="nc" id="L11">        this.fellowship = fellowship;</span>
+<span class="nc" id="L12">    }</span>
+
+    // Getter and setter for fellowship
+    public String getFellowship() {
+<span class="nc" id="L16">        return fellowship;</span>
+    }
+
+    public void setFellowship(String fellowship) {
+<span class="nc" id="L20">        this.fellowship = fellowship;</span>
+<span class="nc" id="L21">    }</span>
+
+    // Implementation of abstract methods
+    @Override
+    public String getResponsibilities() {
+<span class="nc" id="L26">        return &quot;Diagnose and treat heart conditions, perform catheterizations, prescribe medications.&quot;;</span>
+    }
+
+    @Override
+    public String getDepartment() {
+<span class="nc" id="L31">        return &quot;Cardiology&quot;;</span>
+    }
+
+    @Override
+    public void performDuty() {
+<span class="nc" id="L36">        System.out.println(name + &quot; is consulting a patient with heart issues.&quot;);</span>
+<span class="nc" id="L37">    }</span>
+
+    // Optionally override display to include fellowship
+    @Override
+    public void display() {
+<span class="nc" id="L42">        super.display();  // prints common staff info</span>
+<span class="nc" id="L43">        System.out.println(&quot;Fellowship: &quot; + fellowship);</span>
+<span class="nc" id="L44">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -1,0 +1,294 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Validator.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.util</a> &gt; <span class="el_source">Validator.java</span></div><h1>Validator.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.util;
+
+import java.util.List;
+import java.util.Scanner;
+import adminmangementsystem.com.entity.Doctor;
+
+<span class="nc" id="L7">public class Validator {</span>
+
+    public static String getNonEmpty(Scanner sc, String msg) {
+<span class="nc" id="L10">        while (true) {</span>
+<span class="nc" id="L11">            System.out.print(msg);</span>
+<span class="nc" id="L12">            String input = sc.nextLine();</span>
+<span class="nc bnc" id="L13" title="All 4 branches missed.">            if (input != null &amp;&amp; !input.trim().isEmpty())</span>
+<span class="nc" id="L14">                return input;</span>
+<span class="nc" id="L15">            System.out.println(&quot;Invalid input. Please enter a non-empty value.&quot;);</span>
+        }
+    }
+
+    public static String getPhoneNumberLength(Scanner sc, String msg) {
+<span class="nc" id="L20">        while (true) {</span>
+<span class="nc" id="L21">            System.out.print(msg);</span>
+<span class="nc" id="L22">            String input = sc.nextLine();</span>
+
+<span class="nc bnc" id="L24" title="All 2 branches missed.">            if (input.matches(&quot;\\d{8,10}&quot;)) {</span>
+<span class="nc" id="L25">                return input;</span>
+            }
+
+<span class="nc" id="L28">            System.out.println(&quot;Invalid input. Phone number must be 8–10 digits.&quot;);</span>
+        }
+    }
+
+    public static int getPositiveInteger(Scanner sc, String msg) {
+<span class="nc" id="L33">        while (true) {</span>
+            try {
+<span class="nc" id="L35">                System.out.print(msg);</span>
+<span class="nc" id="L36">                int num = Integer.parseInt(sc.nextLine());</span>
+<span class="nc bnc" id="L37" title="All 2 branches missed.">                if (num &gt; 0)</span>
+<span class="nc" id="L38">                    return num;</span>
+<span class="nc" id="L39">                System.out.println(&quot;Invalid input. Please enter a positive number.&quot;);</span>
+<span class="nc" id="L40">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L41">                System.out.println(&quot;Invalid input. Please enter a valid integer.&quot;);</span>
+            }
+        }
+    }
+
+    public static String getValidPatient(Scanner sc, String msg) {
+        while (true) {
+<span class="nc" id="L48">            System.out.print(msg);</span>
+<span class="nc" id="L49">            String input = sc.nextLine();</span>
+<span class="nc bnc" id="L50" title="All 4 branches missed.">            if (input == null || input.trim().isEmpty()) {</span>
+<span class="nc" id="L51">                System.out.println(&quot;Patient ID cannot be empty.&quot;);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">            } else if (input.startsWith(&quot;-&quot;)) {</span>
+<span class="nc" id="L53">                System.out.println(&quot;Invalid input. Patient ID cannot start with a negative sign.&quot;);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">            } else if (!input.matches(&quot;^[a-zA-Z0-9 ]+$&quot;)) {</span>
+<span class="nc" id="L55">                System.out.println(&quot;Invalid input. Patient ID must contain only letters, numbers, and spaces.&quot;);</span>
+<span class="nc" id="L56">            } else {</span>
+<span class="nc" id="L57">                return input;</span>
+            }
+        }
+    }
+
+    public static String getOnlyLetter(Scanner sc, String msg) {
+<span class="nc" id="L63">        while (true) {</span>
+<span class="nc" id="L64">            System.out.print(msg);</span>
+<span class="nc" id="L65">            String input = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">            if (input.matches(&quot;^[a-zA-Z ]+$&quot;)) {</span>
+<span class="nc" id="L67">                return input;</span>
+            } else
+<span class="nc" id="L69">                System.out.println(&quot;Invalid only letter are accepted&quot;);</span>
+        }
+    }
+
+    public static String getValidDateFomart(Scanner sc, String msg) {
+<span class="nc" id="L74">        while (true) {</span>
+<span class="nc" id="L75">            System.out.print(msg);</span>
+<span class="nc" id="L76">            String input = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L77" title="All 2 branches missed.">            if (input.matches(&quot;\\d{2}/\\d{2}/\\d{4}&quot;)) {</span>
+<span class="nc" id="L78">                return input;</span>
+            } else
+<span class="nc" id="L80">                System.out.println(&quot;Invalid DOB! Format must be dd/mm/yyyy.&quot;);</span>
+        }
+    }
+
+    public static String getValidAddress(Scanner sc, String msg) {
+<span class="nc" id="L85">        while (true) {</span>
+<span class="nc" id="L86">            System.out.print(msg);</span>
+<span class="nc" id="L87">            String input = sc.nextLine().trim();</span>
+
+<span class="nc bnc" id="L89" title="All 2 branches missed.">            if (!input.isEmpty()</span>
+<span class="nc bnc" id="L90" title="All 2 branches missed.">                    &amp;&amp; input.length() &lt;= 100</span>
+<span class="nc bnc" id="L91" title="All 2 branches missed.">                    &amp;&amp; input.matches(&quot;[a-zA-Z0-9 ,./-]+&quot;)) {</span>
+<span class="nc" id="L92">                return input;</span>
+            } else {
+<span class="nc" id="L94">                System.out.println(&quot;Invalid address! Format must be letters, numbers, spaces, and , . / - only.&quot;);</span>
+            }
+        }
+    }
+
+    public static String getValidDoctor(Scanner sc, String msg) {
+        while (true) {
+<span class="nc" id="L101">            System.out.print(msg);</span>
+<span class="nc" id="L102">            String input = sc.nextLine();</span>
+
+<span class="nc bnc" id="L104" title="All 4 branches missed.">            if (input == null || input.trim().isEmpty()) {</span>
+<span class="nc" id="L105">                System.out.println(&quot;Doctor ID cannot be empty.&quot;);</span>
+<span class="nc bnc" id="L106" title="All 2 branches missed.">            } else if (input.startsWith(&quot;-&quot;)) {</span>
+<span class="nc" id="L107">                System.out.println(&quot;Invalid input. Doctor ID cannot start with a negative sign.&quot;);</span>
+<span class="nc bnc" id="L108" title="All 2 branches missed.">            } else if (!input.matches(&quot;^[a-zA-Z0-9 ]+$&quot;)) {</span>
+<span class="nc" id="L109">                System.out.println(&quot;Invalid input. Doctor ID must contain only letters, numbers, and spaces.&quot;);</span>
+<span class="nc" id="L110">            } else {</span>
+<span class="nc" id="L111">                return input;</span>
+            }
+        }
+    }
+
+    public static String getDocPosition(Scanner sc, String msg) {
+        while (true) {
+<span class="nc" id="L118">            System.out.print(msg);</span>
+<span class="nc" id="L119">            String input = sc.nextLine().trim();</span>
+
+<span class="nc bnc" id="L121" title="All 2 branches missed.">            if (input.isEmpty()) {</span>
+<span class="nc" id="L122">                System.out.println(&quot;Doctor position cannot be empty.&quot;);</span>
+<span class="nc bnc" id="L123" title="All 2 branches missed.">            } else if (!input.matches(&quot;[a-zA-Z ]{1,50}&quot;)) {</span>
+<span class="nc" id="L124">                System.out.println(&quot;Invalid position. Use letters and spaces only (max 50 characters).&quot;);</span>
+<span class="nc" id="L125">            } else {</span>
+<span class="nc" id="L126">                return input;</span>
+            }
+        }
+    }
+
+    public static double getValidSalary(Scanner sc, String msg) {
+<span class="nc" id="L132">        while (true) {</span>
+<span class="nc" id="L133">            System.out.print(msg);</span>
+<span class="nc" id="L134">            String input = sc.nextLine().trim();</span>
+
+            try {
+<span class="nc" id="L137">                double salary = Double.parseDouble(input);</span>
+
+<span class="nc bnc" id="L139" title="All 2 branches missed.">                if (salary &lt;= 0) {</span>
+<span class="nc" id="L140">                    System.out.println(&quot;Invalid salary! Salary must be greater than 0.&quot;);</span>
+<span class="nc" id="L141">                } else {</span>
+<span class="nc" id="L142">                    return salary;</span>
+                }
+
+<span class="nc" id="L145">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L146">                System.out.println(&quot;Invalid salary! Please enter a numeric value.&quot;);</span>
+            }
+        }
+    }
+
+    public static String getValidUpdateDoc(Scanner sc, String msg, String currentValue) {
+        while (true) {
+<span class="nc" id="L153">            System.out.print(msg + &quot; [&quot; + currentValue + &quot;]: &quot;); // show current value</span>
+<span class="nc" id="L154">            String input = sc.nextLine().trim();</span>
+
+<span class="nc bnc" id="L156" title="All 2 branches missed.">            if (input.isEmpty()) {</span>
+                // User pressed Enter, keep the current value
+<span class="nc" id="L158">                return currentValue;</span>
+<span class="nc bnc" id="L159" title="All 2 branches missed.">            } else if (input.length() &lt; 2) {</span>
+<span class="nc" id="L160">                System.out.println(&quot;Invalid input! Must be at least 2 characters.&quot;);</span>
+<span class="nc" id="L161">            } else {</span>
+<span class="nc" id="L162">                return input;</span>
+            }
+        }
+    }
+
+    public static String getValidDeleteDoc(Scanner sc, List&lt;Doctor&gt; doctors, String msg) {
+<span class="nc" id="L168">        while (true) {</span>
+<span class="nc" id="L169">            System.out.print(msg);</span>
+<span class="nc" id="L170">            String id = sc.nextLine().trim();</span>
+
+<span class="nc bnc" id="L172" title="All 2 branches missed.">            if (id.isEmpty()) {</span>
+<span class="nc" id="L173">                System.out.println(&quot;Doctor ID cannot be empty!&quot;);</span>
+<span class="nc" id="L174">                continue;</span>
+            }
+
+<span class="nc" id="L177">            boolean exists = doctors.stream()</span>
+<span class="nc" id="L178">                    .anyMatch(d -&gt; d.getId().equalsIgnoreCase(id));</span>
+<span class="nc bnc" id="L179" title="All 2 branches missed.">            if (exists) {</span>
+<span class="nc" id="L180">                return id; // valid ID to delete</span>
+            } else {
+<span class="nc" id="L182">                System.out.println(&quot;Doctor ID not found! Please enter a valid ID.&quot;);</span>
+            }
+        }
+    }
+
+    public static double getValidUpdateSalary(Scanner sc, String msg, double currentSalary) {
+<span class="nc" id="L188">        while (true) {</span>
+<span class="nc" id="L189">            System.out.print(msg + &quot; [&quot; + currentSalary + &quot;]: &quot;);</span>
+<span class="nc" id="L190">            String input = sc.nextLine().trim();</span>
+
+<span class="nc bnc" id="L192" title="All 2 branches missed.">            if (input.isEmpty()) {</span>
+<span class="nc" id="L193">                return currentSalary; // keep current value</span>
+            }
+
+            try {
+<span class="nc" id="L197">                double salary = Double.parseDouble(input);</span>
+<span class="nc bnc" id="L198" title="All 2 branches missed.">                if (salary &lt;= 0) {</span>
+<span class="nc" id="L199">                    System.out.println(&quot;Invalid salary! Must be greater than 0.&quot;);</span>
+<span class="nc" id="L200">                } else {</span>
+<span class="nc" id="L201">                    return salary;</span>
+                }
+<span class="nc" id="L203">            } catch (NumberFormatException e) {</span>
+<span class="nc" id="L204">                System.out.println(&quot;Invalid salary! Enter a numeric value.&quot;);</span>
+            }
+        }
+    }
+
+    //Update patient ID
+        public static String getValidUpdatePatientId(Scanner sc, String msg) {
+            while (true) {
+<span class="nc" id="L212">                System.out.print(msg);</span>
+<span class="nc" id="L213">                String input = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L214" title="All 2 branches missed.">                if (input.isEmpty()) {</span>
+<span class="nc" id="L215">                    return null; // Allow empty input to keep existing value</span>
+<span class="nc bnc" id="L216" title="All 2 branches missed.">                } else if (input.startsWith(&quot;-&quot;)) {</span>
+<span class="nc" id="L217">                    System.out.println(&quot;Invalid input. Patient ID cannot start with a negative sign.&quot;);</span>
+<span class="nc bnc" id="L218" title="All 2 branches missed.">                } else if (!input.matches(&quot;^[a-zA-Z0-9 ]+$&quot;)) {</span>
+<span class="nc" id="L219">                    System.out.println(&quot;Invalid input. Patient ID must contain only letters, numbers, and spaces.&quot;);</span>
+<span class="nc" id="L220">                } else {</span>
+<span class="nc" id="L221">                    return input;</span>
+                }
+            }
+        }
+
+        //Get Email Address format
+        public static String getValidEmail(Scanner sc, String msg) {
+<span class="nc" id="L228">           while (true) {</span>
+<span class="nc" id="L229">              System.out.print(msg);</span>
+<span class="nc" id="L230">              String input = sc.nextLine().trim();</span>
+
+              // Simple professional email regex
+<span class="nc bnc" id="L233" title="All 2 branches missed.">           if (input.matches(&quot;^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$&quot;)) {</span>
+<span class="nc" id="L234">              return input;</span>
+            }
+
+<span class="nc" id="L237">           System.out.println(&quot;Invalid email format. Example: example@gmail.com&quot;);</span>
+           }
+        }
+
+        //Get only number
+        public static String getNumberOnly(Scanner sc, String msg) {
+<span class="nc" id="L243">            while (true) {</span>
+<span class="nc" id="L244">               System.out.print(msg);</span>
+<span class="nc" id="L245">               String input = sc.nextLine().trim();</span>
+
+<span class="nc bnc" id="L247" title="All 2 branches missed.">               if (input.matches(&quot;\\d+&quot;)) {</span>
+<span class="nc" id="L248">                  return input;</span>
+               }
+
+<span class="nc" id="L251">            System.out.println(&quot;Invalid input. Numbers only.&quot;);</span>
+            }
+        }
+
+        public static double getPositiveDouble(Scanner sc, String msg) {
+<span class="nc" id="L256">    while (true) {</span>
+<span class="nc" id="L257">        System.out.print(msg);</span>
+<span class="nc" id="L258">        String input = sc.nextLine().trim();</span>
+
+        try {
+<span class="nc" id="L261">            double value = Double.parseDouble(input);</span>
+<span class="nc bnc" id="L262" title="All 2 branches missed.">            if (value &gt; 0) {</span>
+<span class="nc" id="L263">                return value;</span>
+            }
+<span class="nc" id="L265">        } catch (Exception ignored) {}</span>
+
+<span class="nc" id="L267">        System.out.println(&quot;Invalid input. Enter a positive number.&quot;);</span>
+    }
+}
+
+    public static String getDoctorPositionWithShortcut(Scanner sc, String msg) {
+<span class="nc" id="L272">        while (true) {</span>
+<span class="nc" id="L273">            System.out.print(msg);</span>
+<span class="nc" id="L274">            String input = sc.nextLine().trim();</span>
+
+<span class="nc bnc" id="L276" title="All 4 branches missed.">            if (input.equalsIgnoreCase(&quot;S&quot;) || input.equalsIgnoreCase(&quot;Surgeon&quot;)) {</span>
+<span class="nc" id="L277">                return &quot;Surgeon&quot;;</span>
+            }
+
+<span class="nc bnc" id="L280" title="All 4 branches missed.">            if (input.equalsIgnoreCase(&quot;C&quot;) || input.equalsIgnoreCase(&quot;Cardiologist&quot;)) {</span>
+<span class="nc" id="L281">                return &quot;Cardiologist&quot;;</span>
+            }
+
+<span class="nc bnc" id="L284" title="All 4 branches missed.">            if (input.equalsIgnoreCase(&quot;N&quot;) || input.equalsIgnoreCase(&quot;Nurse&quot;)) {</span>
+<span class="nc" id="L285">                return &quot;Nurse&quot;;</span>
+            }
+
+<span class="nc" id="L288">            System.out.println(&quot;Invalid position. Use S/C/N or Surgeon/Cardiologist/Nurse.&quot;);</span>
+        }
+    }
+
+
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

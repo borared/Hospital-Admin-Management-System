@@ -1,0 +1,72 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>App.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com</a> &gt; <span class="el_source">App.java</span></div><h1>App.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com;
+
+import java.util.Scanner;
+
+import adminmangementsystem.com.controller.AppointmentController;
+import adminmangementsystem.com.controller.DoctorController;
+import adminmangementsystem.com.controller.MainController;
+import adminmangementsystem.com.controller.PatientController;
+import adminmangementsystem.com.entity.Admin;
+import adminmangementsystem.com.service.AppointmentService;
+import adminmangementsystem.com.service.DoctorService;
+import adminmangementsystem.com.service.PatientService;
+import adminmangementsystem.com.view.MenuView;
+
+<span class="nc" id="L15">public class App {</span>
+    
+    public static void main(String[] args) {
+
+<span class="nc" id="L19">        Scanner sc = new Scanner(System.in);</span>
+<span class="nc" id="L20">        Admin admin = new Admin(&quot;admin&quot;, &quot;admin$$$&quot;);</span>
+<span class="nc" id="L21">        AppointmentService appointmentSystem = new AppointmentService();</span>
+<span class="nc" id="L22">        PatientService PatientService = new PatientService();</span>
+<span class="nc" id="L23">        DoctorService DoctorService = new DoctorService();</span>
+
+<span class="nc" id="L25">        DoctorController doctorController = new DoctorController(DoctorService);</span>
+<span class="nc" id="L26">        PatientController patientController = new PatientController(PatientService);</span>
+<span class="nc" id="L27">        AppointmentController appointmentController = new AppointmentController(appointmentSystem);</span>
+<span class="nc" id="L28">        MainController mainController = new MainController(doctorController, patientController, appointmentController);</span>
+        
+        
+
+<span class="nc" id="L32">        boolean loggedIn = false;</span>
+
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        while (!loggedIn) {</span>
+<span class="nc" id="L35">            MenuView.printAdminLoginMenu();</span>
+<span class="nc" id="L36">            System.out.print(&quot;Enter your choice: &quot;);</span>
+<span class="nc" id="L37">            int choice = sc.nextInt();</span>
+<span class="nc" id="L38">            sc.nextLine(); </span>
+
+<span class="nc bnc" id="L40" title="All 3 branches missed.">            switch (choice) {</span>
+                case 1: // Login
+<span class="nc" id="L42">                    System.out.print(&quot;Enter admin username: &quot;);</span>
+<span class="nc" id="L43">                    String username = sc.nextLine();</span>
+
+<span class="nc" id="L45">                    System.out.print(&quot;Enter admin password: &quot;);</span>
+<span class="nc" id="L46">                    String password = sc.nextLine();</span>
+
+<span class="nc bnc" id="L48" title="All 2 branches missed.">                    if (admin.login(username, password)) {</span>
+<span class="nc" id="L49">                        loggedIn = true;</span>
+<span class="nc" id="L50">                        System.out.println(&quot;\nLogin successful.\n&quot;);</span>
+<span class="nc" id="L51">                    } else {</span>
+<span class="nc" id="L52">                        System.out.println(&quot;Invalid login. Try again.\n&quot;);</span>
+                    }
+<span class="nc" id="L54">                    break;</span>
+
+                case 2: // Exit
+<span class="nc" id="L57">                    System.out.println(&quot;System exited.&quot;);</span>
+<span class="nc" id="L58">                    sc.close();</span>
+<span class="nc" id="L59">                    return;</span>
+
+                default:
+<span class="nc" id="L62">                    System.out.println(&quot;Invalid choice.\n&quot;);</span>
+            }
+        }
+
+        // hand over control to main controller
+<span class="nc" id="L67">        mainController.start(sc);</span>
+
+<span class="nc" id="L69">        sc.close();</span>
+<span class="nc" id="L70">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

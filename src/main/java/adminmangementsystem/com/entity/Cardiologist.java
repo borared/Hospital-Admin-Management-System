@@ -1,4 +1,4 @@
-package adminmangementsystem.com;
+package adminmangementsystem.com.entity;
 
 public class Cardiologist extends Staff {
 

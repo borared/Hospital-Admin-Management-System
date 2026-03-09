@@ -79,7 +79,7 @@ public class DoctorService implements IDoctorService {
     
     @Override
     public List<Doctor> getAllDoctors() {
-        return getAll();
+        return new ArrayList<>(records);
     }
     
     @Override
@@ -92,7 +92,6 @@ public class DoctorService implements IDoctorService {
         viewDoctorList();
     }
     
-    @Override
     public void displayAll() {
         viewDoctorList();
     }
@@ -183,7 +182,7 @@ public class DoctorService implements IDoctorService {
     public void viewDoctorList() {
         System.out.println("\t\t\t\t------Doctor List------");
         
-        if (isEmpty()) {
+        if (records.isEmpty()) {
             System.out.println("No doctors found.");
             return;
         }

@@ -1,0 +1,192 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>PatientService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.service</a> &gt; <span class="el_source">PatientService.java</span></div><h1>PatientService.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import adminmangementsystem.com.entity.Patient;
+import adminmangementsystem.com.service.interfaces.IPatientService;
+
+<span class="nc" id="L8">public class PatientService implements IPatientService {</span>
+    
+<span class="nc" id="L10">    private List&lt;Patient&gt; records = new ArrayList&lt;&gt;();</span>
+
+    @Override
+    public void addPatient(Patient patient) {
+<span class="nc bnc" id="L14" title="All 2 branches missed.">        if (patient == null) {</span>
+<span class="nc" id="L15">            throw new IllegalArgumentException(&quot;Patient cannot be null.&quot;);</span>
+        }
+
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        if (!isIdUnique(patient.getId())) {</span>
+<span class="nc" id="L19">            throw new IllegalArgumentException(&quot;Patient ID already exists.&quot;);</span>
+        }
+
+<span class="nc" id="L22">        records.add(patient);</span>
+<span class="nc" id="L23">    }</span>
+
+    @Override
+    public boolean deletePatient(String id) {
+<span class="nc" id="L27">        Patient patient = searchPatientById(id);</span>
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (patient != null) {</span>
+<span class="nc" id="L29">            records.remove(patient);</span>
+<span class="nc" id="L30">            return true;</span>
+        }
+<span class="nc" id="L32">        return false;</span>
+    }
+
+    @Override
+    public boolean updatePatient(Patient updatedPatient) {
+<span class="nc bnc" id="L37" title="All 2 branches missed.">        if (updatedPatient == null) {</span>
+<span class="nc" id="L38">            return false;</span>
+        }
+
+<span class="nc" id="L41">        Patient existingPatient = searchPatientById(updatedPatient.getId());</span>
+
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        if (existingPatient == null) {</span>
+<span class="nc" id="L44">            return false;</span>
+        }
+
+<span class="nc" id="L47">        existingPatient.setName(updatedPatient.getName());</span>
+<span class="nc" id="L48">        existingPatient.setDob(updatedPatient.getDob());</span>
+<span class="nc" id="L49">        existingPatient.setAddress(updatedPatient.getAddress());</span>
+<span class="nc" id="L50">        existingPatient.setDisease(updatedPatient.getDisease());</span>
+<span class="nc" id="L51">        existingPatient.setEntryDate(updatedPatient.getEntryDate());</span>
+
+<span class="nc" id="L53">        return true;</span>
+    }
+
+    @Override
+    public Patient searchPatientById(String id) {
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        for (Patient patient : records) {</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">            if (patient.getId().equalsIgnoreCase(id)) {</span>
+<span class="nc" id="L60">                return patient;</span>
+            }
+        }
+<span class="nc" id="L63">        return null;</span>
+    }
+
+    @Override
+    public List&lt;Patient&gt; getAllPatients() {
+<span class="nc" id="L68">        return new ArrayList&lt;&gt;(records);</span>
+    }
+
+    private boolean isIdUnique(String id) {
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        return searchPatientById(id) == null;</span>
+    }
+    
+    public void displayAll() {
+<span class="nc" id="L76">        viewPatientList(null);</span>
+<span class="nc" id="L77">    }</span>
+
+    public void addPatient(java.util.Scanner sc) {
+<span class="nc" id="L80">        Patient patient = adminmangementsystem.com.view.PatientView.getPatientInput(sc);</span>
+        
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (!isIdUnique(patient.getId())) {</span>
+<span class="nc" id="L83">            System.out.println(&quot;Error: Patient ID already exists. Please use a unique ID.&quot;);</span>
+<span class="nc" id="L84">            return;</span>
+        }
+        
+<span class="nc" id="L87">        records.add(patient);</span>
+<span class="nc" id="L88">        System.out.println(&quot;Patient data captured successfully.\n&quot;);</span>
+<span class="nc" id="L89">    }</span>
+    
+    public void updatePatient(java.util.Scanner sc) {
+<span class="nc" id="L92">        String updateId = adminmangementsystem.com.view.PatientView.getSearchId(sc);</span>
+<span class="nc" id="L93">        Patient pToUpdate = searchPatientById(updateId);</span>
+        
+<span class="nc bnc" id="L95" title="All 2 branches missed.">        if (pToUpdate == null) {</span>
+<span class="nc" id="L96">            System.out.println(&quot;Patient not found!&quot;);</span>
+<span class="nc" id="L97">            return;</span>
+        }
+        
+<span class="nc" id="L100">        adminmangementsystem.com.view.PatientView.getPatientUpdateInput(sc, pToUpdate);</span>
+<span class="nc" id="L101">        System.out.println(&quot;Patient updated successfully.&quot;);</span>
+<span class="nc" id="L102">    }</span>
+    
+    public void deletePatient(java.util.Scanner sc) {
+<span class="nc" id="L105">        String deleteId = adminmangementsystem.com.view.PatientView.getPatientIdForDelete(sc);</span>
+<span class="nc" id="L106">        Patient pToDelete = searchPatientById(deleteId);</span>
+        
+<span class="nc bnc" id="L108" title="All 2 branches missed.">        if (pToDelete == null) {</span>
+<span class="nc" id="L109">            System.out.println(&quot;Patient not found!&quot;);</span>
+<span class="nc" id="L110">        } else {</span>
+<span class="nc" id="L111">            records.remove(pToDelete);</span>
+<span class="nc" id="L112">            System.out.println(&quot;Patient deleted successfully.&quot;);</span>
+        }
+<span class="nc" id="L114">    }</span>
+    
+    public void searchPatient(java.util.Scanner sc) {
+<span class="nc" id="L117">        int searchChoice = adminmangementsystem.com.view.PatientView.getSearchChoice(sc);</span>
+        
+<span class="nc bnc" id="L119" title="All 2 branches missed.">        if (searchChoice == -1) {</span>
+<span class="nc" id="L120">            return;</span>
+        }
+        
+<span class="nc" id="L123">        String line = &quot;----------------------------------------------------------------------------------------------------------------------------&quot;;</span>
+        
+<span class="nc" id="L125">        System.out.println(line);</span>
+<span class="nc" id="L126">        System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n&quot;,</span>
+<span class="nc" id="L127">                &quot;ID&quot;, &quot;Name&quot;, &quot;DOB&quot;, &quot;Address&quot;, &quot;Disease&quot;, &quot;Entry Date&quot;);</span>
+<span class="nc" id="L128">        System.out.println(line);</span>
+        
+<span class="nc bnc" id="L130" title="All 2 branches missed.">        if (searchChoice == 1) {</span>
+<span class="nc" id="L131">            String searchName = adminmangementsystem.com.view.PatientView.getSearchName(sc);</span>
+<span class="nc" id="L132">            List&lt;Patient&gt; results = new ArrayList&lt;&gt;();</span>
+            
+<span class="nc bnc" id="L134" title="All 2 branches missed.">            for (Patient p : records) {</span>
+<span class="nc bnc" id="L135" title="All 2 branches missed.">                if (p.getName().equalsIgnoreCase(searchName)) {</span>
+<span class="nc" id="L136">                    results.add(p);</span>
+                }
+            }
+            
+<span class="nc bnc" id="L140" title="All 2 branches missed.">            if (results.isEmpty()) {</span>
+<span class="nc" id="L141">                System.out.println(&quot;|                                             No patients found with that name                                              |&quot;);</span>
+<span class="nc" id="L142">            } else {</span>
+<span class="nc bnc" id="L143" title="All 2 branches missed.">                for (Patient p : results) {</span>
+<span class="nc" id="L144">                    System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n&quot;,</span>
+<span class="nc" id="L145">                            p.getId(), p.getName(), p.getDob(), p.getAddress(),</span>
+<span class="nc" id="L146">                            p.getDisease(), p.getEntryDate());</span>
+                }
+            }
+            
+<span class="nc bnc" id="L150" title="All 2 branches missed.">        } else if (searchChoice == 2) {</span>
+<span class="nc" id="L151">            String searchId = adminmangementsystem.com.view.PatientView.getSearchId(sc);</span>
+<span class="nc" id="L152">            Patient found = searchPatientById(searchId);</span>
+            
+<span class="nc bnc" id="L154" title="All 2 branches missed.">            if (found != null) {</span>
+<span class="nc" id="L155">                System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n&quot;,</span>
+<span class="nc" id="L156">                        found.getId(), found.getName(), found.getDob(), found.getAddress(),</span>
+<span class="nc" id="L157">                        found.getDisease(), found.getEntryDate());</span>
+<span class="nc" id="L158">            } else {</span>
+<span class="nc" id="L159">                System.out.println(&quot;|                                                     Patient not found                                                      |&quot;);</span>
+            }
+            
+<span class="nc" id="L162">        } else {</span>
+<span class="nc" id="L163">            System.out.println(&quot;Invalid choice!&quot;);</span>
+        }
+        
+<span class="nc" id="L166">        System.out.println(line);</span>
+<span class="nc" id="L167">    }</span>
+
+    public void viewPatientList(java.util.Scanner sc) {
+<span class="nc" id="L170">        System.out.println(&quot;\t\t\t\t------Patient List------&quot;);</span>
+
+<span class="nc bnc" id="L172" title="All 2 branches missed.">        if (records.isEmpty()) {</span>
+<span class="nc" id="L173">            System.out.println(&quot;No patients found.&quot;);</span>
+<span class="nc" id="L174">            return;</span>
+        }
+
+<span class="nc" id="L177">        String line = &quot;----------------------------------------------------------------------------------------------------------------------------&quot;;</span>
+<span class="nc" id="L178">        System.out.println(line);</span>
+<span class="nc" id="L179">        System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n&quot;,</span>
+<span class="nc" id="L180">                &quot;ID&quot;, &quot;Name&quot;, &quot;DOB&quot;, &quot;Address&quot;, &quot;Disease&quot;, &quot;Entry Date&quot;);</span>
+<span class="nc" id="L181">        System.out.println(line);</span>
+
+<span class="nc bnc" id="L183" title="All 2 branches missed.">        for (Patient p : records) {</span>
+<span class="nc" id="L184">            System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n&quot;,</span>
+<span class="nc" id="L185">                    p.getId(), p.getName(), p.getDob(), p.getAddress(),</span>
+<span class="nc" id="L186">                    p.getDisease(), p.getEntryDate());</span>
+        }
+
+<span class="nc" id="L189">        System.out.println(line);</span>
+<span class="nc" id="L190">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

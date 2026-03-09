@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Nurse.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.entity</a> &gt; <span class="el_source">Nurse.java</span></div><h1>Nurse.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.entity;
+
+public class Nurse extends Staff {
+
+    private String shift;  // e.g., &quot;Day&quot;, &quot;Night&quot;
+
+    public Nurse(String id, String name, String dob, String address,
+                 String email, String position, double salary, String doe,
+                 String shift) {
+<span class="nc" id="L10">        super(id, name, dob, address, email, position, salary, doe);</span>
+<span class="nc" id="L11">        this.shift = shift;</span>
+<span class="nc" id="L12">    }</span>
+
+    public String getShift() {
+<span class="nc" id="L15">        return shift;</span>
+    }
+
+    public void setShift(String shift) {
+<span class="nc" id="L19">        this.shift = shift;</span>
+<span class="nc" id="L20">    }</span>
+
+    @Override
+    public String getResponsibilities() {
+<span class="nc" id="L24">        return &quot;Patient care, administer medication, assist doctors.&quot;;</span>
+    }
+
+    @Override
+    public String getDepartment() {
+<span class="nc" id="L29">        return &quot;Nursing&quot;;</span>
+    }
+
+    @Override
+    public void performDuty() {
+<span class="nc" id="L34">        System.out.println(name + &quot; is checking vital signs of patients.&quot;);</span>
+<span class="nc" id="L35">    }</span>
+
+    @Override
+    public void display() {
+<span class="nc" id="L39">        super.display();</span>
+<span class="nc" id="L40">        System.out.println(&quot;Shift: &quot; + shift);</span>
+<span class="nc" id="L41">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>StaffService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.service</a> &gt; <span class="el_source">StaffService.java</span></div><h1>StaffService.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import adminmangementsystem.com.entity.Staff;
+
+public class StaffService&lt;T extends Staff&gt; {
+
+    private final Class&lt;T&gt; type;
+<span class="nc" id="L11">    private List&lt;T&gt; records = new ArrayList&lt;&gt;();</span>
+
+<span class="nc" id="L13">    public StaffService(Class&lt;T&gt; type) {</span>
+<span class="nc" id="L14">        this.type = type;</span>
+<span class="nc" id="L15">    }</span>
+
+    public void addStaff(T staff) {
+<span class="nc bnc" id="L18" title="All 2 branches missed.">        if (staff == null) {</span>
+<span class="nc" id="L19">            throw new IllegalArgumentException(&quot;Staff cannot be null.&quot;);</span>
+        }
+<span class="nc bnc" id="L21" title="All 2 branches missed.">        if (!isIdUnique(staff.getId())) {</span>
+<span class="nc" id="L22">            throw new IllegalArgumentException(&quot;Staff ID already exists.&quot;);</span>
+        }
+<span class="nc" id="L24">        records.add(staff);</span>
+<span class="nc" id="L25">    }</span>
+
+    public boolean updateStaff(T updatedStaff) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (updatedStaff == null) return false;</span>
+<span class="nc" id="L29">        T existing = searchStaffById(updatedStaff.getId());</span>
+<span class="nc bnc" id="L30" title="All 2 branches missed.">        if (existing == null) return false;</span>
+
+        // Replace the old record with the updated one
+<span class="nc" id="L33">        records.remove(existing);</span>
+<span class="nc" id="L34">        records.add(updatedStaff);</span>
+<span class="nc" id="L35">        return true;</span>
+    }
+
+    public boolean deleteStaff(String id) {
+<span class="nc" id="L39">        T staff = searchStaffById(id);</span>
+<span class="nc bnc" id="L40" title="All 2 branches missed.">        if (staff != null) {</span>
+<span class="nc" id="L41">            records.remove(staff);</span>
+<span class="nc" id="L42">            return true;</span>
+        }
+<span class="nc" id="L44">        return false;</span>
+    }
+
+    public T searchStaffById(String id) {
+<span class="nc bnc" id="L48" title="All 2 branches missed.">        for (T s : records) {</span>
+<span class="nc bnc" id="L49" title="All 2 branches missed.">            if (s.getId().equalsIgnoreCase(id)) {</span>
+<span class="nc" id="L50">                return s;</span>
+            }
+        }
+<span class="nc" id="L53">        return null;</span>
+    }
+
+    public List&lt;T&gt; searchStaffByName(String name) {
+<span class="nc" id="L57">        List&lt;T&gt; results = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L58" title="All 2 branches missed.">        for (T s : records) {</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">            if (s.getName().equalsIgnoreCase(name)) {</span>
+<span class="nc" id="L60">                results.add(s);</span>
+            }
+        }
+<span class="nc" id="L63">        return results;</span>
+    }
+
+    public boolean isIdUnique(String id) {
+<span class="nc bnc" id="L67" title="All 2 branches missed.">        return searchStaffById(id) == null;</span>
+    }
+
+    // Attendance methods
+    public void checkInStaff(String id) {
+<span class="nc" id="L72">        T staff = searchStaffById(id);</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">        if (staff != null) {</span>
+<span class="nc" id="L74">            staff.checkIn();</span>
+<span class="nc" id="L75">            System.out.println(staff.getName() + &quot; checked in at &quot; + staff.getLastCheckIn());</span>
+<span class="nc" id="L76">        } else {</span>
+<span class="nc" id="L77">            System.out.println(&quot;Staff not found.&quot;);</span>
+        }
+<span class="nc" id="L79">    }</span>
+
+    public void checkOutStaff(String id) {
+<span class="nc" id="L82">        T staff = searchStaffById(id);</span>
+<span class="nc bnc" id="L83" title="All 2 branches missed.">        if (staff != null) {</span>
+<span class="nc" id="L84">            staff.checkOut();</span>
+<span class="nc" id="L85">            System.out.println(staff.getName() + &quot; checked out at &quot; + staff.getLastCheckOut());</span>
+<span class="nc" id="L86">        } else {</span>
+<span class="nc" id="L87">            System.out.println(&quot;Staff not found.&quot;);</span>
+        }
+<span class="nc" id="L89">    }</span>
+
+    public void displayAttendance() {
+<span class="nc bnc" id="L92" title="All 2 branches missed.">        for (T s : records) {</span>
+<span class="nc" id="L93">            System.out.println(s.getId() + &quot; | &quot; + s.getName() + &quot; | Active: &quot; + s.isActive() +</span>
+<span class="nc" id="L94">                               &quot; | Last In: &quot; + s.getLastCheckIn() + &quot; | Last Out: &quot; + s.getLastCheckOut());</span>
+        }
+<span class="nc" id="L96">    }</span>
+
+    public void displayAll() {
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        if (records.isEmpty()) {</span>
+<span class="nc" id="L100">            System.out.println(&quot;No &quot; + type.getSimpleName() + &quot; records found.&quot;);</span>
+<span class="nc" id="L101">            return;</span>
+        }
+<span class="nc bnc" id="L103" title="All 2 branches missed.">        for (T s : records) {</span>
+<span class="nc" id="L104">            s.display();  // uses the overridden display in each subclass</span>
+<span class="nc" id="L105">            System.out.println(&quot;QR Code: &quot; + s.getQrCode());</span>
+<span class="nc" id="L106">            System.out.println(&quot;Department: &quot; + s.getDepartment());</span>
+<span class="nc" id="L107">            System.out.println(&quot;Responsibilities: &quot; + s.getResponsibilities());</span>
+<span class="nc" id="L108">            System.out.println(&quot;---&quot;);</span>
+        }
+<span class="nc" id="L110">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

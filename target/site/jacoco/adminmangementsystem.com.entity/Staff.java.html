@@ -1,0 +1,178 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>Staff.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.entity</a> &gt; <span class="el_source">Staff.java</span></div><h1>Staff.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.entity;
+
+import java.time.LocalDateTime;
+
+public abstract class Staff {
+
+
+    // ========Field Encapsulation==========
+    protected String id;
+    protected String name;
+    protected String dob;
+    protected String address;
+    protected String email;
+    protected String position;
+    protected double salary;
+    protected String doe;
+    protected String qrCode;
+    protected boolean isActive;
+    protected LocalDateTime lastCheckIn;
+    protected LocalDateTime lastCheckOut;
+
+    // CONSTRUCTOR
+<span class="nc" id="L23">    public Staff(String id, String name, String dob, String address,</span>
+                 String email, String position, double salary, String doe) {
+<span class="nc" id="L25">        setId(id);</span>
+<span class="nc" id="L26">        setName(name);</span>
+<span class="nc" id="L27">        setDob(dob);</span>
+<span class="nc" id="L28">        setAddress(address);</span>
+<span class="nc" id="L29">        setEmail(email);</span>
+<span class="nc" id="L30">        setPosition(position);</span>
+<span class="nc" id="L31">        setSalary(salary);</span>
+<span class="nc" id="L32">        setDoe(doe);</span>
+<span class="nc" id="L33">        this.qrCode = generateQRCode(id);</span>
+<span class="nc" id="L34">        this.isActive = false;</span>
+<span class="nc" id="L35">        this.lastCheckIn = null;</span>
+<span class="nc" id="L36">        this.lastCheckOut = null;</span>
+<span class="nc" id="L37">    }</span>
+    
+    // Generate unique QR code data for staff
+    private String generateQRCode(String staffId) {
+<span class="nc" id="L41">        return &quot;STAFF:&quot; + staffId + &quot;:&quot; + System.currentTimeMillis();</span>
+    }
+
+    // SETTERS
+    public boolean setId(String id) {
+<span class="nc bnc" id="L46" title="All 4 branches missed.">        if (id != null &amp;&amp; !id.trim().isEmpty()) {</span>
+<span class="nc" id="L47">            this.id = id;</span>
+<span class="nc" id="L48">            return true;</span>
+        }
+<span class="nc" id="L50">        return false;</span>
+    }
+
+    public boolean setName(String name) {
+<span class="nc bnc" id="L54" title="All 4 branches missed.">        if (name != null &amp;&amp; name.matches(&quot;[a-zA-Z ]{1,50}&quot;)) {</span>
+<span class="nc" id="L55">            this.name = name;</span>
+<span class="nc" id="L56">            return true;</span>
+        }
+<span class="nc" id="L58">        return false;</span>
+    }
+
+    public void setDob(String dob) {
+<span class="nc" id="L62">        this.dob = dob;</span>
+<span class="nc" id="L63">    }</span>
+
+    public void setAddress(String address) {
+<span class="nc" id="L66">        this.address = address;</span>
+<span class="nc" id="L67">    }</span>
+
+    public boolean setEmail(String email) {
+<span class="nc bnc" id="L70" title="All 4 branches missed.">        if (email != null &amp;&amp; email.matches(&quot;^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$&quot;)) {</span>
+<span class="nc" id="L71">            this.email = email;</span>
+<span class="nc" id="L72">            return true;</span>
+        }
+<span class="nc" id="L74">        return false;</span>
+    }
+
+    public void setPosition(String position) {
+<span class="nc" id="L78">        this.position = position;</span>
+<span class="nc" id="L79">    }</span>
+
+    public boolean setSalary(double salary) {
+<span class="nc bnc" id="L82" title="All 2 branches missed.">        if (salary &gt; 0) {</span>
+<span class="nc" id="L83">            this.salary = salary;</span>
+<span class="nc" id="L84">            return true;</span>
+        }
+<span class="nc" id="L86">        return false;</span>
+    }
+
+    public void setDoe(String doe) {
+<span class="nc" id="L90">        this.doe = doe;</span>
+<span class="nc" id="L91">    }</span>
+
+    // GETTERS
+    public String getId() {
+<span class="nc" id="L95">        return id;</span>
+    }
+
+    public String getName() {
+<span class="nc" id="L99">        return name;</span>
+    }
+
+    public String getDob() {
+<span class="nc" id="L103">        return dob;</span>
+    }
+
+    public String getAddress() {
+<span class="nc" id="L107">        return address;</span>
+    }
+
+    public String getEmail() {
+<span class="nc" id="L111">        return email;</span>
+    }
+
+    public String getPosition() {
+<span class="nc" id="L115">        return position;</span>
+    }
+
+    public double getSalary() {
+<span class="nc" id="L119">        return salary;</span>
+    }
+
+    public String getDoe() {
+<span class="nc" id="L123">        return doe;</span>
+    }
+    
+    public String getQrCode() {
+<span class="nc" id="L127">        return qrCode;</span>
+    }
+    
+    public boolean isActive() {
+<span class="nc" id="L131">        return isActive;</span>
+    }
+    
+    public void setActive(boolean active) {
+<span class="nc" id="L135">        this.isActive = active;</span>
+<span class="nc" id="L136">    }</span>
+    
+    public LocalDateTime getLastCheckIn() {
+<span class="nc" id="L139">        return lastCheckIn;</span>
+    }
+    
+    public void setLastCheckIn(LocalDateTime lastCheckIn) {
+<span class="nc" id="L143">        this.lastCheckIn = lastCheckIn;</span>
+<span class="nc" id="L144">    }</span>
+    
+    public LocalDateTime getLastCheckOut() {
+<span class="nc" id="L147">        return lastCheckOut;</span>
+    }
+    
+    public void setLastCheckOut(LocalDateTime lastCheckOut) {
+<span class="nc" id="L151">        this.lastCheckOut = lastCheckOut;</span>
+<span class="nc" id="L152">    }</span>
+    
+    // Check in staff
+    public void checkIn() {
+<span class="nc" id="L156">        this.isActive = true;</span>
+<span class="nc" id="L157">        this.lastCheckIn = LocalDateTime.now();</span>
+<span class="nc" id="L158">    }</span>
+    
+    // Check out staff
+    public void checkOut() {
+<span class="nc" id="L162">        this.isActive = false;</span>
+<span class="nc" id="L163">        this.lastCheckOut = LocalDateTime.now();</span>
+<span class="nc" id="L164">    }</span>
+
+    // ABSTRACT METHODS - Each staff type must implement these
+    public abstract String getResponsibilities();
+    public abstract String getDepartment();
+    public abstract void performDuty();
+
+    // DISPLAY
+    public void display() {
+<span class="nc" id="L173">        System.out.println(id + &quot; | &quot; + name + &quot; | &quot; + dob + &quot; | &quot;</span>
+<span class="nc" id="L174">                + address + &quot; | &quot; + email + &quot; | &quot;</span>
+<span class="nc" id="L175">                + position + &quot; | $&quot; + salary + &quot; | &quot; + doe);</span>
+<span class="nc" id="L176">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

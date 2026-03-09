@@ -1,7 +1,8 @@
-package adminmangementsystem.com;
+package adminmangementsystem.com.util;
 
 import java.util.List;
 import java.util.Scanner;
+import adminmangementsystem.com.entity.Doctor;
 
 public class Validator {
 

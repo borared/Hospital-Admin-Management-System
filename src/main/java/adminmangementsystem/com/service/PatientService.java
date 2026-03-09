@@ -65,14 +65,13 @@ public class PatientService implements IPatientService {
 
     @Override
     public List<Patient> getAllPatients() {
-        return getAll();
+        return new ArrayList<>(records);
     }
 
     private boolean isIdUnique(String id) {
         return searchPatientById(id) == null;
     }
     
-    @Override
     public void displayAll() {
         viewPatientList(null);
     }
@@ -170,7 +169,7 @@ public class PatientService implements IPatientService {
     public void viewPatientList(java.util.Scanner sc) {
         System.out.println("\t\t\t\t------Patient List------");
 
-        if (isEmpty()) {
+        if (records.isEmpty()) {
             System.out.println("No patients found.");
             return;
         }

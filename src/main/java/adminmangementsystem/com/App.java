@@ -6,9 +6,11 @@ import adminmangementsystem.com.controller.AppointmentController;
 import adminmangementsystem.com.controller.DoctorController;
 import adminmangementsystem.com.controller.MainController;
 import adminmangementsystem.com.controller.PatientController;
+import adminmangementsystem.com.entity.Admin;
 import adminmangementsystem.com.service.AppointmentService;
 import adminmangementsystem.com.service.DoctorService;
 import adminmangementsystem.com.service.PatientService;
+import adminmangementsystem.com.view.MenuView;
 
 public class App {
     

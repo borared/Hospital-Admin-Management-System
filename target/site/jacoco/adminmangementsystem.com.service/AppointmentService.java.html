@@ -1,0 +1,131 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>AppointmentService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.service</a> &gt; <span class="el_source">AppointmentService.java</span></div><h1>AppointmentService.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import adminmangementsystem.com.entity.Appointment;
+import adminmangementsystem.com.service.interfaces.IAppointmentService;
+
+<span class="nc" id="L9">public class AppointmentService implements IAppointmentService {</span>
+    
+<span class="nc" id="L11">    private List&lt;Appointment&gt; appointments = new ArrayList&lt;&gt;();</span>
+
+    @Override
+    public void addAppointment(Appointment appointment) {
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        if (appointment == null) {</span>
+<span class="nc" id="L16">            throw new IllegalArgumentException(&quot;Appointment cannot be null.&quot;);</span>
+        }
+        
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        if (!isPatientIdUnique(appointment.getPatientId())) {</span>
+<span class="nc" id="L20">            throw new IllegalArgumentException(&quot;Appointment for this patient ID already exists.&quot;);</span>
+        }
+        
+<span class="nc" id="L23">        appointments.add(appointment);</span>
+<span class="nc" id="L24">    }</span>
+    
+    @Override
+    public boolean updateAppointment(Appointment updatedAppointment) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (updatedAppointment == null) {</span>
+<span class="nc" id="L29">            return false;</span>
+        }
+        
+<span class="nc" id="L32">        Appointment existingAppointment = searchAppointmentById(updatedAppointment.getPatientId());</span>
+        
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (existingAppointment == null) {</span>
+<span class="nc" id="L35">            return false;</span>
+        }
+        
+<span class="nc" id="L38">        existingAppointment.setPatientName(updatedAppointment.getPatientName());</span>
+<span class="nc" id="L39">        existingAppointment.setPatientDOB(updatedAppointment.getPatientDOB());</span>
+<span class="nc" id="L40">        existingAppointment.setPatientPhoneNum(updatedAppointment.getPatientPhoneNum());</span>
+<span class="nc" id="L41">        existingAppointment.setPatientDisease(updatedAppointment.getPatientDisease());</span>
+<span class="nc" id="L42">        existingAppointment.setDOA(updatedAppointment.getDOA());</span>
+        
+<span class="nc" id="L44">        return true;</span>
+    }
+    
+    @Override
+    public boolean cancelAppointment(String patientId) {
+<span class="nc" id="L49">        Appointment appointment = searchAppointmentById(patientId);</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (appointment != null) {</span>
+<span class="nc" id="L51">            appointments.remove(appointment);</span>
+<span class="nc" id="L52">            return true;</span>
+        }
+<span class="nc" id="L54">        return false;</span>
+    }
+    
+    @Override
+    public Appointment searchAppointmentById(String patientId) {
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        for (Appointment appointment : appointments) {</span>
+<span class="nc bnc" id="L60" title="All 2 branches missed.">            if (appointment.getPatientId().equalsIgnoreCase(patientId)) {</span>
+<span class="nc" id="L61">                return appointment;</span>
+            }
+        }
+<span class="nc" id="L64">        return null;</span>
+    }
+    
+    @Override
+    public List&lt;Appointment&gt; searchAppointmentsByName(String patientName) {
+<span class="nc" id="L69">        List&lt;Appointment&gt; results = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L70" title="All 2 branches missed.">        for (Appointment appointment : appointments) {</span>
+<span class="nc bnc" id="L71" title="All 2 branches missed.">            if (appointment.getPatientName().equalsIgnoreCase(patientName)) {</span>
+<span class="nc" id="L72">                results.add(appointment);</span>
+            }
+        }
+<span class="nc" id="L75">        return results;</span>
+    }
+    
+    @Override
+    public List&lt;Appointment&gt; searchAppointmentsByDate(String date) {
+<span class="nc" id="L80">        List&lt;Appointment&gt; results = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        for (Appointment appointment : appointments) {</span>
+<span class="nc bnc" id="L82" title="All 2 branches missed.">            if (appointment.getDOA().equals(date)) {</span>
+<span class="nc" id="L83">                results.add(appointment);</span>
+            }
+        }
+<span class="nc" id="L86">        return results;</span>
+    }
+    
+    @Override
+    public List&lt;Appointment&gt; getAllAppointments() {
+<span class="nc" id="L91">        return new ArrayList&lt;&gt;(appointments);</span>
+    }
+    
+    @Override
+    public boolean isPatientIdUnique(String patientId) {
+<span class="nc bnc" id="L96" title="All 2 branches missed.">        return searchAppointmentById(patientId) == null;</span>
+    }
+    
+    @Override
+    public void viewAppointments() {
+<span class="nc bnc" id="L101" title="All 2 branches missed.">        if (appointments.isEmpty()) {</span>
+<span class="nc" id="L102">            System.out.println(&quot;No appointments found.&quot;);</span>
+<span class="nc" id="L103">            return;</span>
+        }
+
+<span class="nc" id="L106">        String line = &quot;------------------------------------------------------------------------------------------------&quot;;</span>
+<span class="nc" id="L107">        System.out.println(line);</span>
+<span class="nc" id="L108">        System.out.printf(&quot;| %-5s | %-18s | %-12s | %-15s | %-15s | %-12s |\n&quot;,</span>
+<span class="nc" id="L109">                &quot;ID&quot;, &quot;Patient Name&quot;, &quot;DOB&quot;, &quot;Phone&quot;, &quot;Disease&quot;, &quot;DOA&quot;);</span>
+<span class="nc" id="L110">        System.out.println(line);</span>
+
+<span class="nc bnc" id="L112" title="All 2 branches missed.">        for (Appointment a : appointments) {</span>
+<span class="nc" id="L113">            System.out.printf(&quot;| %-5s | %-18s | %-12s | %-15s | %-15s | %-12s |\n&quot;,</span>
+<span class="nc" id="L114">                    a.getPatientId(),</span>
+<span class="nc" id="L115">                    a.getPatientName(),</span>
+<span class="nc" id="L116">                    a.getPatientDOB(),</span>
+<span class="nc" id="L117">                    a.getPatientPhoneNum(),</span>
+<span class="nc" id="L118">                    a.getPatientDisease(),</span>
+<span class="nc" id="L119">                    a.getDOA());</span>
+        }
+
+<span class="nc" id="L122">        System.out.println(line);</span>
+<span class="nc" id="L123">    }</span>
+
+    public void addAppointment(Scanner sc) {
+<span class="nc" id="L126">        Appointment appointment = adminmangementsystem.com.view.AppointmentView.getAppointmentInput(sc);</span>
+<span class="nc" id="L127">        appointments.add(appointment);</span>
+<span class="nc" id="L128">        System.out.println(&quot;Appointment scheduled successfully.\n&quot;);</span>
+<span class="nc" id="L129">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

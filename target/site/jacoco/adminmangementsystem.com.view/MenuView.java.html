@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>MenuView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.view</a> &gt; <span class="el_source">MenuView.java</span></div><h1>MenuView.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.view;
+
+<span class="nc" id="L3">public class MenuView {</span>
+    
+private static final String LINE = &quot;+--------------------------------------------------------+&quot;;
+    private static final String SEP  = &quot;----------------------------------------------------------&quot;;
+
+    public static void printDashboardMenu() {
+<span class="nc" id="L9">        System.out.println(LINE);</span>
+<span class="nc" id="L10">        System.out.printf(&quot;| %-54s |\n&quot;, &quot;          Hospital Admin Management System&quot;);</span>
+<span class="nc" id="L11">        System.out.println(SEP);</span>
+<span class="nc" id="L12">        System.out.printf(&quot;| %-54s |\n&quot;, &quot; 1.Doctor Management System&quot;);</span>
+<span class="nc" id="L13">        System.out.println(SEP);</span>
+<span class="nc" id="L14">        System.out.printf(&quot;| %-54s |\n&quot;, &quot; 2.Patient Management System&quot;);</span>
+<span class="nc" id="L15">        System.out.println(SEP);</span>
+<span class="nc" id="L16">        System.out.printf(&quot;| %-54s |\n&quot;, &quot; 3.Cardiologist Management&quot;);</span>
+<span class="nc" id="L17">        System.out.println(SEP);</span>
+<span class="nc" id="L18">        System.out.printf(&quot;| %-54s |\n&quot;, &quot; 4.Surgeon Management&quot;);</span>
+<span class="nc" id="L19">        System.out.println(SEP);</span>
+<span class="nc" id="L20">        System.out.printf(&quot;| %-54s |\n&quot;, &quot; 5.Nurse Management&quot;);</span>
+<span class="nc" id="L21">        System.out.println(SEP);</span>
+<span class="nc" id="L22">        System.out.printf(&quot;| %-54s |\n&quot;, &quot; 6.Schedule Appointment&quot;);</span>
+<span class="nc" id="L23">        System.out.println(SEP);</span>
+<span class="nc" id="L24">        System.out.printf(&quot;| %-54s |\n&quot;, &quot; 7.View Appointment&quot;);</span>
+<span class="nc" id="L25">        System.out.println(SEP);</span>
+<span class="nc" id="L26">        System.out.printf(&quot;| %-54s |\n&quot;, &quot; 8.View Doctor List&quot;);</span>
+<span class="nc" id="L27">        System.out.println(SEP);</span>
+<span class="nc" id="L28">        System.out.printf(&quot;| %-54s |\n&quot;, &quot; 9.View Patient List&quot;);</span>
+<span class="nc" id="L29">        System.out.println(SEP);</span>
+<span class="nc" id="L30">        System.out.printf(&quot;| %-54s |\n&quot;, &quot; 10.Exit&quot;);</span>
+<span class="nc" id="L31">        System.out.println(LINE);</span>
+<span class="nc" id="L32">    }</span>
+
+    public static void printAdminLoginMenu(){
+<span class="nc" id="L35">        String line = &quot;+-----------------------------------------------------------+&quot;;</span>
+<span class="nc" id="L36">        String separator = &quot;-------------------------------------------------------------&quot;;</span>
+<span class="nc" id="L37">        System.out.println(line);</span>
+<span class="nc" id="L38">        System.out.printf(&quot;| %-57s |\n&quot;, &quot;             Hospital Admin Management System&quot;);</span>
+<span class="nc" id="L39">        System.out.println(separator);</span>
+<span class="nc" id="L40">        System.out.printf(&quot;| %-57s |\n&quot;, &quot; 1.Login as admin&quot;);</span>
+<span class="nc" id="L41">        System.out.println(separator);</span>
+<span class="nc" id="L42">        System.out.printf(&quot;| %-57s |\n&quot;, &quot; 2.Exit&quot;);</span>
+<span class="nc" id="L43">        System.out.println(line);</span>
+<span class="nc" id="L44">    }</span>
+
+    public static void doctorMenu(){
+<span class="nc" id="L47">        System.out.println(&quot;\n\t\t------Doctor Management System------&quot;);</span>
+<span class="nc" id="L48">        System.out.println(&quot;\t1. Add Doctor&quot;);</span>
+<span class="nc" id="L49">        System.out.println(&quot;\t2. Update Doctor Info&quot;);</span>
+<span class="nc" id="L50">        System.out.println(&quot;\t3. Delete Doctor&quot;);</span>
+<span class="nc" id="L51">        System.out.println(&quot;\t4. Search Doctor by Name or ID&quot;);</span>
+<span class="nc" id="L52">        System.out.println(&quot;\t5. View Doctor List&quot;);</span>
+<span class="nc" id="L53">        System.out.println(&quot;\t6. Exit Doctor Management&quot;);</span>
+        
+<span class="nc" id="L55">    }</span>
+
+    public static void appointmentMenu(){
+<span class="nc" id="L58">        System.out.println(&quot;\n\t\t------Appointment Menu------&quot;);</span>
+<span class="nc" id="L59">        System.out.println(&quot;\t1. Schedule Appointment&quot;);</span>
+<span class="nc" id="L60">        System.out.println(&quot;\t2. View Appointments&quot;);</span>
+<span class="nc" id="L61">        System.out.println(&quot;\t3. Exit&quot;);</span>
+        
+<span class="nc" id="L63">    }</span>
+
+    public static void patientMenu(){
+<span class="nc" id="L66">        System.out.println(&quot;\n\t\t------Patient Management System------&quot;);</span>
+<span class="nc" id="L67">        System.out.println(&quot;\t1. Add Patient&quot;);</span>
+<span class="nc" id="L68">        System.out.println(&quot;\t2. Update Patient Info&quot;);</span>
+<span class="nc" id="L69">        System.out.println(&quot;\t3. Delete Patient&quot;);</span>
+<span class="nc" id="L70">        System.out.println(&quot;\t4. Search Patient by Name or ID&quot;);</span>
+<span class="nc" id="L71">        System.out.println(&quot;\t5. Exit Patient Management&quot;);</span>
+        
+<span class="nc" id="L73">    }</span>
+    public static void surgeonMenu() {
+<span class="nc" id="L75">    System.out.println(&quot;\n\t\t------ Surgeon Management System ------&quot;);</span>
+<span class="nc" id="L76">    System.out.println(&quot;\t1. Add Surgeon&quot;);</span>
+<span class="nc" id="L77">    System.out.println(&quot;\t2. Update Surgeon&quot;);</span>
+<span class="nc" id="L78">    System.out.println(&quot;\t3. Delete Surgeon&quot;);</span>
+<span class="nc" id="L79">    System.out.println(&quot;\t4. Search Surgeon&quot;);</span>
+<span class="nc" id="L80">    System.out.println(&quot;\t5. View All Surgeons&quot;);</span>
+<span class="nc" id="L81">    System.out.println(&quot;\t6. Check In Surgeon&quot;);</span>
+<span class="nc" id="L82">    System.out.println(&quot;\t7. Check Out Surgeon&quot;);</span>
+<span class="nc" id="L83">    System.out.println(&quot;\t8. View Attendance&quot;);</span>
+<span class="nc" id="L84">    System.out.println(&quot;\t9. Exit&quot;);</span>
+<span class="nc" id="L85">}</span>
+
+
+
+}
+
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

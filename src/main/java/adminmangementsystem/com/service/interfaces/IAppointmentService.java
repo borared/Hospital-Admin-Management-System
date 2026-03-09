@@ -1,4 +1,4 @@
-package adminmangementsystem.com.management;
+package adminmangementsystem.com.service.interfaces;
 
 import java.util.List;
 import adminmangementsystem.com.entity.Appointment;

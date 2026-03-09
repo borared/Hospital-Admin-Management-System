@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>CardiologistController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.controller</a> &gt; <span class="el_source">CardiologistController.java</span></div><h1>CardiologistController.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.controller;
+
+import java.util.List;
+import java.util.Scanner;
+
+import adminmangementsystem.com.entity.Cardiologist;
+import adminmangementsystem.com.service.StaffService;
+import adminmangementsystem.com.view.CardiologistView;
+
+public class CardiologistController {
+
+    private final StaffService&lt;Cardiologist&gt; cardiologistSystem;
+
+<span class="nc" id="L14">    public CardiologistController(StaffService&lt;Cardiologist&gt; cardiologistSystem) {</span>
+<span class="nc" id="L15">        this.cardiologistSystem = cardiologistSystem;</span>
+<span class="nc" id="L16">    }</span>
+
+    public void run(Scanner sc) {
+<span class="nc" id="L19">        boolean menu = true;</span>
+<span class="nc bnc" id="L20" title="All 2 branches missed.">        while (menu) {</span>
+<span class="nc" id="L21">            System.out.println(&quot;\n\t\t------Cardiologist Management------&quot;);</span>
+<span class="nc" id="L22">            System.out.println(&quot;\t1. Add Cardiologist&quot;);</span>
+<span class="nc" id="L23">            System.out.println(&quot;\t2. Update Cardiologist&quot;);</span>
+<span class="nc" id="L24">            System.out.println(&quot;\t3. Delete Cardiologist&quot;);</span>
+<span class="nc" id="L25">            System.out.println(&quot;\t4. Search Cardiologist&quot;);</span>
+<span class="nc" id="L26">            System.out.println(&quot;\t5. View All Cardiologists&quot;);</span>
+<span class="nc" id="L27">            System.out.println(&quot;\t6. Check In Cardiologist&quot;);</span>
+<span class="nc" id="L28">            System.out.println(&quot;\t7. Check Out Cardiologist&quot;);</span>
+<span class="nc" id="L29">            System.out.println(&quot;\t8. View Attendance&quot;);</span>
+<span class="nc" id="L30">            System.out.println(&quot;\t9. Exit&quot;);</span>
+<span class="nc" id="L31">            System.out.print(&quot;Choose: &quot;);</span>
+
+            int choice;
+            try {
+<span class="nc" id="L35">                choice = Integer.parseInt(sc.nextLine());</span>
+<span class="nc" id="L36">            } catch (Exception e) {</span>
+<span class="nc" id="L37">                System.out.println(&quot;Invalid choice.&quot;);</span>
+<span class="nc" id="L38">                continue;</span>
+            }
+
+<span class="nc bnc" id="L41" title="All 10 branches missed.">            switch (choice) {</span>
+                case 1:
+<span class="nc" id="L43">                    Cardiologist c = CardiologistView.getCardiologistInput(sc);</span>
+<span class="nc" id="L44">                    cardiologistSystem.addStaff(c);</span>
+<span class="nc" id="L45">                    System.out.println(&quot;Cardiologist added.&quot;);</span>
+<span class="nc" id="L46">                    break;</span>
+                case 2:
+                    // Implement update (similar to previous DoctorService update)
+<span class="nc" id="L49">                    System.out.print(&quot;Enter ID to update: &quot;);</span>
+<span class="nc" id="L50">                    String updateId = sc.nextLine();</span>
+<span class="nc" id="L51">                    Cardiologist existing = cardiologistSystem.searchStaffById(updateId);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">                    if (existing == null) {</span>
+<span class="nc" id="L53">                        System.out.println(&quot;Not found.&quot;);</span>
+<span class="nc" id="L54">                    } else {</span>
+                        // You would call a view method to update fields
+                        // For simplicity, we skip detailed implementation here
+<span class="nc" id="L57">                        System.out.println(&quot;Update feature not fully implemented.&quot;);</span>
+                    }
+<span class="nc" id="L59">                    break;</span>
+                case 3:
+<span class="nc" id="L61">                    System.out.print(&quot;Enter ID to delete: &quot;);</span>
+<span class="nc" id="L62">                    String delId = sc.nextLine();</span>
+<span class="nc bnc" id="L63" title="All 2 branches missed.">                    if (cardiologistSystem.deleteStaff(delId)) {</span>
+<span class="nc" id="L64">                        System.out.println(&quot;Deleted.&quot;);</span>
+<span class="nc" id="L65">                    } else {</span>
+<span class="nc" id="L66">                        System.out.println(&quot;Not found.&quot;);</span>
+                    }
+<span class="nc" id="L68">                    break;</span>
+                case 4:
+<span class="nc" id="L70">                    System.out.print(&quot;Enter name or ID to search: &quot;);</span>
+<span class="nc" id="L71">                    String query = sc.nextLine();</span>
+                    // simple search by ID first
+<span class="nc" id="L73">                    Cardiologist byId = cardiologistSystem.searchStaffById(query);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                    if (byId != null) {</span>
+<span class="nc" id="L75">                        byId.display();</span>
+<span class="nc" id="L76">                    } else {</span>
+<span class="nc" id="L77">                        List&lt;Cardiologist&gt; byName = cardiologistSystem.searchStaffByName(query);</span>
+<span class="nc bnc" id="L78" title="All 2 branches missed.">                        if (byName.isEmpty()) {</span>
+<span class="nc" id="L79">                            System.out.println(&quot;No match.&quot;);</span>
+<span class="nc" id="L80">                        } else {</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">                            for (Cardiologist doc : byName) doc.display();</span>
+                        }
+                    }
+<span class="nc" id="L84">                    break;</span>
+                case 5:
+<span class="nc" id="L86">                    cardiologistSystem.displayAll();</span>
+<span class="nc" id="L87">                    break;</span>
+                case 6:
+<span class="nc" id="L89">                    System.out.print(&quot;Enter ID to check in: &quot;);</span>
+<span class="nc" id="L90">                    cardiologistSystem.checkInStaff(sc.nextLine());</span>
+<span class="nc" id="L91">                    break;</span>
+                case 7:
+<span class="nc" id="L93">                    System.out.print(&quot;Enter ID to check out: &quot;);</span>
+<span class="nc" id="L94">                    cardiologistSystem.checkOutStaff(sc.nextLine());</span>
+<span class="nc" id="L95">                    break;</span>
+                    
+                case 8:
+<span class="nc" id="L98">                    cardiologistSystem.displayAttendance();</span>
+<span class="nc" id="L99">                    break;</span>
+                case 9:
+<span class="nc" id="L101">                    menu = false;</span>
+<span class="nc" id="L102">                    break;</span>
+                default:
+<span class="nc" id="L104">                    System.out.println(&quot;Invalid choice.&quot;);</span>
+            }
+        }
+<span class="nc" id="L107">    }</span>
+}
+
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

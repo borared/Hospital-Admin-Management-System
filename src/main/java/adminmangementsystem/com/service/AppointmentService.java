@@ -1,9 +1,10 @@
-package adminmangementsystem.com.management;
+package adminmangementsystem.com.service;
 
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import adminmangementsystem.com.entity.Appointment;
+import adminmangementsystem.com.service.interfaces.IAppointmentService;
 
 public class AppointmentService implements IAppointmentService {
     

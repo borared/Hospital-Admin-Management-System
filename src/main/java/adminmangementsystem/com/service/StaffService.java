@@ -95,7 +95,6 @@ public class StaffService<T extends Staff> {
         }
     }
 
-    @Override
     public void displayAll() {
         if (records.isEmpty()) {
             System.out.println("No " + type.getSimpleName() + " records found.");

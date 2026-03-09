@@ -1,0 +1,237 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoctorService.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.service</a> &gt; <span class="el_source">DoctorService.java</span></div><h1>DoctorService.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.service;
+
+import java.util.ArrayList;
+import java.util.List;
+import java.util.Scanner;
+import adminmangementsystem.com.entity.Doctor;
+import adminmangementsystem.com.service.interfaces.IDoctorService;
+
+<span class="nc" id="L9">public class DoctorService implements IDoctorService {</span>
+    
+<span class="nc" id="L11">    private List&lt;Doctor&gt; records = new ArrayList&lt;&gt;();</span>
+    
+    @Override
+    public void addDoctor(Doctor doctor) {
+<span class="nc bnc" id="L15" title="All 2 branches missed.">        if (doctor == null) {</span>
+<span class="nc" id="L16">            throw new IllegalArgumentException(&quot;Doctor cannot be null.&quot;);</span>
+        }
+        
+<span class="nc bnc" id="L19" title="All 2 branches missed.">        if (!isIdUnique(doctor.getId())) {</span>
+<span class="nc" id="L20">            throw new IllegalArgumentException(&quot;Doctor ID already exists.&quot;);</span>
+        }
+        
+<span class="nc" id="L23">        records.add(doctor);</span>
+<span class="nc" id="L24">    }</span>
+    
+    @Override
+    public boolean updateDoctor(Doctor updatedDoctor) {
+<span class="nc bnc" id="L28" title="All 2 branches missed.">        if (updatedDoctor == null) {</span>
+<span class="nc" id="L29">            return false;</span>
+        }
+        
+<span class="nc" id="L32">        Doctor existingDoctor = searchDoctorById(updatedDoctor.getId());</span>
+        
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        if (existingDoctor == null) {</span>
+<span class="nc" id="L35">            return false;</span>
+        }
+        
+<span class="nc" id="L38">        existingDoctor.setName(updatedDoctor.getName());</span>
+<span class="nc" id="L39">        existingDoctor.setDob(updatedDoctor.getDob());</span>
+<span class="nc" id="L40">        existingDoctor.setAddress(updatedDoctor.getAddress());</span>
+<span class="nc" id="L41">        existingDoctor.setEmail(updatedDoctor.getEmail());</span>
+<span class="nc" id="L42">        existingDoctor.setPosition(updatedDoctor.getPosition());</span>
+<span class="nc" id="L43">        existingDoctor.setSalary(updatedDoctor.getSalary());</span>
+<span class="nc" id="L44">        existingDoctor.setDoe(updatedDoctor.getDoe());</span>
+        
+<span class="nc" id="L46">        return true;</span>
+    }
+    
+    @Override
+    public boolean deleteDoctor(String id) {
+<span class="nc" id="L51">        Doctor doctor = searchDoctorById(id);</span>
+<span class="nc bnc" id="L52" title="All 2 branches missed.">        if (doctor != null) {</span>
+<span class="nc" id="L53">            records.remove(doctor);</span>
+<span class="nc" id="L54">            return true;</span>
+        }
+<span class="nc" id="L56">        return false;</span>
+    }
+    
+    @Override
+    public Doctor searchDoctorById(String id) {
+<span class="nc bnc" id="L61" title="All 2 branches missed.">        for (Doctor doctor : records) {</span>
+<span class="nc bnc" id="L62" title="All 2 branches missed.">            if (doctor.getId().equalsIgnoreCase(id)) {</span>
+<span class="nc" id="L63">                return doctor;</span>
+            }
+        }
+<span class="nc" id="L66">        return null;</span>
+    }
+    
+    @Override
+    public List&lt;Doctor&gt; searchDoctorsByName(String name) {
+<span class="nc" id="L71">        List&lt;Doctor&gt; results = new ArrayList&lt;&gt;();</span>
+<span class="nc bnc" id="L72" title="All 2 branches missed.">        for (Doctor doctor : records) {</span>
+<span class="nc bnc" id="L73" title="All 2 branches missed.">            if (doctor.getName().equalsIgnoreCase(name)) {</span>
+<span class="nc" id="L74">                results.add(doctor);</span>
+            }
+        }
+<span class="nc" id="L77">        return results;</span>
+    }
+    
+    @Override
+    public List&lt;Doctor&gt; getAllDoctors() {
+<span class="nc" id="L82">        return new ArrayList&lt;&gt;(records);</span>
+    }
+    
+    @Override
+    public boolean isIdUnique(String id) {
+<span class="nc bnc" id="L87" title="All 2 branches missed.">        return searchDoctorById(id) == null;</span>
+    }
+    
+    @Override
+    public void viewDoctors() {
+<span class="nc" id="L92">        viewDoctorList();</span>
+<span class="nc" id="L93">    }</span>
+    
+    public void displayAll() {
+<span class="nc" id="L96">        viewDoctorList();</span>
+<span class="nc" id="L97">    }</span>
+
+    public void addDoctor(Scanner sc) {
+<span class="nc" id="L100">        Doctor doctor = adminmangementsystem.com.view.DoctorView.getDoctorInput(sc);</span>
+        
+<span class="nc bnc" id="L102" title="All 2 branches missed.">        if (!isIdUnique(doctor.getId())) {</span>
+<span class="nc" id="L103">            System.out.println(&quot;Error: Doctor ID already exists. Please use a unique ID.&quot;);</span>
+<span class="nc" id="L104">            return;</span>
+        }
+        
+<span class="nc" id="L107">        records.add(doctor);</span>
+<span class="nc" id="L108">        System.out.println(&quot;Doctor data captured successfully.\n&quot;);</span>
+<span class="nc" id="L109">    }</span>
+    
+    public void updateDoctor(Scanner sc) {
+<span class="nc" id="L112">        String updateId = adminmangementsystem.com.view.DoctorView.getUpdateDoctorId(sc);</span>
+<span class="nc" id="L113">        Doctor dToUpdate = searchDoctorById(updateId);</span>
+        
+<span class="nc bnc" id="L115" title="All 2 branches missed.">        if (dToUpdate == null) {</span>
+<span class="nc" id="L116">            System.out.println(&quot;Doctor not found!&quot;);</span>
+<span class="nc" id="L117">            return;</span>
+        }
+        
+<span class="nc" id="L120">        adminmangementsystem.com.view.DoctorView.getDoctorUpdateInput(sc, dToUpdate);</span>
+<span class="nc" id="L121">        System.out.println(&quot;Doctor updated successfully.&quot;);</span>
+<span class="nc" id="L122">    }</span>
+    
+    public void deleteDoctor(Scanner sc) {
+<span class="nc" id="L125">        String deleteId = adminmangementsystem.com.view.DoctorView.getDoctorIdForDelete(sc);</span>
+<span class="nc" id="L126">        Doctor pToDelete = searchDoctorById(deleteId);</span>
+<span class="nc bnc" id="L127" title="All 2 branches missed.">        if (pToDelete == null) {</span>
+<span class="nc" id="L128">            System.out.println(&quot;Doctor not found!&quot;);</span>
+<span class="nc" id="L129">        } else {</span>
+<span class="nc" id="L130">            records.remove(pToDelete);</span>
+<span class="nc" id="L131">            System.out.println(&quot;Doctor deleted successfully.&quot;);</span>
+        }
+<span class="nc" id="L133">    }</span>
+    
+    public void searchDoctor(Scanner sc) {
+<span class="nc" id="L136">        int searchChoice = adminmangementsystem.com.view.DoctorView.getSearchChoice(sc);</span>
+        
+<span class="nc bnc" id="L138" title="All 2 branches missed.">        if (searchChoice == -1) {</span>
+<span class="nc" id="L139">            return;</span>
+        }
+        
+<span class="nc" id="L142">        String line = &quot;----------------------------------------------------------------------------------------------------------------------------&quot;;</span>
+        
+<span class="nc" id="L144">        System.out.println(line);</span>
+<span class="nc" id="L145">        System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10s | %-12s |\n&quot;,</span>
+<span class="nc" id="L146">                &quot;ID&quot;, &quot;Name&quot;, &quot;DOB&quot;, &quot;Address&quot;, &quot;Email&quot;, &quot;Position&quot;, &quot;Salary&quot;, &quot;Entry Date&quot;);</span>
+<span class="nc" id="L147">        System.out.println(line);</span>
+        
+<span class="nc bnc" id="L149" title="All 2 branches missed.">        if (searchChoice == 1) {</span>
+<span class="nc" id="L150">            String searchName = adminmangementsystem.com.view.DoctorView.getSearchName(sc);</span>
+<span class="nc" id="L151">            List&lt;Doctor&gt; results = searchDoctorsByName(searchName);</span>
+            
+<span class="nc bnc" id="L153" title="All 2 branches missed.">            if (results.isEmpty()) {</span>
+<span class="nc" id="L154">                System.out.println(&quot;|                                             No doctors found with that name                                              |&quot;);</span>
+<span class="nc" id="L155">            } else {</span>
+<span class="nc bnc" id="L156" title="All 2 branches missed.">                for (Doctor d : results) {</span>
+<span class="nc" id="L157">                    System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n&quot;,</span>
+<span class="nc" id="L158">                            d.getId(), d.getName(), d.getDob(), d.getAddress(), d.getEmail(),</span>
+<span class="nc" id="L159">                            d.getPosition(), d.getSalary(), d.getDoe());</span>
+                }
+            }
+            
+<span class="nc bnc" id="L163" title="All 2 branches missed.">        } else if (searchChoice == 2) {</span>
+<span class="nc" id="L164">            String searchId = adminmangementsystem.com.view.DoctorView.getSearchId(sc);</span>
+<span class="nc" id="L165">            Doctor found = searchDoctorById(searchId);</span>
+            
+<span class="nc bnc" id="L167" title="All 2 branches missed.">            if (found != null) {</span>
+<span class="nc" id="L168">                System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n&quot;,</span>
+<span class="nc" id="L169">                        found.getId(), found.getName(), found.getDob(), found.getAddress(),</span>
+<span class="nc" id="L170">                        found.getEmail(), found.getPosition(), found.getSalary(), found.getDoe());</span>
+<span class="nc" id="L171">            } else {</span>
+<span class="nc" id="L172">                System.out.println(&quot;|                                                     Doctor not found                                                      |&quot;);</span>
+            }
+            
+<span class="nc" id="L175">        } else {</span>
+<span class="nc" id="L176">            System.out.println(&quot;Invalid choice!&quot;);</span>
+        }
+        
+<span class="nc" id="L179">        System.out.println(line);</span>
+<span class="nc" id="L180">    }</span>
+    
+    public void viewDoctorList() {
+<span class="nc" id="L183">        System.out.println(&quot;\t\t\t\t------Doctor List------&quot;);</span>
+        
+<span class="nc bnc" id="L185" title="All 2 branches missed.">        if (records.isEmpty()) {</span>
+<span class="nc" id="L186">            System.out.println(&quot;No doctors found.&quot;);</span>
+<span class="nc" id="L187">            return;</span>
+        }
+        
+<span class="nc" id="L190">        String line = &quot;-----------------------------------------------------------------------------------------------------------------------------------&quot;;</span>
+        
+<span class="nc" id="L192">        System.out.println(line);</span>
+<span class="nc" id="L193">        System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10s | %-12s |\n&quot;,</span>
+<span class="nc" id="L194">                &quot;ID&quot;, &quot;Name&quot;, &quot;DOB&quot;, &quot;Address&quot;, &quot;Email&quot;, &quot;Position&quot;, &quot;Salary&quot;, &quot;Entry Date&quot;);</span>
+<span class="nc" id="L195">        System.out.println(line);</span>
+        
+<span class="nc bnc" id="L197" title="All 2 branches missed.">        for (Doctor d : records) {</span>
+<span class="nc" id="L198">            System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n&quot;,</span>
+<span class="nc" id="L199">                    d.getId(), d.getName(), d.getDob(), d.getAddress(),</span>
+<span class="nc" id="L200">                    d.getEmail(), d.getPosition(), d.getSalary(), d.getDoe());</span>
+        }
+        
+<span class="nc" id="L203">        System.out.println(line);</span>
+<span class="nc" id="L204">    }</span>
+    
+    public void viewDoctorList1() {
+<span class="nc" id="L207">        viewDoctorList();</span>
+<span class="nc" id="L208">    }</span>
+
+    public void viewDoctorsByPosition(String position, String title) {
+<span class="nc" id="L211">        System.out.println(&quot;\t\t\t\t------&quot; + title + &quot;------&quot;);</span>
+
+<span class="nc" id="L213">        String line = &quot;-----------------------------------------------------------------------------------------------------------------------------------&quot;;</span>
+<span class="nc" id="L214">        boolean found = false;</span>
+
+<span class="nc" id="L216">        System.out.println(line);</span>
+<span class="nc" id="L217">        System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10s | %-12s |\n&quot;,</span>
+<span class="nc" id="L218">                &quot;ID&quot;, &quot;Name&quot;, &quot;DOB&quot;, &quot;Address&quot;, &quot;Email&quot;, &quot;Position&quot;, &quot;Salary&quot;, &quot;Entry Date&quot;);</span>
+<span class="nc" id="L219">        System.out.println(line);</span>
+
+<span class="nc bnc" id="L221" title="All 2 branches missed.">        for (Doctor d : records) {</span>
+<span class="nc bnc" id="L222" title="All 4 branches missed.">            if (d.getPosition() != null &amp;&amp; d.getPosition().equalsIgnoreCase(position)) {</span>
+<span class="nc" id="L223">                found = true;</span>
+<span class="nc" id="L224">                System.out.printf(&quot;| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n&quot;,</span>
+<span class="nc" id="L225">                        d.getId(), d.getName(), d.getDob(), d.getAddress(),</span>
+<span class="nc" id="L226">                        d.getEmail(), d.getPosition(), d.getSalary(), d.getDoe());</span>
+            }
+        }
+
+<span class="nc bnc" id="L230" title="All 2 branches missed.">        if (!found) {</span>
+<span class="nc" id="L231">            System.out.printf(&quot;| %-129s |\n&quot;, &quot;No &quot; + title.toLowerCase() + &quot; found.&quot;);</span>
+        }
+
+<span class="nc" id="L234">        System.out.println(line);</span>
+<span class="nc" id="L235">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

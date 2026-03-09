@@ -1,0 +1,149 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>SurgeonController.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.controller</a> &gt; <span class="el_source">SurgeonController.java</span></div><h1>SurgeonController.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.controller;
+
+import java.util.Scanner;
+import java.util.List;
+import adminmangementsystem.com.service.StaffService;
+import adminmangementsystem.com.entity.Surgeon;
+import adminmangementsystem.com.view.SurgeonView;
+import adminmangementsystem.com.view.MenuView;
+
+public class SurgeonController {
+
+    private final StaffService&lt;Surgeon&gt; surgeonSystem;
+
+<span class="nc" id="L14">    public SurgeonController(StaffService&lt;Surgeon&gt; surgeonSystem) {</span>
+<span class="nc" id="L15">        this.surgeonSystem = surgeonSystem;</span>
+<span class="nc" id="L16">    }</span>
+
+    public StaffService&lt;Surgeon&gt; getSurgeonSystem() {
+<span class="nc" id="L19">        return surgeonSystem;</span>
+    }
+
+    public void run(Scanner sc) {
+<span class="nc" id="L23">        boolean menuActive = true;</span>
+<span class="nc bnc" id="L24" title="All 2 branches missed.">        while (menuActive) {</span>
+<span class="nc" id="L25">            MenuView.surgeonMenu();</span>
+<span class="nc" id="L26">            System.out.print(&quot;Choose an option: &quot;);</span>
+            int choice;
+            try {
+<span class="nc" id="L29">                choice = Integer.parseInt(sc.nextLine());</span>
+<span class="nc" id="L30">            } catch (Exception e) {</span>
+<span class="nc" id="L31">                System.out.println(&quot;Invalid choice!\n&quot;);</span>
+<span class="nc" id="L32">                continue;</span>
+            }
+
+<span class="nc bnc" id="L35" title="All 10 branches missed.">            switch (choice) {</span>
+                case 1: // Add Surgeon
+<span class="nc" id="L37">                    Surgeon newSurgeon = SurgeonView.getSurgeonInput(sc);</span>
+                    try {
+<span class="nc" id="L39">                        surgeonSystem.addStaff(newSurgeon);</span>
+<span class="nc" id="L40">                        System.out.println(&quot;Surgeon added successfully.\n&quot;);</span>
+<span class="nc" id="L41">                    } catch (IllegalArgumentException e) {</span>
+<span class="nc" id="L42">                        System.out.println(&quot;Error: &quot; + e.getMessage() + &quot;\n&quot;);</span>
+                    }
+<span class="nc" id="L44">                    break;</span>
+
+                case 2: // Update Surgeon
+<span class="nc" id="L47">                    System.out.print(&quot;Enter Surgeon ID to update: &quot;);</span>
+<span class="nc" id="L48">                    String updateId = sc.nextLine();</span>
+<span class="nc" id="L49">                    Surgeon existing = surgeonSystem.searchStaffById(updateId);</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">                    if (existing == null) {</span>
+<span class="nc" id="L51">                        System.out.println(&quot;Surgeon not found.\n&quot;);</span>
+<span class="nc" id="L52">                    } else {</span>
+<span class="nc" id="L53">                        Surgeon updated = SurgeonView.getSurgeonUpdateInput(sc, existing);</span>
+<span class="nc bnc" id="L54" title="All 2 branches missed.">                        if (surgeonSystem.updateStaff(updated)) {</span>
+<span class="nc" id="L55">                            System.out.println(&quot;Surgeon updated successfully.\n&quot;);</span>
+<span class="nc" id="L56">                        } else {</span>
+<span class="nc" id="L57">                            System.out.println(&quot;Update failed.\n&quot;);</span>
+                        }
+                    }
+<span class="nc" id="L60">                    break;</span>
+
+                case 3: // Delete Surgeon
+<span class="nc" id="L63">                    System.out.print(&quot;Enter Surgeon ID to delete: &quot;);</span>
+<span class="nc" id="L64">                    String deleteId = sc.nextLine();</span>
+<span class="nc bnc" id="L65" title="All 2 branches missed.">                    if (surgeonSystem.deleteStaff(deleteId)) {</span>
+<span class="nc" id="L66">                        System.out.println(&quot;Surgeon deleted successfully.\n&quot;);</span>
+<span class="nc" id="L67">                    } else {</span>
+<span class="nc" id="L68">                        System.out.println(&quot;Surgeon not found.\n&quot;);</span>
+                    }
+<span class="nc" id="L70">                    break;</span>
+
+                case 4: // Search Surgeon
+<span class="nc" id="L73">                    int searchChoice = SurgeonView.getSearchChoice(sc);</span>
+<span class="nc bnc" id="L74" title="All 2 branches missed.">                    if (searchChoice == -1) break;</span>
+
+<span class="nc bnc" id="L76" title="All 3 branches missed.">                    switch (searchChoice) {</span>
+                        case 1: // by name
+<span class="nc" id="L78">                            String searchName = SurgeonView.getSearchName(sc);</span>
+<span class="nc" id="L79">                            List&lt;Surgeon&gt; results = surgeonSystem.searchStaffByName(searchName);</span>
+<span class="nc bnc" id="L80" title="All 2 branches missed.">                            if (results.isEmpty()) {</span>
+<span class="nc" id="L81">                                System.out.println(&quot;No surgeons found with that name.\n&quot;);</span>
+<span class="nc" id="L82">                            } else {</span>
+<span class="nc" id="L83">                                System.out.println(&quot;\n--- Search Results ---&quot;);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">                                for (Surgeon s : results) {</span>
+<span class="nc" id="L85">                                    s.display();</span>
+<span class="nc" id="L86">                                    System.out.println(&quot;-----&quot;);</span>
+                                }
+                            }
+<span class="nc" id="L89">                            break;</span>
+
+                        case 2: // by ID
+<span class="nc" id="L92">                            String searchId = SurgeonView.getSearchId(sc);</span>
+<span class="nc" id="L93">                            Surgeon found = surgeonSystem.searchStaffById(searchId);</span>
+<span class="nc bnc" id="L94" title="All 2 branches missed.">                            if (found == null) {</span>
+<span class="nc" id="L95">                                System.out.println(&quot;Surgeon not found.\n&quot;);</span>
+<span class="nc" id="L96">                            } else {</span>
+<span class="nc" id="L97">                                found.display();</span>
+                            }
+<span class="nc" id="L99">                            break;</span>
+
+                        default:
+<span class="nc" id="L102">                            System.out.println(&quot;Invalid option.\n&quot;);</span>
+                    }
+<span class="nc" id="L104">                    break;</span>
+
+                case 5: // View All Surgeons
+<span class="nc" id="L107">                    surgeonSystem.displayAll();</span>
+<span class="nc" id="L108">                    break;</span>
+
+                case 6: // Check In
+<span class="nc" id="L111">                    System.out.print(&quot;Enter Surgeon ID to check in: &quot;);</span>
+<span class="nc" id="L112">                    String checkInId = sc.nextLine();</span>
+<span class="nc" id="L113">                    Surgeon checkInSurgeon = surgeonSystem.searchStaffById(checkInId);</span>
+<span class="nc bnc" id="L114" title="All 2 branches missed.">                    if (checkInSurgeon == null) {</span>
+<span class="nc" id="L115">                        System.out.println(&quot;Surgeon not found.\n&quot;);</span>
+<span class="nc" id="L116">                    } else {</span>
+<span class="nc" id="L117">                        surgeonSystem.checkInStaff(checkInId);</span>
+<span class="nc" id="L118">                        System.out.println(&quot;Surgeon checked in successfully.\n&quot;);</span>
+                    }
+<span class="nc" id="L120">                    break;</span>
+
+                case 7: // Check Out
+<span class="nc" id="L123">                    System.out.print(&quot;Enter Surgeon ID to check out: &quot;);</span>
+<span class="nc" id="L124">                    String checkOutId = sc.nextLine();</span>
+<span class="nc" id="L125">                    Surgeon checkOutSurgeon = surgeonSystem.searchStaffById(checkOutId);</span>
+<span class="nc bnc" id="L126" title="All 2 branches missed.">                    if (checkOutSurgeon == null) {</span>
+<span class="nc" id="L127">                        System.out.println(&quot;Surgeon not found.\n&quot;);</span>
+<span class="nc" id="L128">                    } else {</span>
+<span class="nc" id="L129">                        surgeonSystem.checkOutStaff(checkOutId);</span>
+<span class="nc" id="L130">                        System.out.println(&quot;Surgeon checked out successfully.\n&quot;);</span>
+                    }
+<span class="nc" id="L132">                    break;</span>
+
+                case 8: // View Attendance
+<span class="nc" id="L135">                    surgeonSystem.displayAttendance();</span>
+<span class="nc" id="L136">                    break;</span>
+
+                case 9: // Exit
+<span class="nc" id="L139">                    menuActive = false;</span>
+<span class="nc" id="L140">                    System.out.println(&quot;Exiting Surgeon Management.\n&quot;);</span>
+<span class="nc" id="L141">                    break;</span>
+
+                default:
+<span class="nc" id="L144">                    System.out.println(&quot;Invalid choice.\n&quot;);</span>
+            }
+        }
+<span class="nc" id="L147">    }</span>
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>

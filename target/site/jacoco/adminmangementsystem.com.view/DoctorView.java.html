@@ -1,0 +1,135 @@
+<?xml version="1.0" encoding="UTF-8"?><!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd"><html xmlns="http://www.w3.org/1999/xhtml" lang="en"><head><meta http-equiv="Content-Type" content="text/html;charset=UTF-8"/><link rel="stylesheet" href="../jacoco-resources/report.css" type="text/css"/><link rel="shortcut icon" href="../jacoco-resources/report.gif" type="image/gif"/><title>DoctorView.java</title><link rel="stylesheet" href="../jacoco-resources/prettify.css" type="text/css"/><script type="text/javascript" src="../jacoco-resources/prettify.js"></script></head><body onload="window['PR_TAB_WIDTH']=4;prettyPrint()"><div class="breadcrumb" id="breadcrumb"><span class="info"><a href="../jacoco-sessions.html" class="el_session">Sessions</a></span><a href="../index.html" class="el_report">hospitaladminmanagementsystem</a> &gt; <a href="index.source.html" class="el_package">adminmangementsystem.com.view</a> &gt; <span class="el_source">DoctorView.java</span></div><h1>DoctorView.java</h1><pre class="source lang-java linenums">package adminmangementsystem.com.view;
+
+import java.util.Scanner;
+import adminmangementsystem.com.util.Validator;
+import adminmangementsystem.com.entity.Doctor;
+
+<span class="nc" id="L7">public class DoctorView {</span>
+
+    public static Doctor getDoctorInput(Scanner sc) {
+<span class="nc" id="L10">        System.out.println(&quot;\t\t------Add Doctor------&quot;);</span>
+        
+<span class="nc" id="L12">        String doctorId = Validator.getValidPatient(sc, &quot;Enter Doctor ID: &quot;);</span>
+<span class="nc" id="L13">        String doctorName = Validator.getOnlyLetter(sc, &quot;Enter Doctor name: &quot;);</span>
+<span class="nc" id="L14">        String doctorDOB = Validator.getValidDateFomart(sc, &quot;Enter Doctor Date of Birth (dd/mm/yyyy): &quot;);</span>
+<span class="nc" id="L15">        String doctorAddress = Validator.getNonEmpty(sc, &quot;Enter Doctor address: &quot;);</span>
+<span class="nc" id="L16">        String doctorEmail = Validator.getValidEmail(sc, &quot;Enter Doctor email: &quot;);</span>
+<span class="nc" id="L17">        String doctorPosition = Validator.getDoctorPositionWithShortcut(</span>
+<span class="nc" id="L18">            sc,</span>
+<span class="nc" id="L19">            &quot;Enter Doctor position [S=Surgeon, C=Cardiologist, N=Nurse]: &quot;);</span>
+<span class="nc" id="L20">        Double doctorSalary = Validator.getPositiveDouble(sc, &quot;Enter Doctor salary: &quot;);</span>
+<span class="nc" id="L21">        String doctorDOE = Validator.getValidDateFomart(sc, &quot;Enter date of entry (dd/mm/yyyy): &quot;);</span>
+        
+<span class="nc" id="L23">        return new Doctor(doctorId, doctorName, doctorDOB, doctorAddress, doctorEmail, doctorPosition, doctorSalary, doctorDOE);</span>
+    }
+
+    public static Doctor getDoctorUpdateInput(Scanner sc, Doctor existingDoctor) {
+<span class="nc" id="L27">        System.out.println(&quot;Leave blank to keep current value.&quot;);</span>
+
+        // Update Name
+<span class="nc" id="L30">        System.out.print(&quot;Enter new Name (&quot; + existingDoctor.getName() + &quot;): &quot;);</span>
+<span class="nc" id="L31">        String newName = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L32" title="All 4 branches missed.">        if (!newName.isEmpty() &amp;&amp; newName.matches(&quot;[a-zA-Z ]{1,50}&quot;)) {</span>
+<span class="nc" id="L33">            existingDoctor.setName(newName);</span>
+<span class="nc bnc" id="L34" title="All 2 branches missed.">        } else if (!newName.isEmpty()) {</span>
+<span class="nc" id="L35">            System.out.println(&quot;Invalid Name! Keeping old value.&quot;);</span>
+        }
+
+        // Update DOB
+<span class="nc" id="L39">        System.out.print(&quot;Enter new DOB (&quot; + existingDoctor.getDob() + &quot;) [dd/MM/yyyy]: &quot;);</span>
+<span class="nc" id="L40">        String newDob = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L41" title="All 4 branches missed.">        if (!newDob.isEmpty() &amp;&amp; newDob.matches(&quot;\\d{2}/\\d{2}/\\d{4}&quot;)) {</span>
+<span class="nc" id="L42">            existingDoctor.setDob(newDob);</span>
+<span class="nc bnc" id="L43" title="All 2 branches missed.">        } else if (!newDob.isEmpty()) {</span>
+<span class="nc" id="L44">            System.out.println(&quot;Invalid DOB format! Keeping old value.&quot;);</span>
+        }
+
+        // Update Address
+<span class="nc" id="L48">        System.out.print(&quot;Enter new Address (&quot; + existingDoctor.getAddress() + &quot;): &quot;);</span>
+<span class="nc" id="L49">        String newAddress = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L50" title="All 2 branches missed.">        if (!newAddress.isEmpty()) {</span>
+<span class="nc" id="L51">            existingDoctor.setAddress(newAddress);</span>
+        }
+
+        // Update Email
+<span class="nc" id="L55">        System.out.print(&quot;Enter new Email (&quot; + existingDoctor.getEmail() + &quot;): &quot;);</span>
+<span class="nc" id="L56">        String newEmail = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L57" title="All 4 branches missed.">        if (!newEmail.isEmpty() &amp;&amp; newEmail.matches(&quot;^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$&quot;)) {</span>
+<span class="nc" id="L58">            existingDoctor.setEmail(newEmail);</span>
+<span class="nc bnc" id="L59" title="All 2 branches missed.">        } else if (!newEmail.isEmpty()) {</span>
+<span class="nc" id="L60">            System.out.println(&quot;Invalid Email format! Keeping old value.&quot;);</span>
+        }
+
+        // Update Position
+<span class="nc" id="L64">        System.out.print(&quot;Enter new Position (&quot; + existingDoctor.getPosition() + &quot;) [S/C/N]: &quot;);</span>
+<span class="nc" id="L65">        String newPosition = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L66" title="All 2 branches missed.">        if (!newPosition.isEmpty()) {</span>
+<span class="nc bnc" id="L67" title="All 4 branches missed.">            if (newPosition.equalsIgnoreCase(&quot;S&quot;) || newPosition.equalsIgnoreCase(&quot;Surgeon&quot;)) {</span>
+<span class="nc" id="L68">                existingDoctor.setPosition(&quot;Surgeon&quot;);</span>
+<span class="nc bnc" id="L69" title="All 4 branches missed.">            } else if (newPosition.equalsIgnoreCase(&quot;C&quot;) || newPosition.equalsIgnoreCase(&quot;Cardiologist&quot;)) {</span>
+<span class="nc" id="L70">                existingDoctor.setPosition(&quot;Cardiologist&quot;);</span>
+<span class="nc bnc" id="L71" title="All 4 branches missed.">            } else if (newPosition.equalsIgnoreCase(&quot;N&quot;) || newPosition.equalsIgnoreCase(&quot;Nurse&quot;)) {</span>
+<span class="nc" id="L72">                existingDoctor.setPosition(&quot;Nurse&quot;);</span>
+<span class="nc" id="L73">            } else {</span>
+<span class="nc" id="L74">                System.out.println(&quot;Invalid Position! Use S/C/N or Surgeon/Cardiologist/Nurse. Keeping old value.&quot;);</span>
+            }
+        }
+
+        // Update Salary
+<span class="nc" id="L79">        System.out.print(&quot;Enter new Salary (&quot; + existingDoctor.getSalary() + &quot;): &quot;);</span>
+<span class="nc" id="L80">        String newSalary = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L81" title="All 2 branches missed.">        if (!newSalary.isEmpty()) {</span>
+            try {
+<span class="nc" id="L83">                double salaryValue = Double.parseDouble(newSalary);</span>
+<span class="nc bnc" id="L84" title="All 2 branches missed.">                if (salaryValue &gt; 0) {</span>
+<span class="nc" id="L85">                    existingDoctor.setSalary(salaryValue);</span>
+<span class="nc" id="L86">                } else {</span>
+<span class="nc" id="L87">                    System.out.println(&quot;Salary must be positive! Keeping old value.&quot;);</span>
+                }
+<span class="nc" id="L89">            } catch (Exception e) {</span>
+<span class="nc" id="L90">                System.out.println(&quot;Invalid salary! Keeping old value.&quot;);</span>
+            }
+        }
+
+        // Update Date of Entry
+<span class="nc" id="L95">        System.out.print(&quot;Enter new Entry Date (&quot; + existingDoctor.getDoe() + &quot;) [dd/MM/yyyy]: &quot;);</span>
+<span class="nc" id="L96">        String newDoe = sc.nextLine().trim();</span>
+<span class="nc bnc" id="L97" title="All 4 branches missed.">        if (!newDoe.isEmpty() &amp;&amp; newDoe.matches(&quot;\\d{2}/\\d{2}/\\d{4}&quot;)) {</span>
+<span class="nc" id="L98">            existingDoctor.setDoe(newDoe);</span>
+<span class="nc bnc" id="L99" title="All 2 branches missed.">        } else if (!newDoe.isEmpty()) {</span>
+<span class="nc" id="L100">            System.out.println(&quot;Invalid Entry Date format! Keeping old value.&quot;);</span>
+        }
+
+<span class="nc" id="L103">        return existingDoctor;</span>
+    }
+
+    public static String getDoctorIdForDelete(Scanner sc) {
+<span class="nc" id="L107">        System.out.print(&quot;Enter doctor ID to delete: &quot;);</span>
+<span class="nc" id="L108">        return sc.nextLine().trim();</span>
+    }
+
+    public static int getSearchChoice(Scanner sc) {
+<span class="nc" id="L112">        System.out.print(&quot;Search by (1) Name or (2) ID: &quot;);</span>
+        try {
+<span class="nc" id="L114">            return Integer.parseInt(sc.nextLine());</span>
+<span class="nc" id="L115">        } catch (Exception e) {</span>
+<span class="nc" id="L116">            System.out.println(&quot;Invalid choice!&quot;);</span>
+<span class="nc" id="L117">            return -1;</span>
+        }
+    }
+
+    public static String getSearchName(Scanner sc) {
+<span class="nc" id="L122">        System.out.print(&quot;Enter Doctor name: &quot;);</span>
+<span class="nc" id="L123">        return sc.nextLine().trim();</span>
+    }
+
+    public static String getSearchId(Scanner sc) {
+<span class="nc" id="L127">        System.out.print(&quot;Enter Doctor ID: &quot;);</span>
+<span class="nc" id="L128">        return sc.nextLine().trim();</span>
+    }
+
+    public static String getUpdateDoctorId(Scanner sc) {
+<span class="nc" id="L132">        return Validator.getNonEmpty(sc, &quot;Enter Doctor ID to update: &quot;);</span>
+    }
+}
+</pre><div class="footer"><span class="right">Created with <a href="http://www.jacoco.org/jacoco">JaCoCo</a> 0.8.4.201905082037</span></div></body></html>
