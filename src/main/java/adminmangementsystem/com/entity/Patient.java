@@ -1,114 +1,92 @@
-package adminmangementsystem.com.model;
+package adminmangementsystem.com.entity;
+
+import java.time.LocalDate;
 
 public class Patient {
 
-    private String id;
-    private String name;
-    private String dob;
+    private int patientId;
+    private String firstName;
+    private String lastName;
+    private String gender;
+    private LocalDate dateOfBirth;
+    private String phone;
     private String address;
-    private String disease;
-    private String entryDate;
 
-    // Constructor
-    public Patient(String patId, String patName, String patDOB,
-                   String patDisease, String patPhoneNumber, String patDOE) {
-        if(!setId(patId) ||
-           !setName(patName) ||
-           !setDob(patDOB) ||
-           !setDisease(patDisease) ||
-           !setAddress(patPhoneNumber) ||
-           !setEntryDate(patDOE)) {
+    public Patient() {}
 
-            throw new IllegalArgumentException("Invalid patient data.");
-        }
+    public Patient(int patientId, String firstName, String lastName, String gender,
+                   LocalDate dateOfBirth, String phone, String address) {
+        this.patientId = patientId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.gender = gender;
+        this.dateOfBirth = dateOfBirth;
+        this.phone = phone;
+        this.address = address;
     }
 
-    // Getters
-    public String getId() {
-        return id;
+    public int getPatientId() {
+        return patientId;
     }
 
-    public String getName() {
-        return name;
+    public void setPatientId(int patientId) {
+        this.patientId = patientId;
     }
 
-    public String getDob() {
-        return dob;
+    public String getFirstName() {
+        return firstName;
+    }
+
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
+    }
+
+    public String getLastName() {
+        return lastName;
+    }
+
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
+    }
+
+    public String getGender() {
+        return gender;
+    }
+
+    public void setGender(String gender) {
+        this.gender = gender;
+    }
+
+    public LocalDate getDateOfBirth() {
+        return dateOfBirth;
+    }
+
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    public String getPhone() {
+        return phone;
+    }
+
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
     public String getAddress() {
         return address;
     }
 
-    public String getDisease() {
-        return disease;
+    public void setAddress(String address) {
+        this.address = address;
     }
 
-    public String getEntryDate() {
-        return entryDate;
-    }
-
-    // Setters with validation
-    public boolean setId(String id) {
-        if (id != null && !id.isEmpty()) {
-            this.id = id;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean setName(String name) {
-        if (name != null && !name.isEmpty() && name.matches("[a-zA-Z ]{1,50}")) {
-            this.name = name;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean setDob(String dob) {
-        if (dob != null && !dob.isEmpty() && dob.matches("\\d{2}/\\d{2}/\\d{4}")) {
-            this.dob = dob;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean setAddress(String address) {
-        if (address != null && !address.isEmpty()) {
-            this.address = address;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean setDisease(String disease) {
-        if (disease != null && !disease.isEmpty()) {
-            this.disease = disease;
-            return true;
-        }
-        return false;
-    }
-
-    public boolean setEntryDate(String entryDate) {
-        if (entryDate != null && !entryDate.isEmpty() && entryDate.matches("\\d{2}/\\d{2}/\\d{4}")) {
-            this.entryDate = entryDate;
-            return true;
-        }
-        return false;
-    }
-
-    // Display method
     public void displayPatientInfo() {
-        System.out.println("Patient ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Date of Birth: " + dob);
+        System.out.println("Patient ID: " + patientId);
+        System.out.println("Name: " + firstName + " " + lastName);
+        System.out.println("Gender: " + gender);
+        System.out.println("Date of Birth: " + dateOfBirth);
+        System.out.println("Phone: " + phone);
         System.out.println("Address: " + address);
-        System.out.println("Disease: " + disease);
-        System.out.println("Entry Date: " + entryDate);
     }
-
-
-    
 }
-
-

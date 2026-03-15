@@ -1,177 +1,79 @@
 package adminmangementsystem.com.entity;
 
-import java.time.LocalDateTime;
+public class Staff {
 
-public abstract class Staff {
+    private int staffId;
+    private String firstName;
+    private String lastName;
+    private String role;
+    private String phone;
+    private int departmentId;
 
+    public Staff() {}
 
-    // ========Field Encapsulation==========
-    protected String id;
-    protected String name;
-    protected String dob;
-    protected String address;
-    protected String email;
-    protected String position;
-    protected double salary;
-    protected String doe;
-    protected String qrCode;
-    protected boolean isActive;
-    protected LocalDateTime lastCheckIn;
-    protected LocalDateTime lastCheckOut;
-
-    // CONSTRUCTOR
-    public Staff(String id, String name, String dob, String address,
-                 String email, String position, double salary, String doe) {
-        setId(id);
-        setName(name);
-        setDob(dob);
-        setAddress(address);
-        setEmail(email);
-        setPosition(position);
-        setSalary(salary);
-        setDoe(doe);
-        this.qrCode = generateQRCode(id);
-        this.isActive = false;
-        this.lastCheckIn = null;
-        this.lastCheckOut = null;
-    }
-    
-    // Generate unique QR code data for staff
-    private String generateQRCode(String staffId) {
-        return "STAFF:" + staffId + ":" + System.currentTimeMillis();
+    public Staff(int staffId, String firstName, String lastName, 
+                 String role, String phone, int departmentId) {
+        this.staffId = staffId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.role = role;
+        this.phone = phone;
+        this.departmentId = departmentId;
     }
 
-    // SETTERS
-    public boolean setId(String id) {
-        if (id != null && !id.trim().isEmpty()) {
-            this.id = id;
-            return true;
-        }
-        return false;
+    public int getStaffId() {
+        return staffId;
     }
 
-    public boolean setName(String name) {
-        if (name != null && name.matches("[a-zA-Z ]{1,50}")) {
-            this.name = name;
-            return true;
-        }
-        return false;
+    public void setStaffId(int staffId) {
+        this.staffId = staffId;
     }
 
-    public void setDob(String dob) {
-        this.dob = dob;
+    public String getFirstName() {
+        return firstName;
     }
 
-    public void setAddress(String address) {
-        this.address = address;
+    public void setFirstName(String firstName) {
+        this.firstName = firstName;
     }
 
-    public boolean setEmail(String email) {
-        if (email != null && email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
-            this.email = email;
-            return true;
-        }
-        return false;
+    public String getLastName() {
+        return lastName;
     }
 
-    public void setPosition(String position) {
-        this.position = position;
+    public void setLastName(String lastName) {
+        this.lastName = lastName;
     }
 
-    public boolean setSalary(double salary) {
-        if (salary > 0) {
-            this.salary = salary;
-            return true;
-        }
-        return false;
+    public String getRole() {
+        return role;
     }
 
-    public void setDoe(String doe) {
-        this.doe = doe;
+    public void setRole(String role) {
+        this.role = role;
     }
 
-    // GETTERS
-    public String getId() {
-        return id;
+    public String getPhone() {
+        return phone;
     }
 
-    public String getName() {
-        return name;
+    public void setPhone(String phone) {
+        this.phone = phone;
     }
 
-    public String getDob() {
-        return dob;
+    public int getDepartmentId() {
+        return departmentId;
     }
 
-    public String getAddress() {
-        return address;
+    public void setDepartmentId(int departmentId) {
+        this.departmentId = departmentId;
     }
 
-    public String getEmail() {
-        return email;
-    }
-
-    public String getPosition() {
-        return position;
-    }
-
-    public double getSalary() {
-        return salary;
-    }
-
-    public String getDoe() {
-        return doe;
-    }
-    
-    public String getQrCode() {
-        return qrCode;
-    }
-    
-    public boolean isActive() {
-        return isActive;
-    }
-    
-    public void setActive(boolean active) {
-        this.isActive = active;
-    }
-    
-    public LocalDateTime getLastCheckIn() {
-        return lastCheckIn;
-    }
-    
-    public void setLastCheckIn(LocalDateTime lastCheckIn) {
-        this.lastCheckIn = lastCheckIn;
-    }
-    
-    public LocalDateTime getLastCheckOut() {
-        return lastCheckOut;
-    }
-    
-    public void setLastCheckOut(LocalDateTime lastCheckOut) {
-        this.lastCheckOut = lastCheckOut;
-    }
-    
-    // Check in staff
-    public void checkIn() {
-        this.isActive = true;
-        this.lastCheckIn = LocalDateTime.now();
-    }
-    
-    // Check out staff
-    public void checkOut() {
-        this.isActive = false;
-        this.lastCheckOut = LocalDateTime.now();
-    }
-
-    // ABSTRACT METHODS - Each staff type must implement these
-    public abstract String getResponsibilities();
-    public abstract String getDepartment();
-    public abstract void performDuty();
-
-    // DISPLAY
     public void display() {
-        System.out.println(id + " | " + name + " | " + dob + " | "
-                + address + " | " + email + " | "
-                + position + " | $" + salary + " | " + doe);
+        System.out.println("Staff ID: " + staffId);
+        System.out.println("Name: " + firstName + " " + lastName);
+        System.out.println("Role: " + role);
+        System.out.println("Phone: " + phone);
+        System.out.println("Department ID: " + departmentId);
     }
 }
