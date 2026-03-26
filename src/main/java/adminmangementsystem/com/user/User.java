@@ -1,28 +1,28 @@
 package adminmangementsystem.com.user;
 
 /**
- * Abstract base class for all users in the system.
- * Demonstrates OOP principles:
- * - Encapsulation: Private fields with getters/setters
- * - Abstraction: Abstract class with common behavior
- * - Inheritance: Base class for Manager, Receptionist, Doctor
- * - Polymorphism: Subclasses override can() method
+ * ABSTRACTION: Abstract base class - cannot create User objects directly
+ * INHERITANCE: Parent class for Manager and Receptionist
+ * ENCAPSULATION: Private fields with controlled access
  */
 public abstract class User implements IStaff {
     
+    // ENCAPSULATION: Private fields - hidden from outside access
     private String username;
     private String password;
     
+    // Constructor
     public User(String username, String password) {
         this.username = username;
         this.password = password;
     }
     
-    // Encapsulation: standard getters and setters
+    // ENCAPSULATION: Public getter - controlled read access
     public String getUsername() {
         return username;
     }
     
+    // ENCAPSULATION: Public setter - controlled write access
     public void setUsername(String username) {
         this.username = username;
     }
@@ -35,11 +35,12 @@ public abstract class User implements IStaff {
         this.password = password;
     }
     
-    // Common behavior for all users
+    // Common login method for all users
     public boolean login(String username, String password) {
         return this.username.equals(username) && this.password.equals(password);
     }
     
-    // Polymorphism: Subclasses must implement the 'can' method from IStaff interface
-    // This allows each user type to have different permissions
+    // ABSTRACTION: Abstract method - subclasses must implement
+    // POLYMORPHISM: Each subclass provides its own implementation
+    // Declared in IStaff interface: public abstract boolean can(String action);
 }

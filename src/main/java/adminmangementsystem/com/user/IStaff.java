@@ -1,15 +1,13 @@
 package adminmangementsystem.com.user;
 
 /**
- * Interface defining the contract for staff permission checking.
- * Demonstrates OOP Interface and Polymorphism principles.
- * Each user type implements this interface with their own permission logic.
+ * ABSTRACTION: Interface - defines contract without implementation
+ * All staff members must be able to check permissions
  */
 public interface IStaff {
     /**
-     * Check if the user has permission to perform a specific action.
-     * @param action The action to check permission for
-     * @return true if the user can perform the action, false otherwise
+     * POLYMORPHISM: Each class implements this differently
+     * Check if user has permission to perform an action
      */
     public abstract boolean can(String action);
 }

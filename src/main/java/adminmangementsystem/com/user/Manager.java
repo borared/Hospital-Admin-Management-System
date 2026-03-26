@@ -1,22 +1,22 @@
 package adminmangementsystem.com.user;
 
 /**
- * Manager class represents an administrator with full system access.
- * Demonstrates OOP Inheritance and Polymorphism.
+ * INHERITANCE: Manager extends User (IS-A relationship)
+ * POLYMORPHISM: Overrides can() method with Manager-specific behavior
  */
 public class Manager extends User {
 
+    // INHERITANCE: Constructor calls parent constructor using super()
     public Manager(String username, String password) {
         super(username, password);
     }
 
     /**
-     * Polymorphism: Override the can() method
-     * Manager has full control of the system - can perform any action
+     * POLYMORPHISM: Override the can() method from IStaff interface
+     * Manager has full system access - can perform any action
      */
     @Override
     public boolean can(String action) {
-        // Manager/Admin has full control of the system
-        return true;
+        return true;  // Simple: Manager can do everything
     }
 }

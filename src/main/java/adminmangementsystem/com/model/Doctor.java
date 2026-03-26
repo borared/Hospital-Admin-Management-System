@@ -1,7 +1,12 @@
 package adminmangementsystem.com.model;
 
+/**
+ * ENCAPSULATION: Doctor model class with private fields and public methods
+ * Represents a doctor in the hospital system
+ */
 public class Doctor {
 
+    // ENCAPSULATION: Private fields - data is hidden from outside access
     private String id;
     private String name;
     private String dob;
@@ -11,10 +16,9 @@ public class Doctor {
     private double salary;
     private String doe;   
 
-    // CONSTRUCTOR
+    // Constructor - creates a new Doctor object
     public Doctor(String id, String name, String dob, String address,
                   String email, String position, double salary, String doe) {
-
         setId(id);
         setName(name);
         setDob(dob);
@@ -25,7 +29,7 @@ public class Doctor {
         setDoe(doe);
     }
 
-    // SETTERS
+    // ENCAPSULATION: Setters with validation - controlled write access
 
     public boolean setId(String id) {
         if (id != null && !id.trim().isEmpty()) {
@@ -36,6 +40,7 @@ public class Doctor {
     }
 
     public boolean setName(String name) {
+        // Validation: Only letters and spaces, max 50 characters
         if (name != null && name.matches("[a-zA-Z ]{1,50}")) {
             this.name = name;
             return true;
@@ -52,6 +57,7 @@ public class Doctor {
     }
 
     public boolean setEmail(String email) {
+        // Validation: Must be valid email format
         if (email != null && email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+\\.[A-Za-z]{2,6}$")) {
             this.email = email;
             return true;
@@ -64,6 +70,7 @@ public class Doctor {
     }
 
     public boolean setSalary(double salary) {
+        // Validation: Salary must be positive
         if (salary > 0) {
             this.salary = salary;
             return true;
@@ -75,7 +82,7 @@ public class Doctor {
         this.doe = doe;
     }
 
-    // GETTERS
+    // ENCAPSULATION: Getters - controlled read access
 
     public String getId() {
         return id;
@@ -109,8 +116,7 @@ public class Doctor {
         return doe;
     }
 
-    // DISPLAY
-
+    // Display method - shows doctor information
     public void display() {
         System.out.println(id + " | " + name + " | " + dob + " | "
                 + address + " | " + email + " | "

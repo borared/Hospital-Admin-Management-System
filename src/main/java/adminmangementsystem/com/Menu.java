@@ -30,6 +30,25 @@ private static final String LINE = "+-------------------------------------------
         System.out.printf("| %-54s |\n", " 10.Exit");
         System.out.println(LINE);
     }
+    /**
+     * POLYMORPHISM: Different menu for Receptionist role
+     * Shows only options Receptionist can access
+     */
+    public static void printReceptionistMenu() {
+        System.out.println(LINE);
+        System.out.printf("| %-54s |\n", "          Hospital Admin Management System");
+        System.out.println(SEP);
+        System.out.printf("| %-54s |\n", " 1.Patient Management System");
+        System.out.println(SEP);
+        System.out.printf("| %-54s |\n", " 2.Schedule Appointment");
+        System.out.println(SEP);
+        System.out.printf("| %-54s |\n", " 3.View Appointment");
+        System.out.println(SEP);
+        System.out.printf("| %-54s |\n", " 4.View Patient List");
+        System.out.println(SEP);
+        System.out.printf("| %-54s |\n", " 5.Exit");
+        System.out.println(LINE);
+    }
 
     public static void printAdminLoginMenu(){
         String line = "+-----------------------------------------------------------+";
