@@ -8,6 +8,8 @@ C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\a
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\controller\PatientController.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\controller\SurgeonController.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\Doctor.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\entity\Admin.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\entity\Doctor.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\management\AbstractManagementSystem.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\management\AppointmentService.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\management\DoctorSystem.java
@@ -17,9 +19,14 @@ C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\a
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\management\PatientSystem.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\management\StaffSystem.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\Menu.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\model\Admin.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\model\Appointment.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\model\Cardiologist.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\model\Doctor.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\model\Nurse.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\model\Patient.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\model\Staff.java
+C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\model\Surgeon.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\Nurse.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\Staff.java
 C:\Users\U-ser\OneDrive\Desktop\Hospital-Admin-Management-System\src\main\java\adminmangementsystem\com\Surgeon.java
