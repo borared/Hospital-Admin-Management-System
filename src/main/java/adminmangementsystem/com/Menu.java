@@ -50,15 +50,20 @@ private static final String LINE = "+-------------------------------------------
         System.out.println(LINE);
     }
 
+    /**
+     * POLYMORPHISM: Shows different login options for different user types
+     */
     public static void printAdminLoginMenu(){
         String line = "+-----------------------------------------------------------+";
         String separator = "-------------------------------------------------------------";
         System.out.println(line);
         System.out.printf("| %-57s |\n", "             Hospital Admin Management System");
         System.out.println(separator);
-        System.out.printf("| %-57s |\n", " 1.Login as admin");
+        System.out.printf("| %-57s |\n", " 1. Login as Manager");
         System.out.println(separator);
-        System.out.printf("| %-57s |\n", " 2.Exit");
+        System.out.printf("| %-57s |\n", " 2. Login as Receptionist");
+        System.out.println(separator);
+        System.out.printf("| %-57s |\n", " 3. Exit");
         System.out.println(line);
     }
 
