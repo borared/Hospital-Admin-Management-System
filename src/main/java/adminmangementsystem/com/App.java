@@ -1,4 +1,4 @@
-﻿package adminmangementsystem.com;
+package adminmangementsystem.com;
 
 import java.util.Scanner;
 import adminmangementsystem.com.controller.AppointmentController;
@@ -21,10 +21,9 @@ public class App {
             new Manager("admin", "admin$$"),
             new Receptionist("receptionist", "rec123")
         };
-        
-        AppointmentService appointmentSystem = new AppointmentService();
         PatientSystem patientSystem = new PatientSystem();
         DoctorSystem doctorSystem = new DoctorSystem();
+        AppointmentService appointmentSystem = new AppointmentService(patientSystem);
 
         DoctorController doctorController = new DoctorController(doctorSystem);
         PatientController patientController = new PatientController(patientSystem);

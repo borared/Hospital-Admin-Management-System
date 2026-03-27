@@ -3,19 +3,33 @@ package adminmangementsystem.com.view;
 import java.util.Scanner;
 import adminmangementsystem.com.Validator;
 import adminmangementsystem.com.model.Appointment;
+import adminmangementsystem.com.model.Patient;
+import adminmangementsystem.com.management.PatientSystem;
 
+/**
+ * COMPOSITION: AppointmentView creates appointments using existing Patient objects
+ */
 public class AppointmentView {
 
-    public static Appointment getAppointmentInput(Scanner sc) {
+    /**
+     * COMPOSITION: Creates appointment by linking to existing Patient
+     */
+    public static Appointment getAppointmentInput(Scanner sc, PatientSystem patientSystem) {
         System.out.println("\t\t------Appointment Management System------");
         
+        // Get patient ID and search for existing patient
         String patientId = Validator.getNonEmpty(sc, "Enter Patient ID: ");
-        String patientName = Validator.getOnlyLetter(sc, "Enter Patient Name: ");
-        String patientDOB = Validator.getValidDateFomart(sc, "Enter patient Date of Birth (dd/mm/yyyy): ");
-        String phoneNumber = Validator.getPhoneNumberLength(sc, "Enter patient Phone Number: ");
-        String disease = Validator.getOnlyLetter(sc, "Enter patient disease: ");
-        String DOA = Validator.getValidDateFomart(sc, "Enter date of appointment (dd/mm/yyyy): ");
+        Patient patient = patientSystem.searchPatientById(patientId);
         
-        return new Appointment(patientId, patientName, patientDOB, disease, phoneNumber, DOA);
+        if (patient == null) {
+            System.out.println("Error: Patient not found. Please register the patient first.");
+            return null;
+        }
+        
+        // Get appointment details
+        String appointmentDate = Validator.getValidDateFomart(sc, "Enter appointment date (dd/mm/yyyy): ");
+        String appointmentTime = Validator.getNonEmpty(sc, "Enter appointment time (e.g., 10:00 AM): ");
+        
+        return new Appointment(patient, appointmentDate, appointmentTime);
     }
 }

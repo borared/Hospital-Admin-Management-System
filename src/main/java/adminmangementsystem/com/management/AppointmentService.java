@@ -5,9 +5,27 @@ import java.util.List;
 import java.util.Scanner;
 import adminmangementsystem.com.model.Appointment;
 
+/**
+ * ENCAPSULATION: Manages all appointments privately
+ * COMPOSITION: Works with Patient objects through Appointment
+ */
 public class AppointmentService implements IAppointmentService {
     
     private List<Appointment> appointments = new ArrayList<>();
+    private PatientSystem patientSystem;
+
+    // Constructor receives PatientSystem for composition
+    public AppointmentService(PatientSystem patientSystem) {
+        setPatientSystem(patientSystem);
+    }
+    
+    public boolean setPatientSystem(PatientSystem patientSystem) {
+        if (patientSystem != null) {
+            this.patientSystem = patientSystem;
+            return true;
+        }
+        return false;
+    }
 
     @Override
     public void addAppointment(Appointment appointment) {
@@ -34,11 +52,8 @@ public class AppointmentService implements IAppointmentService {
             return false;
         }
         
-        existingAppointment.setPatientName(updatedAppointment.getPatientName());
-        existingAppointment.setPatientDOB(updatedAppointment.getPatientDOB());
-        existingAppointment.setPatientPhoneNum(updatedAppointment.getPatientPhoneNum());
-        existingAppointment.setPatientDisease(updatedAppointment.getPatientDisease());
-        existingAppointment.setDOA(updatedAppointment.getDOA());
+        existingAppointment.setAppointmentDate(updatedAppointment.getAppointmentDate());
+        existingAppointment.setAppointmentTime(updatedAppointment.getAppointmentTime());
         
         return true;
     }
@@ -78,7 +93,7 @@ public class AppointmentService implements IAppointmentService {
     public List<Appointment> searchAppointmentsByDate(String date) {
         List<Appointment> results = new ArrayList<>();
         for (Appointment appointment : appointments) {
-            if (appointment.getDOA().equals(date)) {
+            if (appointment.getAppointmentDate().equals(date)) {
                 results.add(appointment);
             }
         }
@@ -102,28 +117,31 @@ public class AppointmentService implements IAppointmentService {
             return;
         }
 
-        String line = "------------------------------------------------------------------------------------------------";
+        String line = "------------------------------------------------------------------------------------------------------------";
         System.out.println(line);
-        System.out.printf("| %-5s | %-18s | %-12s | %-15s | %-15s | %-12s |\n",
-                "ID", "Patient Name", "DOB", "Phone", "Disease", "DOA");
+        System.out.printf("| %-5s | %-18s | %-12s | %-20s | %-15s | %-12s | %-8s |\n",
+                "ID", "Patient Name", "DOB", "Address", "Disease", "Date", "Time");
         System.out.println(line);
 
         for (Appointment a : appointments) {
-            System.out.printf("| %-5s | %-18s | %-12s | %-15s | %-15s | %-12s |\n",
+            System.out.printf("| %-5s | %-18s | %-12s | %-20s | %-15s | %-12s | %-8s |\n",
                     a.getPatientId(),
                     a.getPatientName(),
                     a.getPatientDOB(),
-                    a.getPatientPhoneNum(),
+                    a.getPatientAddress(),
                     a.getPatientDisease(),
-                    a.getDOA());
+                    a.getAppointmentDate(),
+                    a.getAppointmentTime());
         }
 
         System.out.println(line);
     }
 
     public void addAppointment(Scanner sc) {
-        Appointment appointment = adminmangementsystem.com.view.AppointmentView.getAppointmentInput(sc);
-        appointments.add(appointment);
-        System.out.println("Appointment scheduled successfully.\n");
+        Appointment appointment = adminmangementsystem.com.view.AppointmentView.getAppointmentInput(sc, patientSystem);
+        if (appointment != null) {
+            appointments.add(appointment);
+            System.out.println("Appointment scheduled successfully.\n");
+        }
     }
 }
