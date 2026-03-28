@@ -3,7 +3,7 @@ package adminmangementsystem.com.controller;
 import java.util.List;
 import java.util.Scanner;
 
-import adminmangementsystem.com.Cardiologist;
+import adminmangementsystem.com.model.Cardiologist;
 import adminmangementsystem.com.management.StaffSystem;
 import adminmangementsystem.com.view.CardiologistView;
 

@@ -4,7 +4,13 @@ import java.util.ArrayList;
 import java.util.List;
 import adminmangementsystem.com.model.Patient;
 
-public class PatientSystem extends AbstractManagementSystem<Patient> implements IPatientSystem {
+/**
+ * ENCAPSULATION: Manages patient records privately
+ */
+public class PatientSystem implements IPatientSystem {
+    
+    // ENCAPSULATION: Private list of patients
+    private List<Patient> records = new ArrayList<>();
 
     @Override
     public void addPatient(Patient patient) {
@@ -62,14 +68,17 @@ public class PatientSystem extends AbstractManagementSystem<Patient> implements 
 
     @Override
     public List<Patient> getAllPatients() {
-        return getAll();
+        return new ArrayList<>(records);
+    }
+    
+    private boolean isEmpty() {
+        return records.isEmpty();
     }
 
     private boolean isIdUnique(String id) {
         return searchPatientById(id) == null;
     }
     
-    @Override
     public void displayAll() {
         viewPatientList(null);
     }

@@ -5,7 +5,13 @@ import java.util.List;
 import java.util.Scanner;
 import adminmangementsystem.com.model.Doctor;
 
-public class DoctorSystem extends AbstractManagementSystem<Doctor> implements IDoctorSystem {
+/**
+ * ENCAPSULATION: Manages doctor records privately
+ */
+public class DoctorSystem implements IDoctorSystem {
+    
+    // ENCAPSULATION: Private list of doctors
+    private List<Doctor> records = new ArrayList<>();
     
     @Override
     public void addDoctor(Doctor doctor) {
@@ -76,7 +82,7 @@ public class DoctorSystem extends AbstractManagementSystem<Doctor> implements ID
     
     @Override
     public List<Doctor> getAllDoctors() {
-        return getAll();
+        return new ArrayList<>(records);
     }
     
     @Override
@@ -89,7 +95,6 @@ public class DoctorSystem extends AbstractManagementSystem<Doctor> implements ID
         viewDoctorList();
     }
     
-    @Override
     public void displayAll() {
         viewDoctorList();
     }
@@ -180,7 +185,7 @@ public class DoctorSystem extends AbstractManagementSystem<Doctor> implements ID
     public void viewDoctorList() {
         System.out.println("\t\t\t\t------Doctor List------");
         
-        if (isEmpty()) {
+        if (records.isEmpty()) {
             System.out.println("No doctors found.");
             return;
         }

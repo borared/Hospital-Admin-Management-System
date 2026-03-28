@@ -3,7 +3,7 @@ package adminmangementsystem.com.controller;
 import java.util.Scanner;
 import java.util.List;
 import adminmangementsystem.com.management.StaffSystem;
-import adminmangementsystem.com.Surgeon;
+import adminmangementsystem.com.model.Surgeon;
 import adminmangementsystem.com.view.SurgeonView;
 import adminmangementsystem.com.Menu;
 

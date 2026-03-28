@@ -2,7 +2,7 @@ package adminmangementsystem.com.view;
 
 import java.util.Scanner;
 import adminmangementsystem.com.Validator;
-import adminmangementsystem.com.Cardiologist;
+import adminmangementsystem.com.model.Cardiologist;
 
 public class CardiologistView {
 

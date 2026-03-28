@@ -3,10 +3,15 @@ package adminmangementsystem.com.management;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
-import adminmangementsystem.com.Staff;
+import adminmangementsystem.com.model.Staff;
 
-public class StaffSystem<T extends Staff> extends AbstractManagementSystem<T> {
-
+/**
+ * ENCAPSULATION: Manages staff records privately
+ */
+public class StaffSystem<T extends Staff> {
+    
+    // ENCAPSULATION: Private list of staff
+    private List<T> records = new ArrayList<>();
     private final Class<T> type;
 
     public StaffSystem(Class<T> type) {
@@ -94,7 +99,6 @@ public class StaffSystem<T extends Staff> extends AbstractManagementSystem<T> {
         }
     }
 
-    @Override
     public void displayAll() {
         if (records.isEmpty()) {
             System.out.println("No " + type.getSimpleName() + " records found.");
