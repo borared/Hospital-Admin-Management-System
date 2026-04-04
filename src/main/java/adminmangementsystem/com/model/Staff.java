@@ -88,7 +88,7 @@ public abstract class Staff {
         this.doe = doe;
     }
 
-    // GETTERS
+    // GETTER
     public String getId() {
         return id;
     }
@@ -154,7 +154,6 @@ public abstract class Staff {
         this.isActive = true;
         this.lastCheckIn = LocalDateTime.now();
     }
-    
     // Check out staff
     public void checkOut() {
         this.isActive = false;
