@@ -1,6 +1,6 @@
 package adminmangementsystem.com.model;
 
-public class Cardiologist extends Staff {
+public class Cardiologist extends Doctor {
 
     private String fellowship;  // e.g., "Interventional Cardiology"
 

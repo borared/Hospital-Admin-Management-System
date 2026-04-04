@@ -28,10 +28,6 @@ public abstract class Staff {
         setPosition(position);
         setSalary(salary);
         setDoe(doe);
-        this.qrCode = generateQRCode(id);
-        this.isActive = false;
-        this.lastCheckIn = null;
-        this.lastCheckOut = null;
     }
     
     // Generate unique QR code data for staff

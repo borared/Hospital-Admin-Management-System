@@ -1,6 +1,6 @@
 package adminmangementsystem.com.model;
 
-public class Surgeon extends Staff {
+public class Surgeon extends Doctor {
 
     private String specialization;  // e.g., "Orthopedic", "Cardiothoracic"
 

@@ -1,6 +1,6 @@
 package adminmangementsystem.com.model;
 
-public class Nurse extends Staff {
+public class Nurse extends Doctor {
 
     private String shift;  // e.g., "Day", "Night"
 
