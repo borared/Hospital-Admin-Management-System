@@ -157,7 +157,7 @@ public class DoctorSystem implements IDoctorSystem {
                 System.out.println("|                                             No doctors found with that name                                              |");
             } else {
                 for (Doctor d : results) {
-                    d.display();  // Instance method
+                    d.displayDoctor();  // Instance method
                 }
             }
             
@@ -166,7 +166,7 @@ public class DoctorSystem implements IDoctorSystem {
             Doctor found = searchDoctorById(searchId);
             
             if (found != null) {
-                found.display();  // Instance method
+                found.displayDoctor();  // Instance method
             } else {
                 System.out.println("|                                                     Doctor not found                                                      |");
             }

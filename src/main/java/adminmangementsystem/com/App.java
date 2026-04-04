@@ -1,4 +1,4 @@
-package adminmangementsystem.com;
+﻿package adminmangementsystem.com;
 
 import java.util.Scanner;
 import adminmangementsystem.com.controller.AppointmentController;
@@ -90,11 +90,14 @@ public class App {
         String password = sc.nextLine();
         
         for (User user : users) {
-            if (userType.isInstance(user) && user.login(username, password)) {
+            boolean isCorrectType = userType.isInstance(user);
+            boolean isValidLogin = user.login(username, password);
+
+            if (isCorrectType && isValidLogin) {
                 return userType.cast(user);
             }
         }
-        
+
         return null;
     }
 }

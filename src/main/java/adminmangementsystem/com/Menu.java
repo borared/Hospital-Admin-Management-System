@@ -13,9 +13,9 @@ private static final String LINE = "+-------------------------------------------
         System.out.println(SEP);
         System.out.printf("| %-54s |\n", " 2.Patient Management System");
         System.out.println(SEP);
-        System.out.printf("| %-54s |\n", " 3.Cardiologist Management");
+        System.out.printf("| %-54s |\n", " 3.View Cardiology list");
         System.out.println(SEP);
-        System.out.printf("| %-54s |\n", " 4.Surgeon Management");
+        System.out.printf("| %-54s |\n", " 4.View Surgeon list");
         System.out.println(SEP);
         System.out.printf("| %-54s |\n", " 5.Nurse Management");
         System.out.println(SEP);
