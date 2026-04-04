@@ -148,9 +148,7 @@ public class PatientSystem implements IPatientSystem {
                 System.out.println("|                                             No patients found with that name                                              |");
             } else {
                 for (Patient p : results) {
-                    System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
-                            p.getId(), p.getName(), p.getDob(), p.getAddress(),
-                            p.getDisease(), p.getEntryDate());
+                    p.displayPatientInfo();  // Instance method
                 }
             }
             
@@ -159,9 +157,7 @@ public class PatientSystem implements IPatientSystem {
             Patient found = searchPatientById(searchId);
             
             if (found != null) {
-                System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
-                        found.getId(), found.getName(), found.getDob(), found.getAddress(),
-                        found.getDisease(), found.getEntryDate());
+                found.displayPatientInfo();  // Instance method
             } else {
                 System.out.println("|                                                     Patient not found                                                      |");
             }
@@ -188,9 +184,7 @@ public class PatientSystem implements IPatientSystem {
         System.out.println(line);
 
         for (Patient p : records) {
-            System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
-                    p.getId(), p.getName(), p.getDob(), p.getAddress(),
-                    p.getDisease(), p.getEntryDate());
+            p.displayPatientInfo();  // Instance method - each patient displays itself
         }
 
         System.out.println(line);

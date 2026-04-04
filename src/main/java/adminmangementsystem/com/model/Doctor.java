@@ -7,7 +7,7 @@ package adminmangementsystem.com.model;
 public class Doctor {
 
     // ENCAPSULATION: Private fields - data is hidden from outside access
-    private String id;
+    private final String id;  // 'final' = immutable, cannot change after construction
     private String name;
     private String dob;
     private String address;
@@ -19,7 +19,13 @@ public class Doctor {
     // Constructor - creates a new Doctor object
     public Doctor(String id, String name, String dob, String address,
                   String email, String position, double salary, String doe) {
-        setId(id);
+        // Validate ID in constructor (only place to set it)
+        if (id == null || id.trim().isEmpty()) {
+            throw new IllegalArgumentException("Doctor ID cannot be null or empty");
+        }
+        this.id = id.trim();  // Set once, cannot change later
+        
+        // Other fields use setters (can be changed later)
         setName(name);
         setDob(dob);
         setAddress(address);
@@ -30,14 +36,7 @@ public class Doctor {
     }
 
     // ENCAPSULATION: Setters with validation - controlled write access
-
-    public boolean setId(String id) {
-        if (id != null && !id.trim().isEmpty()) {
-            this.id = id;
-            return true;
-        }
-        return false;
-    }
+    // NOTE: No setId() method - ID is read-only after creation
 
     public boolean setName(String name) {
         // Validation: Only letters and spaces, max 50 characters
@@ -116,10 +115,9 @@ public class Doctor {
         return doe;
     }
 
-    // Display method - shows doctor information
-    public void display() {
-        System.out.println(id + " | " + name + " | " + dob + " | "
-                + address + " | " + email + " | "
-                + position + " | $" + salary + " | " + doe);
+    // Display method - instance-based, shows THIS doctor's data in table format
+    public void displayDoctor() {
+        System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
+                id, name, dob, address, email, position, salary, doe);
     }
 }

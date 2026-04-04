@@ -2,7 +2,7 @@ package adminmangementsystem.com.model;
 
 public class Patient {
 
-    private String id;
+    private final String id;  // 'final' = immutable, cannot change after construction
     private String name;
     private String dob;
     private String address;
@@ -12,8 +12,14 @@ public class Patient {
     // Constructor
     public Patient(String patId, String patName, String patDOB,
                    String patDisease, String patPhoneNumber, String patDOE) {
-        if(!setId(patId) ||
-           !setName(patName) ||
+        // Validate ID in constructor (only place to set it)
+        if (patId == null || patId.trim().isEmpty()) {
+            throw new IllegalArgumentException("Patient ID cannot be null or empty");
+        }
+        this.id = patId.trim();  // Set once, cannot change later
+        
+        // Other fields use setters with validation
+        if(!setName(patName) ||
            !setDob(patDOB) ||
            !setDisease(patDisease) ||
            !setAddress(patPhoneNumber) ||
@@ -49,14 +55,8 @@ public class Patient {
     }
 
     // Setters with validation
-    public boolean setId(String id) {
-        if (id != null && !id.isEmpty()) {
-            this.id = id;
-            return true;
-        }
-        return false;
-    }
-
+    // NOTE: No setId() method - ID is read-only after creation
+    
     public boolean setName(String name) {
         if (name != null && !name.isEmpty() && name.matches("[a-zA-Z ]{1,50}")) {
             this.name = name;
@@ -82,8 +82,8 @@ public class Patient {
     }
 
     public boolean setDisease(String disease) {
-        if (disease != null && !disease.isEmpty()) {
-            this.disease = disease;
+        if (disease != null && !disease.trim().isEmpty()) {
+            this.disease = disease.trim();
             return true;
         }
         return false;
@@ -97,14 +97,10 @@ public class Patient {
         return false;
     }
 
-    // Display method
+    // Display method - instance-based, shows THIS patient's data in table format
     public void displayPatientInfo() {
-        System.out.println("Patient ID: " + id);
-        System.out.println("Name: " + name);
-        System.out.println("Date of Birth: " + dob);
-        System.out.println("Address: " + address);
-        System.out.println("Disease: " + disease);
-        System.out.println("Entry Date: " + entryDate);
+        System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-15s | %-12s |\n",
+                id, name, dob, address, disease, entryDate);
     }
 
 

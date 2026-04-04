@@ -157,9 +157,7 @@ public class DoctorSystem implements IDoctorSystem {
                 System.out.println("|                                             No doctors found with that name                                              |");
             } else {
                 for (Doctor d : results) {
-                    System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
-                            d.getId(), d.getName(), d.getDob(), d.getAddress(), d.getEmail(),
-                            d.getPosition(), d.getSalary(), d.getDoe());
+                    d.display();  // Instance method
                 }
             }
             
@@ -168,9 +166,7 @@ public class DoctorSystem implements IDoctorSystem {
             Doctor found = searchDoctorById(searchId);
             
             if (found != null) {
-                System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
-                        found.getId(), found.getName(), found.getDob(), found.getAddress(),
-                        found.getEmail(), found.getPosition(), found.getSalary(), found.getDoe());
+                found.display();  // Instance method
             } else {
                 System.out.println("|                                                     Doctor not found                                                      |");
             }
@@ -198,9 +194,7 @@ public class DoctorSystem implements IDoctorSystem {
         System.out.println(line);
         
         for (Doctor d : records) {
-            System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
-                    d.getId(), d.getName(), d.getDob(), d.getAddress(),
-                    d.getEmail(), d.getPosition(), d.getSalary(), d.getDoe());
+            d.displayDoctor();  // Instance method - each doctor displays itself
         }
         
         System.out.println(line);
@@ -224,9 +218,7 @@ public class DoctorSystem implements IDoctorSystem {
         for (Doctor d : records) {
             if (d.getPosition() != null && d.getPosition().equalsIgnoreCase(position)) {
                 found = true;
-                System.out.printf("| %-5s | %-18s | %-12s | %-18s | %-20s | %-12s | %-10.2f | %-12s |\n",
-                        d.getId(), d.getName(), d.getDob(), d.getAddress(),
-                        d.getEmail(), d.getPosition(), d.getSalary(), d.getDoe());
+                d.displayDoctor();  // Instance method
             }
         }
 
