@@ -30,10 +30,6 @@ public abstract class Staff {
         setDoe(doe);
     }
     
-    // Generate unique QR code data for staff
-    private String generateQRCode(String staffId) {
-        return "STAFF:" + staffId + ":" + System.currentTimeMillis();
-    }
 
     // SETTERS
     public boolean setId(String id) {
