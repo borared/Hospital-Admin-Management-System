@@ -72,33 +72,6 @@ public class StaffSystem<T extends Staff> {
     }
 
     // Attendance methods
-    public void checkInStaff(String id) {
-        T staff = searchStaffById(id);
-        if (staff != null) {
-            staff.checkIn();
-            System.out.println(staff.getName() + " checked in at " + staff.getLastCheckIn());
-        } else {
-            System.out.println("Staff not found.");
-        }
-    }
-
-    public void checkOutStaff(String id) {
-        T staff = searchStaffById(id);
-        if (staff != null) {
-            staff.checkOut();
-            System.out.println(staff.getName() + " checked out at " + staff.getLastCheckOut());
-        } else {
-            System.out.println("Staff not found.");
-        }
-    }
-
-    public void displayAttendance() {
-        for (T s : records) {
-            System.out.println(s.getId() + " | " + s.getName() + " | Active: " + s.isActive() +
-                               " | Last In: " + s.getLastCheckIn() + " | Last Out: " + s.getLastCheckOut());
-        }
-    }
-
     public void displayAll() {
         if (records.isEmpty()) {
             System.out.println("No " + type.getSimpleName() + " records found.");
@@ -106,7 +79,6 @@ public class StaffSystem<T extends Staff> {
         }
         for (T s : records) {
             s.display();  // uses the overridden display in each subclass
-            System.out.println("QR Code: " + s.getQrCode());
             System.out.println("Department: " + s.getDepartment());
             System.out.println("Responsibilities: " + s.getResponsibilities());
             System.out.println("---");
