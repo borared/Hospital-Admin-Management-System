@@ -27,7 +27,7 @@ public class PatientSystem implements IPatientSystem {
 
     @Override
     public boolean deletePatient(String id) {
-        Patient patient = searchPatientById(id);
+        Patient patient = searchPatient(id);
         if (patient != null) {
             records.remove(patient);
             return true;
@@ -41,7 +41,7 @@ public class PatientSystem implements IPatientSystem {
             return false;
         }
 
-        Patient existingPatient = searchPatientById(updatedPatient.getId());
+        Patient existingPatient = searchPatient(updatedPatient.getId());
 
         if (existingPatient == null) {
             return false;
@@ -56,8 +56,10 @@ public class PatientSystem implements IPatientSystem {
         return true;
     }
 
+  
+
     @Override
-    public Patient searchPatientById(String id) {
+    public Patient searchPatient(String id) {
         for (Patient patient : records) {
             if (patient.getId().equalsIgnoreCase(id)) {
                 return patient;
@@ -65,6 +67,17 @@ public class PatientSystem implements IPatientSystem {
         }
         return null;
     }
+
+    @Override
+    public List<Patient> searchPatient(String name, String dob) {
+        List<Patient> results = new ArrayList<>();
+        for (Patient p : records) {
+            if (p.getName().equalsIgnoreCase(name)) {
+                results.add(p);
+            }
+        }
+        return results;
+    }                        
 
     @Override
     public List<Patient> getAllPatients() {
@@ -76,7 +89,7 @@ public class PatientSystem implements IPatientSystem {
     }
 
     private boolean isIdUnique(String id) {
-        return searchPatientById(id) == null;
+        return searchPatient(id) == null;
     }
     
     public void displayAll() {
@@ -97,7 +110,7 @@ public class PatientSystem implements IPatientSystem {
     
     public void updatePatient(java.util.Scanner sc) {
         String updateId = adminmangementsystem.com.view.PatientView.getSearchId(sc);
-        Patient pToUpdate = searchPatientById(updateId);
+        Patient pToUpdate = searchPatient(updateId);
         
         if (pToUpdate == null) {
             System.out.println("Patient not found!");
@@ -110,7 +123,7 @@ public class PatientSystem implements IPatientSystem {
     
     public void deletePatient(java.util.Scanner sc) {
         String deleteId = adminmangementsystem.com.view.PatientView.getPatientIdForDelete(sc);
-        Patient pToDelete = searchPatientById(deleteId);
+        Patient pToDelete = searchPatient(deleteId);
         
         if (pToDelete == null) {
             System.out.println("Patient not found!");
@@ -154,7 +167,7 @@ public class PatientSystem implements IPatientSystem {
             
         } else if (searchChoice == 2) {
             String searchId = adminmangementsystem.com.view.PatientView.getSearchId(sc);
-            Patient found = searchPatientById(searchId);
+            Patient found = searchPatient(searchId);
             
             if (found != null) {
                 found.displayPatientInfo();  // Instance method

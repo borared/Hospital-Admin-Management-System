@@ -11,7 +11,11 @@ public interface IPatientSystem {
 
     boolean updatePatient(Patient patient);
 
-    Patient searchPatientById(String id);
+
+    // Overloaded search methods for patient lookup
+    Patient searchPatient(String id);
+
+    List<Patient> searchPatient(String name, String dob);
 
     List<Patient> getAllPatients();
 }

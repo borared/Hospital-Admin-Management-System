@@ -19,7 +19,7 @@ public class AppointmentView {
         
         // Get patient ID and search for existing patient
         String patientId = Validator.getNonEmpty(sc, "Enter Patient ID: ");
-        Patient patient = patientSystem.searchPatientById(patientId);
+        Patient patient = patientSystem.searchPatient(patientId);
         
         if (patient == null) {
             System.out.println("Error: Patient not found. Please register the patient first.");

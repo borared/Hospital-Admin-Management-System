@@ -1,4 +1,4 @@
-﻿package adminmangementsystem.com;
+package adminmangementsystem.com;
 
 import java.util.Scanner;
 import adminmangementsystem.com.controller.AppointmentController;
