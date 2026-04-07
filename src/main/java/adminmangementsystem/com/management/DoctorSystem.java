@@ -99,6 +99,7 @@ public class DoctorSystem implements IDoctorSystem {
         viewDoctorList();
     }
 
+    // Create Object Doctor
     public void addDoctor(Scanner sc) {
         Doctor doctor = adminmangementsystem.com.view.DoctorView.getDoctorInput(sc);
         

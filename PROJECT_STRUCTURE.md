@@ -12,12 +12,10 @@ Hospital-Admin-Management-System/
 │   ├── Validator.java              # Input validation utilities
 │   │
 │   ├── controller/                 # Business Logic Layer
-│   │   ├── MainController.java     # Main app controller & menu routing
 │   │   ├── DoctorController.java   # Doctor management operations
 │   │   ├── PatientController.java  # Patient management operations
 │   │   ├── AppointmentController.java # Appointment scheduling
-│   │   ├── CardiologistController.java # Cardiologist-specific operations
-│   │   └── SurgeonController.java  # Surgeon-specific operations
+│   │   └── MainController.java     # Main app controller & menu routing
 │   │
 │   ├── management/                 # Data Management Layer
 │   │   ├── DoctorSystem.java       # Doctor CRUD operations
