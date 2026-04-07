@@ -1,11 +1,14 @@
 package adminmangementsystem.com.management;
 
 import java.util.List;
+import java.util.Scanner;
 import adminmangementsystem.com.model.Appointment;
 
 public interface IAppointmentService {
     
     void addAppointment(Appointment appointment);
+    
+    void addAppointment(Scanner sc);
     
     boolean updateAppointment(Appointment appointment);
     

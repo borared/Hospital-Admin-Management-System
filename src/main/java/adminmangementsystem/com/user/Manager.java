@@ -12,7 +12,7 @@ public class Manager extends User {
     }
 
     /**
-     * POLYMORPHISM: Override the can() method from IStaff interface
+     * POLYMORPHISM: Override the can() method from IUser interface
      * Manager has full system access - can perform any action
      */
     @Override

@@ -5,7 +5,7 @@ package adminmangementsystem.com.user;
  * INHERITANCE: Parent class for Manager and Receptionist
  * ENCAPSULATION: Private fields with controlled access
  */
-public abstract class User implements IStaff {
+public abstract class User implements IUser {
     
     // ENCAPSULATION: Private fields - hidden from outside access
     private String username;

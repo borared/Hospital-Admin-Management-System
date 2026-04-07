@@ -97,7 +97,6 @@ public class App {
                 return userType.cast(user);
             }
         }
-
         return null;
     }
 }

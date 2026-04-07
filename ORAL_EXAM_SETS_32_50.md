@@ -178,18 +178,32 @@ Hiding implementation details (encapsulation) allows internal changes without af
 In the DoctorSystem class:
 
 ```java
-public Doctor findDoctorById(int id) {
-    // Internal implementation: could use ArrayList, HashMap, or database
-    for (Doctor doctor : doctors) {
-        if (doctor.getId() == id) {
-            return doctor;
+// In AppointmentController.java
+public class AppointmentController {
+    private final IAppointmentService appointmentService;
+
+    public void run(Scanner sc) {
+        // ... menu logic ...
+        switch (appointmentChoice) {
+            case 1:
+                appointmentService.addAppointment(sc);  // Calls the method
+                break;
+            case 2:
+                appointmentService.viewAppointments();  // Calls the method
+                break;
+            // ...
         }
     }
-    return null;
 }
 ```
 
-Controllers call `findDoctorById()` without knowing if doctors are stored in a list, map, or database. The implementation can change from ArrayList to HashMap for better performance without affecting any calling code.
+The controller doesn't know that:
+
+addAppointment(sc) internally calls AppointmentView.getAppointmentInput(sc, patientSystem) to get user input
+It validates patient IDs using isPatientIdUnique() and searchAppointmentById()
+Appointments are stored in a private ArrayList<Appointment> field
+It interacts with PatientSystem for patient validation
+The implementation could change to use a database or different storage without affecting AppointmentController—it only depends on the interface contract. This demonstrates encapsulation: the controller uses the public method without needing to know how appointments are created, validated, or stored internally
 
 ### Q3 (100): Explain how this kind of encapsulation makes debugging and modification easier later.
 Encapsulation improves maintenance:

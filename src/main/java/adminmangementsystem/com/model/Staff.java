@@ -1,8 +1,8 @@
 package adminmangementsystem.com.model;
 
-import java.time.LocalDateTime;
 
-public abstract class Staff {
+
+public abstract class Staff implements IStaff {
 
     protected String id;
     protected String name;

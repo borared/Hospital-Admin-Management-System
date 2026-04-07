@@ -12,7 +12,7 @@ public class Receptionist extends User {
     }
 
     /**
-     * POLYMORPHISM: Override the can() method from IStaff interface
+     * POLYMORPHISM: Override the can() method from IUser interface
      * Receptionist has limited permissions - only patient and appointment management
      */
     @Override

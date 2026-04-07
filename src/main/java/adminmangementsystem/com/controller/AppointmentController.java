@@ -1,17 +1,17 @@
 package adminmangementsystem.com.controller;
 
 import java.util.Scanner;
-import adminmangementsystem.com.management.AppointmentService;
+import adminmangementsystem.com.management.IAppointmentService;
 import adminmangementsystem.com.Menu;
 
 public class AppointmentController {
-    private final AppointmentService appointmentService;
+    private final IAppointmentService appointmentService;
 
-    public AppointmentController(AppointmentService appointmentService) {
+    public AppointmentController(IAppointmentService appointmentService) {
         this.appointmentService = appointmentService;
     }
 
-    public AppointmentService getAppointmentService() {
+    public IAppointmentService getAppointmentService() {
         return appointmentService;
     }
 
